@@ -16,6 +16,11 @@ public class PlayerScript : MonoBehaviour
     
     public void Muve(InputAction.CallbackContext context)
     {
+        if ((vector2.x > 0 && transform.localScale.x < 0) || (vector2.x < 0 && transform.localScale.x > 0))
+        {
+            transform.localScale = new Vector2(-transform.localScale.x, transform.localScale.y);
+        }
+
         vector2 = context.ReadValue<Vector2>();
     }
 
