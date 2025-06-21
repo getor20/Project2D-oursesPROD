@@ -308,8 +308,10 @@ TextureImporter:
       outline: []
       physicsShape:
       - - {x: -2.5, y: -1.5}
-        - {x: -2.5, y: 1.5}
-        - {x: 2.5, y: 1.5}
+        - {x: -2.5, y: 0.5}
+        - {x: -1.5, y: 1.5}
+        - {x: 1.5, y: 1.5}
+        - {x: 2.5, y: 0.5}
         - {x: 2.5, y: -1.5}
       tessellationDetail: 0
       bones: []
