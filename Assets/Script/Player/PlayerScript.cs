@@ -7,8 +7,8 @@ public class PlayerScript : MonoBehaviour
     private Vector2 vector2 = Vector2.zero;
 
     [SerializeField]
-    private float speed = 10f;
-    private bool Flipi = false;
+    private float speed = 7f;
+    public bool move = false;
 
     private void FixedUpdate()
     {
@@ -18,10 +18,18 @@ public class PlayerScript : MonoBehaviour
             transform.localScale = new Vector2(-transform.localScale.x, transform.localScale.y);
         }
     }
-    
-    public void Muve(InputAction.CallbackContext context)
+
+    public void Move(InputAction.CallbackContext context)
     {
+        if (context.started)
+        {
+            move = true;
+        }
+        else if (context.canceled)
+        {
+            move = false;
+        }
+
         vector2 = context.ReadValue<Vector2>();
     }
-
 }
