@@ -8,6 +8,7 @@ public class PlayerScript : MonoBehaviour
 
     [SerializeField]
     private float speed = 7f;
+    private float run = 4f;
     public bool move = false;
 
     private void FixedUpdate()
@@ -31,5 +32,17 @@ public class PlayerScript : MonoBehaviour
         }
 
         vector2 = context.ReadValue<Vector2>();
+    }
+
+    public void Run(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            speed += run;
+        }
+        else if (context.canceled)
+        {
+            speed -= run;
+        }
     }
 }

@@ -203,6 +203,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: b47f7c37-8f46-41a2-868e-b199224e6f76
     m_ActionName: Player/Move[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7489242907792358987}
+        m_TargetAssemblyTypeName: PlayerScript, Assembly-CSharp
+        m_MethodName: Run
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: c72ac733-3aed-426e-8be0-3d1ee3c170fb
+    m_ActionName: Player/Shift[/Keyboard/shift]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
