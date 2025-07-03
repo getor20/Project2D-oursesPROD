@@ -191,7 +191,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 7489242907792358987}
         m_TargetAssemblyTypeName: PlayerScript, Assembly-CSharp
-        m_MethodName: Move
+        m_MethodName: OnMove
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -207,7 +207,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 7489242907792358987}
         m_TargetAssemblyTypeName: PlayerScript, Assembly-CSharp
-        m_MethodName: Run
+        m_MethodName: OnRun
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -236,7 +236,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae34310e0b8a0d047b20cb05eddca795, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 7
+  walkingSpeed: 7
   move: 0
 --- !u!114 &1686384601855684895
 MonoBehaviour:

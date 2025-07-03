@@ -11,9 +11,4 @@ public class PlayerAnimator : MonoBehaviour
         _Animator = GetComponent<Animator>();
         _PlayerScript = GetComponent<PlayerScript>();
     }
-
-    private void Update()
-    {
-        _Animator.SetBool(PlayerAnimName.Move, _PlayerScript.move);
-    }
 }
