@@ -4,12 +4,12 @@ using UnityEngine.InputSystem;
 public class PlayerScript : MonoBehaviour
 {
     private Rigidbody2D Rigidbody2D;
-    private Vector2 directionVector2 = Vector2.zero;
+    public Vector2 directionVector2 = Vector2.zero;
 
     [SerializeField]
     private float MainSpeed;
     private float WalkingSpeed = 7f;   
-    private float RunSpeed = 11f;
+    private float RunSpeed = 10f;
 
     private void Awake()
     {

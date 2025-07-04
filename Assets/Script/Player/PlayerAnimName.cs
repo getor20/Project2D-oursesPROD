@@ -2,6 +2,7 @@
 {
     internal class PlayerAnimName
     {
-        public const string Move = "Move";
+        public const string MoveX = "MoveX";
+        public const string MoveY = "MoveY";
     }
 }
