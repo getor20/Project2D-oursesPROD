@@ -15,7 +15,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Shift",
+                    "name": "Run",
                     "type": "Button",
                     "id": "c72ac733-3aed-426e-8be0-3d1ee3c170fb",
                     "expectedControlType": "Button",
@@ -142,7 +142,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Shift",
+                    "action": "Run",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

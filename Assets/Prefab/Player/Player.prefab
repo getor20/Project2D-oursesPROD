@@ -13,7 +13,8 @@ GameObject:
   - component: {fileID: 7046274507854032804}
   - component: {fileID: 3644167057936882963}
   - component: {fileID: 1318172365282029092}
-  - component: {fileID: 7489242907792358987}
+  - component: {fileID: 8825012490475364088}
+  - component: {fileID: 4803432724749424871}
   - component: {fileID: 1686384601855684895}
   - component: {fileID: 2557257273435448415}
   m_Layer: 6
@@ -79,12 +80,12 @@ SpriteRenderer:
   m_SortingLayerID: -2104494739
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1569791429, guid: c1b3067329f1bad459fe9cc018b1f352, type: 3}
+  m_Sprite: {fileID: -153729824, guid: cb579b894218b154e83944c93f6a0424, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.9375, y: 1.1875}
+  m_Size: {x: 0.8125, y: 1.1875}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -153,14 +154,14 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.8125, y: 1.1875}
-    newSize: {x: 0.9375, y: 1.1875}
+    oldSize: {x: 1, y: 2.125}
+    newSize: {x: 0.8125, y: 1.1875}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.9375, y: 1.1875}
+  m_Size: {x: 1, y: 2.125}
   m_EdgeRadius: 0
 --- !u!114 &1318172365282029092
 MonoBehaviour:
@@ -189,8 +190,8 @@ MonoBehaviour:
   m_ActionEvents:
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7489242907792358987}
-        m_TargetAssemblyTypeName: PlayerScript, Assembly-CSharp
+      - m_Target: {fileID: 4803432724749424871}
+        m_TargetAssemblyTypeName: PlayerInput, Assembly-CSharp
         m_MethodName: OnMove
         m_Mode: 0
         m_Arguments:
@@ -205,8 +206,8 @@ MonoBehaviour:
     m_ActionName: Player/Move[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7489242907792358987}
-        m_TargetAssemblyTypeName: PlayerScript, Assembly-CSharp
+      - m_Target: {fileID: 4803432724749424871}
+        m_TargetAssemblyTypeName: PlayerInput, Assembly-CSharp
         m_MethodName: OnRun
         m_Mode: 0
         m_Arguments:
@@ -224,7 +225,7 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &7489242907792358987
+--- !u!114 &8825012490475364088
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -236,7 +237,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae34310e0b8a0d047b20cb05eddca795, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MainSpeed: 0
+  _mainSpeed: 0
+  _walkingSpeed: 7
+  _runSpeed: 10
+--- !u!114 &4803432724749424871
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5698108747678711827}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b870243238af72c4a9213da53562d9a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerMove: {fileID: 8825012490475364088}
 --- !u!114 &1686384601855684895
 MonoBehaviour:
   m_ObjectHideFlags: 0
