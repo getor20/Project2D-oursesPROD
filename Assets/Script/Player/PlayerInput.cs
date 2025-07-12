@@ -3,17 +3,21 @@ using UnityEngine.InputSystem;
 
 public class PlayerInput : MonoBehaviour
 {
-    [SerializeField]
-    private PlayerMove playerMove;
+    private PlayerMove _playerMove;
+
+    private void Awake()
+    {
+        _playerMove = GetComponent<PlayerMove>();
+    }
 
     public void OnMove(InputAction.CallbackContext context)
     {
         var input = context.ReadValue<Vector2>();
-        playerMove.SetDirection(input);
+        _playerMove.SetDirection(input);
     }
 
     public void OnRun(InputAction.CallbackContext context)
     {
-        playerMove.SetRunning(context.ReadValueAsButton());
+        _playerMove.SetRunning(context.ReadValueAsButton());
     }
 }

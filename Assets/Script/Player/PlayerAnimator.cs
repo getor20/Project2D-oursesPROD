@@ -3,19 +3,19 @@ using UnityEngine;
 
 public class PlayerAnimator : MonoBehaviour
 {
-    private Animator animator;
-    private PlayerMove playerMove;
+    private Animator _animator;
+    private PlayerMove _playerMove;
 
     private void Awake()
     {
-        animator = GetComponent<Animator>();
-        playerMove = GetComponent<PlayerMove>();
+        _animator = GetComponent<Animator>();
+        _playerMove = GetComponent<PlayerMove>();
     }
 
     private void Update()
     {
-        animator.SetFloat(PlayerAnimName.MoveY, playerMove.moveDirection.y);
-        animator.SetFloat(PlayerAnimName.MoveX, playerMove.moveDirection.x);
-        animator.SetBool(PlayerAnimName.IsMove, playerMove.IsMove);
+        _animator.SetFloat(PlayerAnimName.MoveY, _playerMove.MoveDirection.y);
+        _animator.SetFloat(PlayerAnimName.MoveX, _playerMove.MoveDirection.x);
+        _animator.SetFloat(PlayerAnimName.IsMainSpeed, _playerMove._mainSpeed);
     }
 }
