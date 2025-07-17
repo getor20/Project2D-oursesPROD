@@ -237,7 +237,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae34310e0b8a0d047b20cb05eddca795, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mainSpeed: 0
   _walkingSpeed: 7
   _runSpeed: 10
 --- !u!114 &4803432724749424871
@@ -252,7 +251,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b870243238af72c4a9213da53562d9a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerMove: {fileID: 8825012490475364088}
+  input: {x: 0, y: 0}
 --- !u!114 &1686384601855684895
 MonoBehaviour:
   m_ObjectHideFlags: 0
