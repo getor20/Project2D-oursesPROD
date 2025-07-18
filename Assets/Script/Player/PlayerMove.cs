@@ -40,6 +40,10 @@ public class PlayerMove : MonoBehaviour
             _transitionAngular = 1;
             Debug.Log("угол да");
         }
+        if (_directionVector2 == Vector2.up)
+        {
+            Debug.Log("На верх");
+        }
     }
 
     public void DirectVector()
