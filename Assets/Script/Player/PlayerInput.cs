@@ -42,6 +42,9 @@ public class PlayerInput : MonoBehaviour
 
     public void OnMove(InputAction.CallbackContext context)
     {
+        /*context.control.displayName;
+        context.control.name;
+        context.control.device;*/
         var i = context.action.name;
         if (i == "Wove")
         {

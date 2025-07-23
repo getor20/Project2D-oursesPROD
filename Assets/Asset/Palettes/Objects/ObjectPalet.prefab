@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2236400214448100715}
   - component: {fileID: 173406759059398782}
   m_Layer: 0
-  m_Name: FloraPalet
+  m_Name: ObjectPalet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6874122077886432231}
   - component: {fileID: 9147182944305433496}
   - component: {fileID: 5450794280958020555}
+  - component: {fileID: 6160526859697996207}
   m_Layer: 7
   m_Name: Bonfire
   m_TagString: Untagged
@@ -241,3 +242,19 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   - {x: 0.5, y: 0.5, z: 0}
   - {x: -0.5, y: 0.5, z: 0}
+--- !u!111 &6160526859697996207
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6131297324266274143}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 0}
+  m_Animations:
+  - {fileID: 7400000, guid: 0ae4e91c31b139f448b3136358b11273, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_CullingType: 0
