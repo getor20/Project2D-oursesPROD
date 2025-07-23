@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8836802424852194019}
   - component: {fileID: 7344223708603680569}
   m_Layer: 0
-  m_Name: EarthWaterPalet
+  m_Name: LevelPalet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
