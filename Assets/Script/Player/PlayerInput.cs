@@ -48,7 +48,7 @@ public class PlayerInput : MonoBehaviour
         var i = context.action.name;
         if (i == "Wove")
         {
-            Debug.Log("Кнопка нажата: " + context.action.name);
+            //Debug.Log("Кнопка нажата: " + context.action.name);
         }
 
         input = context.ReadValue<Vector2>();

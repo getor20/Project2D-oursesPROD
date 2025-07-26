@@ -32,13 +32,13 @@ public class PlayerMove : MonoBehaviour
         Move();
         AngularDirection();
         //DirectVector();
-        Debug.Log("AngularDirection: " + _isAngularDirection);
-        Debug.Log(_directionVector2);
+        //Debug.Log("AngularDirection: " + _isAngularDirection);
+        //Debug.Log(_directionVector2);
         //Debug.Log("_isMoving: " + _isMoving);
         if (!_isMoving && _isAngularDirection)
         {
             _transitionAngular = 1;
-            Debug.Log("угол да");
+            //Debug.Log("угол да");
         }
     }
 
@@ -112,7 +112,7 @@ public class PlayerMove : MonoBehaviour
             if (_directionVector2 == Vector2.up || _directionVector2 == Vector2.down || _directionVector2 == Vector2.right || _directionVector2 == Vector2.left)
             {
                 _transitionAngular = 0;
-                Debug.Log("На верх");
+                //Debug.Log("На верх");
             }
         }
         else
