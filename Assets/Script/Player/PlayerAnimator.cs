@@ -1,24 +1,18 @@
-using Assets.Script.Player;
 using UnityEngine;
 
-namespace Assets.Script.Player
-{
-    internal class PlayerAnimName
-    {
-        public const string DirectionX = "DirectionX";
-        public const string DirectionY = "DirectionY";
-        public const string IsMainSpeed = "IsMainSpeed";
-        public const string AngularDirectionX = "AngularDirectionX";
-        public const string AngularDirectionY = "AngularDirectionY";
-        public const string NewFloat = "New Float";
-        public const string NewFloat0 = "New Float 0";
-    }
-}
 
 public class PlayerAnimator : MonoBehaviour
 {
     private Animator _animator;
     private PlayerMove _playerMove;
+
+    private int _isSpeedHash = Animator.StringToHash("IsSpeed");
+    private int _directionXHash = Animator.StringToHash("DirectionX");
+    private int _directionYHash = Animator.StringToHash("DirectionY");
+    private int _angularDirectionXHash = Animator.StringToHash("AngularDirectionX");
+    private int _angularDirectionYHash = Animator.StringToHash("AngularDirectionY");
+    private int _newFloatHash = Animator.StringToHash("New Float");
+    private int _newFloat0Hash = Animator.StringToHash("New Float 0");
 
     private void Awake()
     {
@@ -28,12 +22,12 @@ public class PlayerAnimator : MonoBehaviour
 
     private void Update()
     {
-        _animator.SetFloat(PlayerAnimName.DirectionX, _playerMove._directionVector2.x);
-        _animator.SetFloat(PlayerAnimName.DirectionY, _playerMove._directionVector2.y);
-        _animator.SetFloat(PlayerAnimName.IsMainSpeed, _playerMove._mainSpeed);
-        _animator.SetFloat(PlayerAnimName.AngularDirectionX,_playerMove._directionVector.x);
-        _animator.SetFloat(PlayerAnimName.AngularDirectionY, _playerMove._directionVector.y);
-        _animator.SetFloat(PlayerAnimName.NewFloat, _playerMove._transitionDirect);
-        _animator.SetFloat(PlayerAnimName.NewFloat0, _playerMove._transitionAngular);
+        _animator.SetFloat(_isSpeedHash, _playerMove._mainSpeed);
+        _animator.SetFloat(_directionXHash, _playerMove._directionVector2.x);
+        _animator.SetFloat(_directionYHash, _playerMove._directionVector2.y);
+        _animator.SetFloat(_angularDirectionXHash, _playerMove._directionVector.x);
+        _animator.SetFloat(_angularDirectionYHash, _playerMove._directionVector.y);
+        _animator.SetFloat(_newFloatHash, _playerMove._transitionDirect);
+        _animator.SetFloat(_newFloat0Hash, _playerMove._transitionAngular);
     }
 }
