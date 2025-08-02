@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngineInternal;
 
 public class Enemy1AI : MonoBehaviour
 {
@@ -7,13 +8,16 @@ public class Enemy1AI : MonoBehaviour
         Patrol,
         Pursuit
     }
-
+    [SerializeField]
+    private GameObject[] _waypoints;
     [SerializeField]
     private float _mainRadius;
     [SerializeField]
     private float _patrolRadius = 3;
     [SerializeField]
     private float _pursuitRadius = 5;
+    [SerializeField]
+    public bool _isPatrol { get; private set; }
     [SerializeField]
     private Transform _target;
     private Enemy1Move _move;
@@ -29,6 +33,7 @@ public class Enemy1AI : MonoBehaviour
 
     private void Start()
     {
+        transform.position = _waypoints[0].transform.position;
         _mainRadius = _patrolRadius;
         _enemyState = EnemyState.Patrol;
         _move.SetMoveDirection(Vector2.zero); // Убедитесь, что он начинает движение с остановки
@@ -54,6 +59,7 @@ public class Enemy1AI : MonoBehaviour
         // Обработка входа в новое состояние
         if (_enemyState == EnemyState.Patrol)
         {
+            _isPatrol = true;
             Debug.Log("патруль");
             _mainRadius = _patrolRadius;
             _move.SetMoveDirection(Vector2.zero); // Останавливаем движение при входе в Patrol
@@ -61,6 +67,7 @@ public class Enemy1AI : MonoBehaviour
         }
         else if (_enemyState == EnemyState.Pursuit)
         {
+            _isPatrol = false;
             Debug.Log("Преследования");
             _mainRadius = _pursuitRadius;
             // Никаких специальных действий при входе в Pursuit не требуется, так как это обрабатывается в ExecuteChaseState
