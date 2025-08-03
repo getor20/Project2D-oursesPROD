@@ -4,6 +4,7 @@ public class Enemy1Move : MonoBehaviour
 {
     private Rigidbody2D _rigidbody2D;
     private Vector2 _directionVector2;
+    private Enemy1AI _enemyAI;
 
     [SerializeField]
     private float _mainSpeed;
@@ -17,6 +18,7 @@ public class Enemy1Move : MonoBehaviour
 
     private void Awake()
     {
+        _enemyAI = GetComponent<Enemy1AI>();
         _rigidbody2D = GetComponent<Rigidbody2D>();
     }
 
@@ -37,6 +39,7 @@ public class Enemy1Move : MonoBehaviour
 
     private void Move()
     {
+        _mainSpeed = _enemyAI._isPatrol ? _speedPatrol : _speedPursuit;
         _rigidbody2D.velocity = _directionVector2 * _mainSpeed;
     }
 }

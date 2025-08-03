@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngineInternal;
 
 public class Enemy1AI : MonoBehaviour
 {
@@ -8,8 +7,9 @@ public class Enemy1AI : MonoBehaviour
         Patrol,
         Pursuit
     }
+
     [SerializeField]
-    private GameObject[] _waypoints;
+    private Transform[] _waypoints;
     [SerializeField]
     private float _mainRadius;
     [SerializeField]
@@ -17,6 +17,9 @@ public class Enemy1AI : MonoBehaviour
     [SerializeField]
     private float _pursuitRadius = 5;
     [SerializeField]
+    private float _patrolPointThreshold = 0.5f;
+    [SerializeField]
+    private int _indexMassif = 0;
     public bool _isPatrol { get; private set; }
     [SerializeField]
     private Transform _target;
@@ -33,10 +36,8 @@ public class Enemy1AI : MonoBehaviour
 
     private void Start()
     {
-        transform.position = _waypoints[0].transform.position;
-        _mainRadius = _patrolRadius;
+        transform.position = _waypoints[0].position;
         _enemyState = EnemyState.Patrol;
-        _move.SetMoveDirection(Vector2.zero); // ”бедитесь, что он начинает движение с остановки
     }
 
     private void Update()
@@ -51,27 +52,7 @@ public class Enemy1AI : MonoBehaviour
             return;
         }
 
-        // ќбработка выхода из текущего состо€ни€ (необ€зательно, но хорошо дл€ очистки)
-        // ƒл€ ваших текущих состо€ний никаких специальных действий при выходе не требуетс€
-
         _enemyState = newState;
-
-        // ќбработка входа в новое состо€ние
-        if (_enemyState == EnemyState.Patrol)
-        {
-            _isPatrol = true;
-            Debug.Log("патруль");
-            _mainRadius = _patrolRadius;
-            _move.SetMoveDirection(Vector2.zero); // ќстанавливаем движение при входе в Patrol
-            // ¬ы можете добавить здесь специфическую логику патрулировани€, например, движение к путевым точкам
-        }
-        else if (_enemyState == EnemyState.Pursuit)
-        {
-            _isPatrol = false;
-            Debug.Log("ѕреследовани€");
-            _mainRadius = _pursuitRadius;
-            // Ќикаких специальных действий при входе в Pursuit не требуетс€, так как это обрабатываетс€ в ExecuteChaseState
-        }
     }
 
     private void RunFSM()
@@ -85,18 +66,40 @@ public class Enemy1AI : MonoBehaviour
                 {
                     SwitchState(EnemyState.Pursuit);
                 }
-                // «десь нет кода движени€, он обрабатываетс€ SwitchState, устанавливающим направление в ноль
+                _isPatrol = true;
+                _mainRadius = _patrolRadius;
+                ExecutePatrolState();
                 break;
             case EnemyState.Pursuit:
                 if (distanceToTarget > _mainRadius)
                 {
                     SwitchState(EnemyState.Patrol);
                 }
-                else
-                {
-                    ExecuteChaseState(); // ѕродолжаем преследование, если все еще в радиусе преследовани€
-                }
+                _isPatrol = false;
+                _mainRadius = _pursuitRadius;
+                ExecuteChaseState();
+                
                 break;
+        }
+    }
+
+    private void ExecutePatrolState()
+    {
+        Vector2 direction = Vector2.zero;
+        int randomInt = Random.Range(0, 3);
+        Transform targetPoint = _waypoints[_indexMassif];
+        if (Vector2.Distance(transform.position, targetPoint.position) < _patrolPointThreshold)
+        {
+            _indexMassif = (_indexMassif + randomInt) % _waypoints.Length;
+            targetPoint = _waypoints[_indexMassif];
+        }
+        direction = (targetPoint.position - transform.position).normalized;
+
+
+        if (direction != Vector2.zero)
+        {
+            _move.SetMoveDirection(direction);
+            _animator.SetDirection(direction);
         }
     }
 
@@ -106,6 +109,7 @@ public class Enemy1AI : MonoBehaviour
         _move.SetMoveDirection(direction);
         _animator.SetDirection(direction);
     }
+
 
     private void OnDrawGizmosSelected()
     {
