@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
-public class ChangeDayNight : MonoBehaviour
+public class DayNightChange : MonoBehaviour
 {
     [SerializeField]
     private Light2D _light2D;
@@ -13,7 +13,7 @@ public class ChangeDayNight : MonoBehaviour
     [SerializeField]
     private float _timeNightDay = 120f;
 
-    private float _currentTime = 0;
+    private float _currentTime = 0f;
 
     private void Awake()
     {

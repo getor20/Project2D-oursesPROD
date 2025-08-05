@@ -14,7 +14,7 @@ public class PlayerMove : MonoBehaviour
     [SerializeField]
     private float _walkingSpeed = 7f;
     [SerializeField]
-    private float _runSpeed = 9;
+    private float _runSpeed = 9f;
 
     private bool _isMoving;
     private bool _isRunning;

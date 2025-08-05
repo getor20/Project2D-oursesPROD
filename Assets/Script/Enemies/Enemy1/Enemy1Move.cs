@@ -9,9 +9,9 @@ public class Enemy1Move : MonoBehaviour
     [SerializeField]
     private float _mainSpeed;
     [SerializeField]
-    private float _speedPatrol = 2;
+    private float _speedPatrol = 2f;
     [SerializeField]
-    private float _speedPursuit = 7;
+    private float _speedPursuit = 7f;
     [SerializeField]
 
     public float CurrentSpeed => _rigidbody2D.velocity.magnitude;
