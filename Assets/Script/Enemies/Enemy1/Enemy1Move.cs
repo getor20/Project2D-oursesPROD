@@ -11,7 +11,7 @@ public class Enemy1Move : MonoBehaviour
     [SerializeField]
     private float _speedPatrol = 2;
     [SerializeField]
-    private float _speedPursuit = 5;
+    private float _speedPursuit = 7;
     [SerializeField]
 
     public float CurrentSpeed => _rigidbody2D.velocity.magnitude;
@@ -20,11 +20,6 @@ public class Enemy1Move : MonoBehaviour
     {
         _enemyAI = GetComponent<Enemy1AI>();
         _rigidbody2D = GetComponent<Rigidbody2D>();
-    }
-
-    private void Start()
-    {
-        _mainSpeed = _speedPatrol;
     }
 
     private void FixedUpdate()

@@ -15,7 +15,7 @@ public class Enemy1AI : MonoBehaviour
     [SerializeField]
     private float _patrolRadius = 3;
     [SerializeField]
-    private float _pursuitRadius = 5;
+    private float _pursuitRadius = 6;
     [SerializeField]
     private float _patrolPointThreshold = 0.5f;
     [SerializeField]

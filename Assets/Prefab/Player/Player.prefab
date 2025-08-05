@@ -239,7 +239,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _walkingSpeed: 7
-  _runSpeed: 10
+  _runSpeed: 9
 --- !u!114 &4803432724749424871
 MonoBehaviour:
   m_ObjectHideFlags: 0
