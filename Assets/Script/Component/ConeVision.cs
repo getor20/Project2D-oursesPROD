@@ -5,6 +5,9 @@ public class ConeVision : MonoBehaviour
 {
     [SerializeField]
     private Transform _target;
+    public Transform Target => _target;
+
+
     [SerializeField]
     private LayerMask _layerMask;
 

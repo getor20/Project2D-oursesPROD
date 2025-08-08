@@ -259,10 +259,10 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  _target: {fileID: 0}
   _coneVision: {fileID: 5713874993963388246}
+  Position: {x: 0, y: 0}
   _mainRadius: 0
-  _patrolRadius: 4
+  _patrolRadius: 3
   _pursuitRadius: 6
   _patrolPointThreshold: 0.5
   _indexMassif: 0
@@ -311,6 +311,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _target: {fileID: 0}
+  _enemy1AI: {fileID: 5360775011102273974}
   _layerMask:
     serializedVersion: 2
     m_Bits: 144

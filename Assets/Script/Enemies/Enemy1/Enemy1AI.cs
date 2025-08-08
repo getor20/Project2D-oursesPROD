@@ -10,15 +10,13 @@ public class Enemy1AI : MonoBehaviour
 
     [SerializeField]
     private Transform[] _waypoints;
-
-    [SerializeField]
-    private Transform _target;
     private Enemy1Move _move;
     private Enemy1Animator _animator;
     [SerializeField]
     private ConeVision _coneVision;
+    public Vector2 Position;
 
-    [SerializeField]
+[SerializeField]
     private float _mainRadius;
     [SerializeField]
     private float _patrolRadius = 4f;
@@ -65,12 +63,13 @@ public class Enemy1AI : MonoBehaviour
 
     private void RunFSM()
     {
-        float distanceToTarget = Vector2.Distance(transform.position, _target.position);
+        float distanceToTarget = Vector2.Distance(transform.position, _coneVision.Target.position);
 
         switch (_enemyState)
         {
             case EnemyState.Patrol:
-                if (distanceToTarget < _mainRadius)
+                if /*נאהטףס מבחמנא*/ (distanceToTarget < _patrolRadius)
+                   /*ףדמכ מבחמנא*/ //(_coneVision.IsTargetInVision())
                 {
                     SwitchState(EnemyState.Pursuit);
                 }
@@ -79,7 +78,8 @@ public class Enemy1AI : MonoBehaviour
                 ExecutePatrolState();
                 break;
             case EnemyState.Pursuit:
-                if (distanceToTarget > _mainRadius)
+                if /*נאהטףס מבחמנא*/ (distanceToTarget > _patrolRadius)
+                   /*ףדמכ מבחמנא*/ //(!_coneVision.IsTargetInVision())
                 {
                     SwitchState(EnemyState.Patrol);
                 }
@@ -98,7 +98,7 @@ public class Enemy1AI : MonoBehaviour
         Transform targetPoint = _waypoints[_indexMassif];
         if (Vector2.Distance(transform.position, targetPoint.position) < _patrolPointThreshold)
         {
-            _indexMassif = (_indexMassif + randomInt) % _waypoints.Length;
+            _indexMassif = (_indexMassif + 1) % _waypoints.Length;
         }
         direction = (targetPoint.position - transform.position).normalized;
 
@@ -111,7 +111,7 @@ public class Enemy1AI : MonoBehaviour
 
     private void ExecuteChaseState()
     {
-        Vector2 direction = (_target.position - transform.position).normalized;
+        Vector2 direction = (_coneVision.Target.position - transform.position).normalized;
         _move.SetMoveDirection(direction);
         _animator.SetDirection(direction);
     }
