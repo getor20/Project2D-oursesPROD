@@ -98,7 +98,7 @@ public class Enemy1AI : MonoBehaviour
         Transform targetPoint = _waypoints[_indexMassif];
         if (Vector2.Distance(transform.position, targetPoint.position) < _patrolPointThreshold)
         {
-            _indexMassif = (_indexMassif + 1) % _waypoints.Length;
+            _indexMassif = (_indexMassif + randomInt) % _waypoints.Length;
         }
         direction = (targetPoint.position - transform.position).normalized;
 
