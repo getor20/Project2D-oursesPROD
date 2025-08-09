@@ -211,7 +211,7 @@ MonoBehaviour:
   - {x: 0.125, y: -0.375, z: 0}
   m_ShapePathHash: 0
   m_Mesh: {fileID: 0}
-  m_InstanceId: -1336
+  m_InstanceId: 31220
   m_LocalBounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0.125, y: 0.375, z: 0}
@@ -241,7 +241,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _mainSpeed: 0
   _speedPatrol: 2
-  _speedPursuit: 7
+  _speedChase: 7
 --- !u!114 &5360775011102273974
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -260,12 +260,12 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   _coneVision: {fileID: 5713874993963388246}
-  Position: {x: 0, y: 0}
   _mainRadius: 0
   _patrolRadius: 3
-  _pursuitRadius: 6
+  _chaseRadius: 6
   _patrolPointThreshold: 0.5
   _indexMassif: 0
+  Position: {x: 0, y: 0}
 --- !u!1 &438792898889324413
 GameObject:
   m_ObjectHideFlags: 0
@@ -311,7 +311,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _target: {fileID: 0}
-  _enemy1AI: {fileID: 5360775011102273974}
   _layerMask:
     serializedVersion: 2
     m_Bits: 144

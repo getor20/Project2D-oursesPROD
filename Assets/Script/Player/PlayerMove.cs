@@ -11,14 +11,17 @@ public class PlayerMove : MonoBehaviour
 
     [SerializeField]
     public float _mainSpeed { get; private set; }
+
     [SerializeField]
     private float _walkingSpeed = 7f;
+
     [SerializeField]
     private float _runSpeed = 9f;
 
     private bool _isMoving;
     private bool _isRunning;
     private bool _isAngularDirection;
+
     public float _transitionDirect { get; private set; }
     public float _transitionAngular { get; private set; }
 

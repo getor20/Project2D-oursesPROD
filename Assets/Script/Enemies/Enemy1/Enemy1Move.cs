@@ -4,21 +4,20 @@ public class Enemy1Move : MonoBehaviour
 {
     private Rigidbody2D _rigidbody2D;
     private Vector2 _directionVector2;
-    private Enemy1AI _enemyAI;
 
     [SerializeField]
     private float _mainSpeed;
+
     [SerializeField]
     private float _speedPatrol = 2f;
-    [SerializeField]
-    private float _speedPursuit = 7f;
-    [SerializeField]
 
+    [SerializeField]
+    private float _speedChase = 7f;
+    
     public float CurrentSpeed => _rigidbody2D.velocity.magnitude;
 
     private void Awake()
     {
-        _enemyAI = GetComponent<Enemy1AI>();
         _rigidbody2D = GetComponent<Rigidbody2D>();
     }
 
@@ -32,9 +31,18 @@ public class Enemy1Move : MonoBehaviour
         _directionVector2 = direction.normalized;
     }
 
+    public void SetChaseSpeed()
+    {
+        _mainSpeed = _speedChase;
+    }
+
+    public void SetPatrolSpeed()
+    {
+        _mainSpeed = _speedPatrol;
+    }
+
     private void Move()
     {
-        _mainSpeed = _enemyAI._isPatrol ? _speedPatrol : _speedPursuit;
         _rigidbody2D.velocity = _directionVector2 * _mainSpeed;
     }
 }

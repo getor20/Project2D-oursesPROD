@@ -5,31 +5,35 @@ public class Enemy1AI : MonoBehaviour
     public enum EnemyState
     {
         Patrol,
-        Pursuit
+        Chase
     }
 
     [SerializeField]
     private Transform[] _waypoints;
-    private Enemy1Move _move;
-    private Enemy1Animator _animator;
+
     [SerializeField]
     private ConeVision _coneVision;
-    public Vector2 Position;
 
-[SerializeField]
+    [SerializeField]
     private float _mainRadius;
+
     [SerializeField]
     private float _patrolRadius = 4f;
+
     [SerializeField]
-    private float _pursuitRadius = 6f;
+    private float _chaseRadius = 6f;
+
     [SerializeField]
     private float _patrolPointThreshold = 0.5f;
 
     [SerializeField]
     private int _indexMassif = 0;
+
+    private Enemy1Move _move;
+    private Enemy1Animator _animator;
     public bool _isPatrol { get; private set; }
 
-    
+    public Vector2 Position;
 
     private void Awake()
     {
@@ -68,23 +72,25 @@ public class Enemy1AI : MonoBehaviour
         switch (_enemyState)
         {
             case EnemyState.Patrol:
-                if /*נאהטףס מבחמנא*/ (distanceToTarget < _patrolRadius)
-                   /*ףדמכ מבחמנא*/ //(_coneVision.IsTargetInVision())
+                if /*נאהטףס מבחמנא*/ //(distanceToTarget < _patrolRadius)
+                   /*ףדמכ מבחמנא*/ (_coneVision.IsTargetInVision())
                 {
-                    SwitchState(EnemyState.Pursuit);
+                    SwitchState(EnemyState.Chase);
                 }
                 _isPatrol = true;
                 _mainRadius = _patrolRadius;
+                _move.SetPatrolSpeed();
                 ExecutePatrolState();
                 break;
-            case EnemyState.Pursuit:
-                if /*נאהטףס מבחמנא*/ (distanceToTarget > _patrolRadius)
-                   /*ףדמכ מבחמנא*/ //(!_coneVision.IsTargetInVision())
+            case EnemyState.Chase:
+                if /*נאהטףס מבחמנא*/ //(distanceToTarget > _patrolRadius)
+                   /*ףדמכ מבחמנא*/ (!_coneVision.IsTargetInVision())
                 {
                     SwitchState(EnemyState.Patrol);
                 }
                 _isPatrol = false;
-                _mainRadius = _pursuitRadius;
+                _move.SetChaseSpeed();
+                _mainRadius = _chaseRadius;
                 ExecuteChaseState();
                 
                 break;

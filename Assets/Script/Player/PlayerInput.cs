@@ -4,8 +4,10 @@ using UnityEngine.InputSystem;
 public class PlayerInput : MonoBehaviour
 {
     private PlayerMove _playerMove;
-    public Vector2 input;
+    
     private Vector2 _angularVector = new Vector2(0.707107f, 0.707107f);
+
+    public Vector2 input;
 
     private void Awake()
     {

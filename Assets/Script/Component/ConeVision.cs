@@ -5,8 +5,6 @@ public class ConeVision : MonoBehaviour
 {
     [SerializeField]
     private Transform _target;
-    public Transform Target => _target;
-
 
     [SerializeField]
     private LayerMask _layerMask;
@@ -17,6 +15,18 @@ public class ConeVision : MonoBehaviour
     [Range(0, 380)]
     [SerializeField]
     private float _visionAngle = 90f;
+  
+    private Vector2 _forwardDirection = Vector2.up;
+
+    public Transform Target => _target;
+
+    public void SetDirection(Vector2 direction)
+    {
+        if (direction != Vector2.zero)
+        {
+            _forwardDirection = direction.normalized;
+        }
+    }
 
     public bool IsTargetInVision()
     {
@@ -34,7 +44,7 @@ public class ConeVision : MonoBehaviour
 
         Vector2 directionToTarget = (_target.position - transform.position).normalized;
 
-        if (Vector2.Angle(transform.up, directionToTarget) > _visionAngle / 2)
+        if (Vector2.Angle(_forwardDirection, directionToTarget) > _visionAngle / 2)
         {
             return false;
         }
@@ -49,7 +59,7 @@ public class ConeVision : MonoBehaviour
         return true;
     }
 
-    private void OnDrawGizmosSelected()
+    /*private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;
         Vector2 viewAngleA = DirFromAngle(-_visionAngle / 2);
@@ -64,5 +74,33 @@ public class ConeVision : MonoBehaviour
         angleInDegrees += transform.eulerAngles.z; 
 
         return new Vector3(Mathf.Sin(angleInDegrees * Mathf.Deg2Rad), Mathf.Cos(angleInDegrees * Mathf.Deg2Rad), 0);
+    }*/
+
+//#if 
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.yellow;
+        UnityEditor.Handles.DrawWireDisc(transform.position, Vector3.forward, _visionRadius);
+
+        Vector3 viewAngleA = DirectionFromAngle(-_visionAngle / 2, _forwardDirection);
+        Vector3 viewAngleB = DirectionFromAngle(_visionAngle / 2, _forwardDirection);
+
+        Gizmos.DrawLine(transform.position, transform.position + viewAngleA * _visionRadius);
+        Gizmos.DrawLine(transform.position, transform.position + viewAngleB * _visionRadius);
+
+        if (IsTargetInVision())
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawLine(transform.position, _target.position);
+        }
+    }
+
+    private Vector3 DirectionFromAngle(float angleInDegrees, Vector2 forwardDirection)
+    {
+        float baseAngle = Mathf.Atan2(forwardDirection.y, forwardDirection.x) * Mathf.Rad2Deg;  
+        float totalAngle = baseAngle + angleInDegrees;
+
+        return new Vector3(Mathf.Cos(totalAngle * Mathf.Deg2Rad), Mathf.Sin(totalAngle * Mathf.Deg2Rad));
     }
 }
