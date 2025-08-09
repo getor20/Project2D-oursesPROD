@@ -4,11 +4,6 @@ public class PlayerMove : MonoBehaviour
 {
     private Rigidbody2D _rigidbody2D;
 
-    public Vector2 _directionVector2 { get; private set; }
-    public Vector2 _directionVector { get; private set; }
-    private Vector2 _directVector = new Vector2(0, 0);
-    private Vector2 _angularVector = new Vector2(0.707107f, 0.707107f);
-
     [SerializeField]
     public float _mainSpeed { get; private set; }
 
@@ -18,12 +13,20 @@ public class PlayerMove : MonoBehaviour
     [SerializeField]
     private float _runSpeed = 9f;
 
+    private Vector2 _directVector = new Vector2(0, 0);
+    private Vector2 _angularVector = new Vector2(0.707107f, 0.707107f);
+
     private bool _isMoving;
     private bool _isRunning;
     private bool _isAngularDirection;
 
     public float _transitionDirect { get; private set; }
     public float _transitionAngular { get; private set; }
+
+    public Vector2 _directionVector2 { get; private set; }
+    public Vector2 _directionVector { get; private set; }
+
+    
 
     private void Awake()
     {
