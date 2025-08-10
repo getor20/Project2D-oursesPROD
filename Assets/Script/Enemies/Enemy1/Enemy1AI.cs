@@ -49,11 +49,7 @@ public class Enemy1AI : MonoBehaviour
         _enemyState = EnemyState.Patrol;
     }
 
-    private void Update()
-    {
-        Debug.Log(_coneVision.IsTargetInVision());
-        RunFSM();
-    }
+    private void Update() => RunFSM();
 
     private void SwitchState(EnemyState newState)
     {
@@ -77,10 +73,13 @@ public class Enemy1AI : MonoBehaviour
                 {
                     SwitchState(EnemyState.Chase);
                 }
+
                 _isPatrol = true;
                 _mainRadius = _patrolRadius;
                 _move.SetPatrolSpeed();
+                _coneVision.SetVisionRadius();
                 ExecutePatrolState();
+                
                 break;
             case EnemyState.Chase:
                 if /*נאהטףס מבחמנא*/ //(distanceToTarget > _patrolRadius)
@@ -88,9 +87,11 @@ public class Enemy1AI : MonoBehaviour
                 {
                     SwitchState(EnemyState.Patrol);
                 }
+
                 _isPatrol = false;
                 _move.SetChaseSpeed();
                 _mainRadius = _chaseRadius;
+                _coneVision.SetVisionRadius();
                 ExecuteChaseState();
                 
                 break;
@@ -110,16 +111,21 @@ public class Enemy1AI : MonoBehaviour
 
         if (direction != Vector2.zero)
         {
-            _move.SetMoveDirection(direction);
-            _animator.SetDirection(direction);
+            SetDirection(direction);
         }
     }
 
     private void ExecuteChaseState()
     {
         Vector2 direction = (_coneVision.Target.position - transform.position).normalized;
+        SetDirection(direction);
+    }
+
+    private void SetDirection(Vector2 direction)
+    {
         _move.SetMoveDirection(direction);
         _animator.SetDirection(direction);
+        _coneVision.SetDirection(direction);
     }
 
 

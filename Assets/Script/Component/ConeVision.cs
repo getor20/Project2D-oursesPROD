@@ -10,13 +10,19 @@ public class ConeVision : MonoBehaviour
     private LayerMask _layerMask;
 
     [SerializeField]
-    private float _visionRadius = 5f;
+    private float _mainVisionRadius;
 
-    [Range(0, 380)]
+    [SerializeField]
+    private float _patrolVisionRadius = 3f;
+
+    [SerializeField]
+    private float _chaseVisionRadius = 6f;
+
+    [Range(0, 360)]
     [SerializeField]
     private float _visionAngle = 90f;
   
-    private Vector2 _forwardDirection = Vector2.up;
+    private Vector2 _forwardDirection;
 
     public Transform Target => _target;
 
@@ -37,7 +43,7 @@ public class ConeVision : MonoBehaviour
 
         float distanceToTarget = Vector2.Distance(transform.position, _target.position);
 
-        if (distanceToTarget > _visionRadius)
+        if (distanceToTarget > _mainVisionRadius)
         {
             return false;
         }
@@ -53,41 +59,36 @@ public class ConeVision : MonoBehaviour
 
         if (hit.collider is not null)
         {
-            return true;
+            return false;
         }
 
         return true;
     }
 
-    /*private void OnDrawGizmosSelected()
+    public void SetVisionRadius()
     {
-        Gizmos.color = Color.yellow;
-        Vector2 viewAngleA = DirFromAngle(-_visionAngle / 2);
-        Vector2 viewAngleB = DirFromAngle(_visionAngle / 2);
-
-        Gizmos.DrawLine(transform.position, viewAngleA);
-        Gizmos.DrawLine(transform.position, viewAngleB);    
+        if (IsTargetInVision())
+        {
+            _mainVisionRadius = _chaseVisionRadius;
+        }
+        else
+        {
+            _mainVisionRadius = _patrolVisionRadius;
+        }
     }
 
-    private Vector3 DirFromAngle(float angleInDegrees)
-    {
-        angleInDegrees += transform.eulerAngles.z; 
-
-        return new Vector3(Mathf.Sin(angleInDegrees * Mathf.Deg2Rad), Mathf.Cos(angleInDegrees * Mathf.Deg2Rad), 0);
-    }*/
-
-//#if 
+#if UNITY_EDITOR
 
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;
-        UnityEditor.Handles.DrawWireDisc(transform.position, Vector3.forward, _visionRadius);
+        UnityEditor.Handles.DrawWireDisc(transform.position, Vector3.forward, _mainVisionRadius);
 
         Vector3 viewAngleA = DirectionFromAngle(-_visionAngle / 2, _forwardDirection);
         Vector3 viewAngleB = DirectionFromAngle(_visionAngle / 2, _forwardDirection);
 
-        Gizmos.DrawLine(transform.position, transform.position + viewAngleA * _visionRadius);
-        Gizmos.DrawLine(transform.position, transform.position + viewAngleB * _visionRadius);
+        Gizmos.DrawLine(transform.position, transform.position + viewAngleA * _mainVisionRadius);
+        Gizmos.DrawLine(transform.position, transform.position + viewAngleB * _mainVisionRadius);
 
         if (IsTargetInVision())
         {
@@ -103,4 +104,5 @@ public class ConeVision : MonoBehaviour
 
         return new Vector3(Mathf.Cos(totalAngle * Mathf.Deg2Rad), Mathf.Sin(totalAngle * Mathf.Deg2Rad));
     }
+#endif
 }

@@ -313,6 +313,8 @@ MonoBehaviour:
   _target: {fileID: 0}
   _layerMask:
     serializedVersion: 2
-    m_Bits: 144
-  _visionRadius: 3
+    m_Bits: 1168
+  _mainVisionRadius: 0
+  _patrolVisionRadius: 3
+  _chaseVisionRadius: 6
   _visionAngle: 90

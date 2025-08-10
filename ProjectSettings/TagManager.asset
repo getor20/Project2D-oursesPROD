@@ -15,7 +15,7 @@ TagManager:
   - Object
   - MapBoundaries
   - Enemy
-  - 
+  - Building
   - 
   - 
   - 
@@ -52,4 +52,7 @@ TagManager:
     locked: 0
   - name: Object
     uniqueID: 2925730337
+    locked: 0
+  - name: Building
+    uniqueID: 263565977
     locked: 0
