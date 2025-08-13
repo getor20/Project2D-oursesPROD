@@ -9,10 +9,10 @@ public class Enemy1AI : MonoBehaviour
     }
 
     [SerializeField]
-    private Transform[] _waypoints;
+    private ConeVision _coneVision;
 
     [SerializeField]
-    private ConeVision _coneVision;
+    private PatrolPoint _patrolPoint;
 
     [SerializeField]
     private float _mainRadius;
@@ -27,13 +27,11 @@ public class Enemy1AI : MonoBehaviour
     private float _patrolPointThreshold = 0.5f;
 
     [SerializeField]
-    private int _indexMassif = 0;
+    private int _indexPatrol = 0;
 
     private Enemy1Move _move;
     private Enemy1Animator _animator;
     public bool _isPatrol { get; private set; }
-
-    public Vector2 Position;
 
     private void Awake()
     {
@@ -45,7 +43,7 @@ public class Enemy1AI : MonoBehaviour
 
     private void Start()
     {
-        transform.position = _waypoints[_indexMassif].position;
+        transform.position = _patrolPoint.GetPointTransform(_indexPatrol).position;
         _enemyState = EnemyState.Patrol;
     }
 
@@ -102,10 +100,10 @@ public class Enemy1AI : MonoBehaviour
     {
         Vector2 direction = Vector2.zero;
         int randomInt = Random.Range(0, 3);
-        Transform targetPoint = _waypoints[_indexMassif];
+        Transform targetPoint = _patrolPoint.GetPointTransform(_indexPatrol);
         if (Vector2.Distance(transform.position, targetPoint.position) < _patrolPointThreshold)
         {
-            _indexMassif = (_indexMassif + randomInt) % _waypoints.Length;
+            _indexPatrol = (_indexPatrol + randomInt) % _patrolPoint.PointCount;
         }
         direction = (targetPoint.position - transform.position).normalized;
 
