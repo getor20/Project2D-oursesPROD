@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Enemy1AI : MonoBehaviour
@@ -25,6 +26,9 @@ public class Enemy1AI : MonoBehaviour
 
     [SerializeField]
     private float _patrolPointThreshold = 0.5f;
+    
+    [SerializeField]
+    private float distance = 3;
 
     [SerializeField]
     private int _indexPatrol = 0;
@@ -47,7 +51,10 @@ public class Enemy1AI : MonoBehaviour
         _enemyState = EnemyState.Patrol;
     }
 
-    private void Update() => RunFSM();
+    private void Update()
+    {
+        RunFSM();
+    }
 
     private void SwitchState(EnemyState newState)
     {
@@ -61,7 +68,6 @@ public class Enemy1AI : MonoBehaviour
 
     private void RunFSM()
     {
-        float distanceToTarget = Vector2.Distance(transform.position, _coneVision.Target.position);
 
         switch (_enemyState)
         {
@@ -86,14 +92,38 @@ public class Enemy1AI : MonoBehaviour
                     SwitchState(EnemyState.Patrol);
                 }
 
+                SetStaticState();
                 _isPatrol = false;
-                _move.SetChaseSpeed();
                 _mainRadius = _chaseRadius;
                 _coneVision.SetVisionRadius();
                 ExecuteChaseState();
                 
                 break;
         }
+    }
+
+    private void SetStaticState()
+    {
+        float currentDistance = Vector3.Distance(transform.position, _coneVision.Target.position);
+
+        // Если расстояние меньше минимального, отталкиваемся
+        if (currentDistance < distance)
+        {
+            // Вычисляем вектор направления от цели к нашему объекту
+            Vector3 direction = (transform.position - _coneVision.Target.position).normalized;
+
+            // Вычисляем новую позицию, отступая от цели на заданное расстояние
+            transform.position = _coneVision.Target.position + direction * distance;
+
+            _move.SetStaticSpeed();
+            SetDirection(Vector2.zero);
+        }
+        else
+        {
+            _move.SetChaseSpeed();
+        }
+
+        Debug.Log(currentDistance);
     }
 
     private void ExecutePatrolState()

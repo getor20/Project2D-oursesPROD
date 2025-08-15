@@ -74,7 +74,7 @@ public class PatrolPoint : MonoBehaviour
         }
 
         Vector3 rightWing = Quaternion.Euler(0, 0, _arrowAngle) * (-direction);
-        Vector3 leftWing = Quaternion.Euler(0, 0, _arrowAngle) * (-direction);
+        Vector3 leftWing = Quaternion.Euler(0, 0, -_arrowAngle) * (-direction);
 
         UnityEditor.Handles.DrawLine(end, end + rightWing * _arrowSize);
         UnityEditor.Handles.DrawLine(end, end + leftWing * _arrowSize);

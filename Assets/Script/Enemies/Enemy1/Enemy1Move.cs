@@ -6,7 +6,7 @@ public class Enemy1Move : MonoBehaviour
     private Vector2 _directionVector2;
 
     [SerializeField]
-    private float _mainSpeed;
+    private float _speedMain;
 
     [SerializeField]
     private float _speedPatrol = 2f;
@@ -33,16 +33,22 @@ public class Enemy1Move : MonoBehaviour
 
     public void SetChaseSpeed()
     {
-        _mainSpeed = _speedChase;
+        _speedMain = _speedChase;
     }
 
     public void SetPatrolSpeed()
     {
-        _mainSpeed = _speedPatrol;
+        _speedMain = _speedPatrol;
+    }
+
+    public void SetStaticSpeed()
+    {
+        Debug.Log("SetStaticSpeed called");
+        _speedMain = 0;
     }
 
     private void Move()
     {
-        _rigidbody2D.velocity = _directionVector2 * _mainSpeed;
+        _rigidbody2D.velocity = _directionVector2 * _speedMain;
     }
 }
