@@ -1,5 +1,7 @@
+using System;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem.LowLevel;
 
 public class Enemy1AI : MonoBehaviour
 {
@@ -9,33 +11,18 @@ public class Enemy1AI : MonoBehaviour
         Chase
     }
 
-    [SerializeField]
-    private ConeVision _coneVision;
+    [SerializeField] private ConeVision _coneVision;
+    [SerializeField] private PatrolPath _patrolPath;
 
-    [SerializeField]
-    private PatrolPoint _patrolPoint;
-
-    [SerializeField]
-    private float _mainRadius;
-
-    [SerializeField]
-    private float _patrolRadius = 4f;
-
-    [SerializeField]
-    private float _chaseRadius = 6f;
-
-    [SerializeField]
-    private float _patrolPointThreshold = 0.5f;
-    
-    [SerializeField]
-    private float distance = 3;
-
-    [SerializeField]
-    private int _indexPatrol = 0;
+    [SerializeField] private float _patrolPointThreshold = 0.5f;
+    [SerializeField] private int _indexPatrol = 0;
+    [SerializeField] private float _attackDistance = 3;
+    [SerializeField] private float _waitTime = 0f;
 
     private Enemy1Move _move;
     private Enemy1Animator _animator;
-    public bool _isPatrol { get; private set; }
+
+    private EnemyState _enemyState;
 
     private void Awake()
     {
@@ -43,11 +30,21 @@ public class Enemy1AI : MonoBehaviour
         _animator = GetComponent<Enemy1Animator>();
     }
 
-    private EnemyState _enemyState;
-
     private void Start()
     {
-        transform.position = _patrolPoint.GetPointTransform(_indexPatrol).position;
+        if (_patrolPath is not null && _patrolPath.Length > 1)
+        {
+           try
+            {
+                transform.position = _patrolPath.GetPoint(_indexPatrol).Position;
+            }
+            catch (ArgumentOutOfRangeException ex)
+            {
+                Debug.LogError($"Стартовый индекс {_indexPatrol} некорректен: {ex.Message}. Позиция врага ");
+                return;
+            }
+        }
+
         _enemyState = EnemyState.Patrol;
     }
 
@@ -72,48 +69,34 @@ public class Enemy1AI : MonoBehaviour
         switch (_enemyState)
         {
             case EnemyState.Patrol:
-                if /*радиус обзора*/ //(distanceToTarget < _patrolRadius)
-                   /*угол обзора*/ (_coneVision.IsTargetInVision())
+                if (_coneVision.IsTargetInVision())
                 {
                     SwitchState(EnemyState.Chase);
                 }
-
-                _isPatrol = true;
-                _mainRadius = _patrolRadius;
-                _move.SetPatrolSpeed();
-                _coneVision.SetVisionRadius();
                 ExecutePatrolState();
-                
                 break;
             case EnemyState.Chase:
-                if /*радиус обзора*/ //(distanceToTarget > _patrolRadius)
-                   /*угол обзора*/ (!_coneVision.IsTargetInVision())
+                if (!_coneVision.IsTargetInVision())
                 {
                     SwitchState(EnemyState.Patrol);
                 }
-
-                SetStaticState();
-                _isPatrol = false;
-                _mainRadius = _chaseRadius;
-                _coneVision.SetVisionRadius();
                 ExecuteChaseState();
-                
                 break;
         }
     }
 
-    private void SetStaticState()
+    /*private void SetStaticState()
     {
         float currentDistance = Vector3.Distance(transform.position, _coneVision.Target.position);
 
         // Если расстояние меньше минимального, отталкиваемся
-        if (currentDistance < distance)
+        if (currentDistance < _attackDistance)
         {
             // Вычисляем вектор направления от цели к нашему объекту
             Vector3 direction = (transform.position - _coneVision.Target.position).normalized;
 
             // Вычисляем новую позицию, отступая от цели на заданное расстояние
-            transform.position = _coneVision.Target.position + direction * distance;
+            transform.position = _coneVision.Target.position + direction * _attackDistance;
 
             _move.SetStaticSpeed();
             SetDirection(Vector2.zero);
@@ -124,29 +107,65 @@ public class Enemy1AI : MonoBehaviour
         }
 
         Debug.Log(currentDistance);
-    }
+    }*/
 
     private void ExecutePatrolState()
     {
-        Vector2 direction = Vector2.zero;
-        int randomInt = Random.Range(0, 3);
-        Transform targetPoint = _patrolPoint.GetPointTransform(_indexPatrol);
-        if (Vector2.Distance(transform.position, targetPoint.position) < _patrolPointThreshold)
+        if (_patrolPath is null || _patrolPath.Length <= 1)
         {
-            _indexPatrol = (_indexPatrol + randomInt) % _patrolPoint.PointCount;
+            return;
         }
-        direction = (targetPoint.position - transform.position).normalized;
 
-        if (direction != Vector2.zero)
+        PatrolPoint currentPoint = _patrolPath.GetPoint(_indexPatrol);
+        Vector2 direction = (currentPoint.Position - (Vector2)transform.position).normalized;
+
+        if (_waitTime > 0f)
         {
-            SetDirection(direction);
+            _waitTime -= Time.deltaTime;
+            _move.SetMoveDirection(Vector2.zero);
+            _animator.SetDirection(direction);
+            _coneVision.SetDirection(direction);
+            return;
         }
+        int random = UnityEngine.Random.Range(0, 3);
+        if (Vector2.Distance(transform.position, currentPoint.Position) < _patrolPointThreshold)
+        {
+            _waitTime = currentPoint.WaitTime;
+            _indexPatrol = (_indexPatrol + random) % _patrolPath.Length;
+            currentPoint = _patrolPath.GetPoint(_indexPatrol);
+        }
+
+        SetDirection(direction);
+
+        _move.SetPatrolSpeed();
+        _coneVision.SetVisionRadius();
     }
 
     private void ExecuteChaseState()
     {
+        if (_coneVision.Target is null)
+        {
+            Debug.LogWarning("Target is null in Chase state.");
+            return;
+        }   
+
+        float distanceToTarget = Vector2.Distance(transform.position, _coneVision.Target.position);
+
         Vector2 direction = (_coneVision.Target.position - transform.position).normalized;
+
+        if (distanceToTarget > _attackDistance)
+        {
+            _move.SetMoveDirection(direction);
+        }
+        else
+        {
+            _move.SetMoveDirection(Vector2.zero);
+        }
+
         SetDirection(direction);
+
+        _move.SetChaseSpeed();
+        _coneVision.SetVisionRadius();
     }
 
     private void SetDirection(Vector2 direction)
@@ -157,9 +176,4 @@ public class Enemy1AI : MonoBehaviour
     }
 
 
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, _mainRadius);
-    }
 }

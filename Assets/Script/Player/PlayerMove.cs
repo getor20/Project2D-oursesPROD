@@ -4,14 +4,10 @@ public class PlayerMove : MonoBehaviour
 {
     private Rigidbody2D _rigidbody2D;
 
-    [SerializeField]
-    public float _mainSpeed { get; private set; }
+    public float _mainSpeed { get ; private set; }
 
-    [SerializeField]
-    private float _walkingSpeed = 7f;
-
-    [SerializeField]
-    private float _runSpeed = 9f;
+    [SerializeField] private float _walkingSpeed = 7f;
+    [SerializeField] private float _runSpeed = 9f;
 
     private Vector2 _directVector = new Vector2(0, 0);
     private Vector2 _angularVector = new Vector2(0.707107f, 0.707107f);

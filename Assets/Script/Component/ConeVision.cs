@@ -1,27 +1,15 @@
 using UnityEngine;
-using UnityEngine.Rendering.Universal;
 
 public class ConeVision : MonoBehaviour
 {
-    [SerializeField]
-    private Transform _target;
+    [SerializeField] private Transform _target;
+    [SerializeField] private LayerMask _layerMask;
 
-    [SerializeField]
-    private LayerMask _layerMask;
+    [SerializeField] private float _mainVisionRadius;
+    [SerializeField] private float _patrolVisionRadius = 3f;
+    [SerializeField] private float _chaseVisionRadius = 6f;
+    [SerializeField, Range(0, 360)] private float _visionAngle = 90f;
 
-    [SerializeField]
-    private float _mainVisionRadius;
-
-    [SerializeField]
-    private float _patrolVisionRadius = 3f;
-
-    [SerializeField]
-    private float _chaseVisionRadius = 6f;
-
-    [Range(0, 360)]
-    [SerializeField]
-    private float _visionAngle = 90f;
-  
     private Vector2 _forwardDirection;
 
     public Transform Target => _target;
@@ -29,52 +17,35 @@ public class ConeVision : MonoBehaviour
     public void SetDirection(Vector2 direction)
     {
         if (direction != Vector2.zero)
-        {
             _forwardDirection = direction.normalized;
-        }
     }
 
     public bool IsTargetInVision()
     {
         if (_target is null)
-        {
             return false;
-        }
 
         float distanceToTarget = Vector2.Distance(transform.position, _target.position);
 
         if (distanceToTarget > _mainVisionRadius)
-        {
             return false;
-        }
 
         Vector2 directionToTarget = (_target.position - transform.position).normalized;
 
         if (Vector2.Angle(_forwardDirection, directionToTarget) > _visionAngle / 2)
-        {
             return false;
-        }
 
         RaycastHit2D hit = Physics2D.Raycast(transform.position, directionToTarget, distanceToTarget, _layerMask);
 
         if (hit.collider is not null)
-        {
             return false;
-        }
 
         return true;
     }
 
     public void SetVisionRadius()
     {
-        if (IsTargetInVision())
-        {
-            _mainVisionRadius = _chaseVisionRadius;
-        }
-        else
-        {
-            _mainVisionRadius = _patrolVisionRadius;
-        }
+        _mainVisionRadius = IsTargetInVision() ? _chaseVisionRadius : _patrolVisionRadius;
     }
 
 #if UNITY_EDITOR
@@ -99,7 +70,7 @@ public class ConeVision : MonoBehaviour
 
     private Vector3 DirectionFromAngle(float angleInDegrees, Vector2 forwardDirection)
     {
-        float baseAngle = Mathf.Atan2(forwardDirection.y, forwardDirection.x) * Mathf.Rad2Deg;  
+        float baseAngle = Mathf.Atan2(forwardDirection.y, forwardDirection.x) * Mathf.Rad2Deg;
         float totalAngle = baseAngle + angleInDegrees;
 
         return new Vector3(Mathf.Cos(totalAngle * Mathf.Deg2Rad), Mathf.Sin(totalAngle * Mathf.Deg2Rad));

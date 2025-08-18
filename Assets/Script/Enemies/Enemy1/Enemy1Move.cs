@@ -5,14 +5,9 @@ public class Enemy1Move : MonoBehaviour
     private Rigidbody2D _rigidbody2D;
     private Vector2 _directionVector2;
 
-    [SerializeField]
-    private float _speedMain;
-
-    [SerializeField]
-    private float _speedPatrol = 2f;
-
-    [SerializeField]
-    private float _speedChase = 7f;
+    [SerializeField] private float _speedMain;
+    [SerializeField] private float _speedPatrol = 2f;
+    [SerializeField] private float _speedChase = 7f;
     
     public float CurrentSpeed => _rigidbody2D.velocity.magnitude;
 

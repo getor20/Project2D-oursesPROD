@@ -239,7 +239,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c747b7369b46aa44a8acee7e11163a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mainSpeed: 0
+  _speedMain: 0
   _speedPatrol: 2
   _speedChase: 7
 --- !u!114 &5360775011102273974
@@ -255,12 +255,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _coneVision: {fileID: 5713874993963388246}
-  _patrolPoint: {fileID: 0}
-  _mainRadius: 0
-  _patrolRadius: 3
-  _chaseRadius: 6
+  _patrolPath: {fileID: 0}
   _patrolPointThreshold: 0.5
   _indexPatrol: 0
+  _attackDistance: 3
+  _waitTime: 0
 --- !u!1 &438792898889324413
 GameObject:
   m_ObjectHideFlags: 0
@@ -308,7 +307,7 @@ MonoBehaviour:
   _target: {fileID: 0}
   _layerMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1024
   _mainVisionRadius: 0
   _patrolVisionRadius: 3
   _chaseVisionRadius: 6
