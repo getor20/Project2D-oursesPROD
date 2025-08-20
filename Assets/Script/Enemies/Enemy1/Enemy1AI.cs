@@ -1,7 +1,4 @@
-using System;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.InputSystem.LowLevel;
 
 public class Enemy1AI : MonoBehaviour
 {
@@ -32,18 +29,7 @@ public class Enemy1AI : MonoBehaviour
 
     private void Start()
     {
-        if (_patrolPath is not null && _patrolPath.Length > 1)
-        {
-           try
-            {
-                transform.position = _patrolPath.GetPoint(_indexPatrol).Position;
-            }
-            catch (ArgumentOutOfRangeException ex)
-            {
-                Debug.LogError($"Стартовый индекс {_indexPatrol} некорректен: {ex.Message}. Позиция врага ");
-                return;
-            }
-        }
+        transform.position = _patrolPath.GetPoint(_indexPatrol).Position;
 
         _enemyState = EnemyState.Patrol;
     }
@@ -85,36 +71,8 @@ public class Enemy1AI : MonoBehaviour
         }
     }
 
-    /*private void SetStaticState()
-    {
-        float currentDistance = Vector3.Distance(transform.position, _coneVision.Target.position);
-
-        // Если расстояние меньше минимального, отталкиваемся
-        if (currentDistance < _attackDistance)
-        {
-            // Вычисляем вектор направления от цели к нашему объекту
-            Vector3 direction = (transform.position - _coneVision.Target.position).normalized;
-
-            // Вычисляем новую позицию, отступая от цели на заданное расстояние
-            transform.position = _coneVision.Target.position + direction * _attackDistance;
-
-            _move.SetStaticSpeed();
-            SetDirection(Vector2.zero);
-        }
-        else
-        {
-            _move.SetChaseSpeed();
-        }
-
-        Debug.Log(currentDistance);
-    }*/
-
     private void ExecutePatrolState()
     {
-        if (_patrolPath is null || _patrolPath.Length <= 1)
-        {
-            return;
-        }
 
         PatrolPoint currentPoint = _patrolPath.GetPoint(_indexPatrol);
         Vector2 direction = (currentPoint.Position - (Vector2)transform.position).normalized;
@@ -135,7 +93,9 @@ public class Enemy1AI : MonoBehaviour
             currentPoint = _patrolPath.GetPoint(_indexPatrol);
         }
 
-        SetDirection(direction);
+        _move.SetMoveDirection(direction);
+        _animator.SetDirection(direction);
+        _coneVision.SetDirection(direction);
 
         _move.SetPatrolSpeed();
         _coneVision.SetVisionRadius();
@@ -143,12 +103,6 @@ public class Enemy1AI : MonoBehaviour
 
     private void ExecuteChaseState()
     {
-        if (_coneVision.Target is null)
-        {
-            Debug.LogWarning("Target is null in Chase state.");
-            return;
-        }   
-
         float distanceToTarget = Vector2.Distance(transform.position, _coneVision.Target.position);
 
         Vector2 direction = (_coneVision.Target.position - transform.position).normalized;
@@ -162,18 +116,13 @@ public class Enemy1AI : MonoBehaviour
             _move.SetMoveDirection(Vector2.zero);
         }
 
-        SetDirection(direction);
+        _animator.SetDirection(direction);
+        _coneVision.SetDirection(direction);
 
         _move.SetChaseSpeed();
         _coneVision.SetVisionRadius();
     }
 
-    private void SetDirection(Vector2 direction)
-    {
-        _move.SetMoveDirection(direction);
-        _animator.SetDirection(direction);
-        _coneVision.SetDirection(direction);
-    }
 
 
 }

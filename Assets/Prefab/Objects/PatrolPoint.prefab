@@ -45,5 +45,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _pointColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  _radius: 0.5
+  _radius: 0.3
   _waitTime: 0

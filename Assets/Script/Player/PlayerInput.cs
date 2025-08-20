@@ -7,7 +7,7 @@ public class PlayerInput : MonoBehaviour
     
     private Vector2 _angularVector = new Vector2(0.707107f, 0.707107f);
 
-    public Vector2 input;
+    //public Vector2 input;
 
     private void Awake()
     {
@@ -19,7 +19,7 @@ public class PlayerInput : MonoBehaviour
         //DirectionVector();
     }
 
-    public void DirectionVector()
+    /*public void DirectionVector()
     {
         if (input.y == _angularVector.y && input.x == _angularVector.x)
         {
@@ -38,7 +38,7 @@ public class PlayerInput : MonoBehaviour
         {
             Debug.Log("_vector4" + input);
         }
-    }
+    }*/
 
     public void OnMove(InputAction.CallbackContext context)
     {
@@ -51,7 +51,7 @@ public class PlayerInput : MonoBehaviour
             //Debug.Log("Кнопка нажата: " + context.action.name);
         }
 
-        input = context.ReadValue<Vector2>();
+        var input = context.ReadValue<Vector2>();
         _playerMove.SetDirection(input);
     }
 

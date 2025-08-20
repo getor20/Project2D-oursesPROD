@@ -3,17 +3,11 @@ using UnityEngine.Rendering.Universal;
 
 public class DayNightChange : MonoBehaviour
 {
-    [SerializeField]
-    private Light2D _light2D;
-    [SerializeField]
-    private Gradient _lightGradient;
-    [SerializeField]
-    private AnimationCurve _lightIntensity;
-
-    [SerializeField]
-    private float _timeNightDay = 120f;
-
-    private float _currentTime = 0f;
+    [SerializeField] private Light2D _light2D;
+    [SerializeField] private Gradient _lightGradient;
+    [SerializeField] private AnimationCurve _lightIntensity;
+    [SerializeField] private float _timeNightDay = 120;
+    [SerializeField] private float _currentTime = 60f;
 
     private void Awake()
     {
