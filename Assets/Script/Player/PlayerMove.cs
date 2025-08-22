@@ -1,3 +1,4 @@
+using System.Threading;
 using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
@@ -21,11 +22,7 @@ public class PlayerMove : MonoBehaviour
 
 
     public Vector2 MainDirection { get; private set; }
-
-
     public Vector2 DirectionVector2 { get; private set; }
-
-    
     public Vector2 DirectionVector { get; private set; }
 
     
@@ -39,7 +36,7 @@ public class PlayerMove : MonoBehaviour
     {
         Move();
         AngularDirection();
-       // i();
+        //i();
 
         /*if (_isMoving && _isAngularDirection)
         {
@@ -49,55 +46,68 @@ public class PlayerMove : MonoBehaviour
 
     public void AngularDirection()
     {
-        if (MainDirection.y == _angularVector.y && MainDirection.x == _angularVector.x && _isMoving)
+        if (MainDirection.y == _angularVector.y && MainDirection.x == _angularVector.x /*&& _isMoving*/)
         {
+            DirectionVector2 = MainDirection;
             _isAngularDirection = true;
             TransitionAngular = 1;
             Debug.Log("да");
         }
-        else if (MainDirection.y == -_angularVector.y && MainDirection.x == -_angularVector.x && _isMoving)
+        else if (MainDirection.y == -_angularVector.y && MainDirection.x == -_angularVector.x /*&& _isMoving*/)
         {
+            DirectionVector2 = MainDirection;
             _isAngularDirection = true;
             TransitionAngular = 1;
             Debug.Log("да");
         }
-        else if (MainDirection.y == -_angularVector.y && MainDirection.x == _angularVector.x && _isMoving)
+        else if (MainDirection.y == -_angularVector.y && MainDirection.x == _angularVector.x /*&& _isMoving*/)
         {
+            DirectionVector2 = MainDirection;
             _isAngularDirection = true;
             TransitionAngular = 1;
             Debug.Log("да");
         }
-        else if (MainDirection.y == _angularVector.y && MainDirection.x == -_angularVector.x && _isMoving)
+        else if (MainDirection.y == _angularVector.y && MainDirection.x == -_angularVector.x /*&& _isMoving*/)
         {
+            DirectionVector2 = MainDirection;
             _isAngularDirection = true;
             TransitionAngular = 1;
             Debug.Log("да");
+        }
+        else
+        {
+            //Thread.Sleep(1000);
+            i();
         }
     }
 
-    /*public void i()
+    public void i()
     {
-        if (MainDirection.y > _directVector.y && MainDirection.x == _directVector.x && _isMoving)
+        if (MainDirection.y >= 1 /*&& MainDirection.x == _directVector.x*/&& _isMoving)
         {
+            DirectionVector2 = MainDirection;
             TransitionAngular = 0;
             Debug.Log("нет");
         }
-        else if (MainDirection.y == _directVector.y && MainDirection.x < _directVector.x && _isMoving)
+        else if (MainDirection.x <= 1 /*&& MainDirection.y == _directVector.y*/ && _isMoving)
         {
+            DirectionVector2 = MainDirection;
             TransitionAngular = 0;
             Debug.Log("нет");
         }
-        else if (MainDirection.y < _directVector.y && MainDirection.x == _directVector.x && _isMoving)
+        else if (MainDirection.y <= 1 /*&& MainDirection.x == _directVector.x*/ && _isMoving)
         {
+            DirectionVector2 = MainDirection;
             TransitionAngular = 0;
             Debug.Log("нет");
         }
-        else if (MainDirection.y == _directVector.y && MainDirection.x > _directVector.x && _isMoving)
+        else if (MainDirection.x >= 1 /*&& MainDirection.y == _directVector.y*/ && _isMoving)
         {
+            DirectionVector2 = MainDirection;
             TransitionAngular = 0;
             Debug.Log("нет");
         }
-    }*/
+    }
 
     public void SetDirection(Vector2 direction)
     {

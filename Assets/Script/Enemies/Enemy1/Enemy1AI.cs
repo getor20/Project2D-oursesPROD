@@ -13,7 +13,7 @@ public class Enemy1AI : MonoBehaviour
 
     [SerializeField] private float _patrolPointThreshold = 0.5f;
     [SerializeField] private int _indexPatrol = 0;
-    [SerializeField] private float _attackDistance = 3;
+    [SerializeField] private float _attackDistance = 2;
     [SerializeField] private float _waitTime = 0f;
 
     private Enemy1Move _move;
