@@ -104,7 +104,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.0001
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
@@ -252,7 +252,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b870243238af72c4a9213da53562d9a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  input: {x: 0, y: 0}
 --- !u!114 &1686384601855684895
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -312,7 +311,7 @@ MonoBehaviour:
   - {x: 0.25, y: -1.0625, z: 0}
   m_ShapePathHash: 0
   m_Mesh: {fileID: 0}
-  m_InstanceId: -1310
+  m_InstanceId: -1338
   m_LocalBounds:
     m_Center: {x: 0.03125, y: -0.09375, z: 0}
     m_Extent: {x: 0.21875, y: 0.96875, z: 0}

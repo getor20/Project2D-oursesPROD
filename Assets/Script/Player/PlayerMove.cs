@@ -20,7 +20,6 @@ public class PlayerMove : MonoBehaviour
     public float TransitionDirect { get; private set; }
     public float TransitionAngular { get; private set; }
 
-
     public Vector2 MainDirection { get; private set; }
     public Vector2 DirectionVector2 { get; private set; }
     public Vector2 DirectionVector { get; private set; }

@@ -5,10 +5,8 @@ public class Enemy1Move : MonoBehaviour
     private Rigidbody2D _rigidbody2D;
     private Vector2 _directionVector2;
 
-    [SerializeField] private float _speedMain;
-    [SerializeField] private float _speedPatrol = 2f;
-    [SerializeField] private float _speedChase = 7f;
-    
+    private float _speedMain;
+   
     public float CurrentSpeed => _rigidbody2D.velocity.magnitude;
 
     private void Awake()
@@ -26,20 +24,9 @@ public class Enemy1Move : MonoBehaviour
         _directionVector2 = direction.normalized;
     }
 
-    public void SetChaseSpeed()
+    public void SetSpeed(float speed)
     {
-        _speedMain = _speedChase;
-    }
-
-    public void SetPatrolSpeed()
-    {
-        _speedMain = _speedPatrol;
-    }
-
-    public void SetStaticSpeed()
-    {
-        Debug.Log("SetStaticSpeed called");
-        _speedMain = 0;
+        _speedMain = speed;
     }
 
     private void Move()

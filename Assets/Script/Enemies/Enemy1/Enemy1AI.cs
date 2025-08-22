@@ -8,6 +8,7 @@ public class Enemy1AI : MonoBehaviour
         Chase
     }
 
+    /*[SerializeField]*/ private StatEnemy _stats;
     [SerializeField] private ConeVision _coneVision;
     [SerializeField] private PatrolPath _patrolPath;
 
@@ -25,6 +26,7 @@ public class Enemy1AI : MonoBehaviour
     {
         _move = GetComponent<Enemy1Move>();
         _animator = GetComponent<Enemy1Animator>();
+        _stats = GetComponent<StatEnemy>();
     }
 
     private void Start()
@@ -85,19 +87,19 @@ public class Enemy1AI : MonoBehaviour
             _coneVision.SetDirection(direction);
             return;
         }
-        int random = UnityEngine.Random.Range(0, 3);
+        int random = Random.Range(0, 4);
         if (Vector2.Distance(transform.position, currentPoint.Position) < _patrolPointThreshold)
         {
             _waitTime = currentPoint.WaitTime;
-            _indexPatrol = (_indexPatrol + random) % _patrolPath.Length;
-            currentPoint = _patrolPath.GetPoint(_indexPatrol);
+            _indexPatrol = (random) % _patrolPath.Length;
+            currentPoint = _patrolPath.GetPoint(random);
         }
 
         _move.SetMoveDirection(direction);
         _animator.SetDirection(direction);
         _coneVision.SetDirection(direction);
 
-        _move.SetPatrolSpeed();
+        _move.SetSpeed(_stats.SpeedPatrol);
         _coneVision.SetVisionRadius();
     }
 
@@ -119,7 +121,7 @@ public class Enemy1AI : MonoBehaviour
         _animator.SetDirection(direction);
         _coneVision.SetDirection(direction);
 
-        _move.SetChaseSpeed();
+        _move.SetSpeed(_stats.SpeedChase);
         _coneVision.SetVisionRadius();
     }
 

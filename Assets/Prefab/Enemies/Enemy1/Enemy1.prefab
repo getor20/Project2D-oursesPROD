@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 3232022142827821681}
   - component: {fileID: 8338645040537047855}
   - component: {fileID: 5360775011102273974}
+  - component: {fileID: 3971197010227163128}
   m_Layer: 9
   m_Name: Enemy1
   m_TagString: Untagged
@@ -170,7 +171,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 0.0001
+  m_Mass: 99999
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
@@ -181,7 +182,7 @@ Rigidbody2D:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_Interpolate: 2
+  m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
@@ -211,7 +212,7 @@ MonoBehaviour:
   - {x: 0.125, y: -0.375, z: 0}
   m_ShapePathHash: 0
   m_Mesh: {fileID: 0}
-  m_InstanceId: -1326
+  m_InstanceId: -1304
   m_LocalBounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0.125, y: 0.375, z: 0}
@@ -239,9 +240,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c747b7369b46aa44a8acee7e11163a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speedMain: 0
-  _speedPatrol: 2
-  _speedChase: 7
 --- !u!114 &5360775011102273974
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -254,12 +252,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69ee75406b114074fb9da897d7886f88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _stats: {fileID: 3971197010227163128}
   _coneVision: {fileID: 5713874993963388246}
   _patrolPath: {fileID: 0}
   _patrolPointThreshold: 0.5
   _indexPatrol: 0
-  _attackDistance: 3
+  _attackDistance: 2
   _waitTime: 0
+--- !u!114 &3971197010227163128
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 425876356420238833}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2ae85e7bb585204eaba8fdc1878cdb3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _baseStats: {fileID: 11400000, guid: 16a9929316303114d97c05771af4c9ab, type: 2}
 --- !u!1 &438792898889324413
 GameObject:
   m_ObjectHideFlags: 0
