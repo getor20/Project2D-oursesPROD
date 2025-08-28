@@ -5,10 +5,10 @@ public class PlayerMove : MonoBehaviour
 {
     private Rigidbody2D _rigidbody2D;
 
-    public float MainSpeed { get ; private set; }
+    private StatPlayer _statPlayer;
 
-    [SerializeField] private float _walkingSpeed = 7f;
-    [SerializeField] private float _runSpeed = 9f;
+    [SerializeField] public float MainSpeed { get; private set; }
+
 
     private Vector2 _directVector = new Vector2(0, 0);
     private Vector2 _angularVector = new Vector2(0.707107f, 0.707107f);
@@ -29,6 +29,7 @@ public class PlayerMove : MonoBehaviour
     private void Awake()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
+        _statPlayer = GetComponent<StatPlayer>();
     }
 
     private void FixedUpdate()
@@ -131,7 +132,7 @@ public class PlayerMove : MonoBehaviour
             return;
         }
 
-        MainSpeed = _isRunning ? _runSpeed : _walkingSpeed;
+        MainSpeed = _isRunning ? _statPlayer.RunSpeed : _statPlayer.WalkingSpeed;
         _rigidbody2D.velocity = MainDirection * MainSpeed;
     }
 

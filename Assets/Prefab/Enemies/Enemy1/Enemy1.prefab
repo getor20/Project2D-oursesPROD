@@ -212,7 +212,7 @@ MonoBehaviour:
   - {x: 0.125, y: -0.375, z: 0}
   m_ShapePathHash: 0
   m_Mesh: {fileID: 0}
-  m_InstanceId: -1304
+  m_InstanceId: 41584
   m_LocalBounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0.125, y: 0.375, z: 0}
@@ -252,7 +252,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69ee75406b114074fb9da897d7886f88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _stats: {fileID: 3971197010227163128}
   _coneVision: {fileID: 5713874993963388246}
   _patrolPath: {fileID: 0}
   _patrolPointThreshold: 0.5
@@ -271,7 +270,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2ae85e7bb585204eaba8fdc1878cdb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _baseStats: {fileID: 11400000, guid: 16a9929316303114d97c05771af4c9ab, type: 2}
+  _stats: {fileID: 11400000, guid: 16a9929316303114d97c05771af4c9ab, type: 2}
+  OnDie:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5360775011102273974}
+        m_TargetAssemblyTypeName: Enemy1AI, Assembly-CSharp
+        m_MethodName: Die
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &438792898889324413
 GameObject:
   m_ObjectHideFlags: 0

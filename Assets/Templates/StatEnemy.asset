@@ -12,7 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16f44a02dd80da646b53829a8e6da4c7, type: 3}
   m_Name: StatEnemy
   m_EditorClassIdentifier: 
-  MaxHealth: 100
+  CurrentHealth: 0
+  MaxHealth: 1
   Damage: 10
-  Speed: 5
   Armor: 0
+  WalkingSpeed: 7
+  RunSpeed: 9
+  SpeedPatrol: 3
+  SpeedChase: 7

@@ -8,7 +8,7 @@ public class Enemy1AI : MonoBehaviour
         Chase
     }
 
-    /*[SerializeField]*/ private StatEnemy _stats;
+    private StatEnemy _stats;
     [SerializeField] private ConeVision _coneVision;
     [SerializeField] private PatrolPath _patrolPath;
 
@@ -124,7 +124,4 @@ public class Enemy1AI : MonoBehaviour
         _move.SetSpeed(_stats.SpeedChase);
         _coneVision.SetVisionRadius();
     }
-
-
-
 }
