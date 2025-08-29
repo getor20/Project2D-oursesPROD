@@ -3,11 +3,8 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
-    private Rigidbody2D _rigidbody2D;
-
-    private StatPlayer _statPlayer;
-
-    [SerializeField] public float MainSpeed { get; private set; }
+    private Rigidbody2D _rigidbody;
+    public float CurrentSpeed => _rigidbody.velocity.magnitude;
 
 
     private Vector2 _directVector = new Vector2(0, 0);
@@ -28,15 +25,14 @@ public class PlayerMove : MonoBehaviour
 
     private void Awake()
     {
-        _rigidbody2D = GetComponent<Rigidbody2D>();
-        _statPlayer = GetComponent<StatPlayer>();
+        _rigidbody = GetComponent<Rigidbody2D>();
     }
 
     private void FixedUpdate()
     {
-        Move();
-        AngularDirection();
-        //i();
+        //Move();
+        //AngularDirection();
+       // i();
 
         /*if (_isMoving && _isAngularDirection)
         {
@@ -109,7 +105,7 @@ public class PlayerMove : MonoBehaviour
         }
     }
 
-    public void SetDirection(Vector2 direction)
+    /*public void SetDirection(Vector2 direction)
     {
         if (direction == Vector2.zero)
         { 
@@ -121,11 +117,11 @@ public class PlayerMove : MonoBehaviour
             _isMoving = true;
             MainDirection = direction;
         }
-    }
+    }*/
 
-    private void Move()
+    public void Move(Vector2 direction, float speed)
     {
-        if (!_isMoving)
+        /*if (!_isMoving)
         {
             MainSpeed = 0;
             _rigidbody2D.velocity = Vector2.zero;
@@ -133,11 +129,19 @@ public class PlayerMove : MonoBehaviour
         }
 
         MainSpeed = _isRunning ? _statPlayer.RunSpeed : _statPlayer.WalkingSpeed;
-        _rigidbody2D.velocity = MainDirection * MainSpeed;
+        _rigidbody2D.velocity = MainDirection * MainSpeed;*/
+
+        MainDirection = direction;
+        _rigidbody.velocity = direction.normalized * speed;
     }
 
-    public void SetRunning(bool isRunning)
+    /*public void SetRunning(bool isRunning)
     {
         _isRunning = isRunning;
+    }*/
+
+    public void Stop()
+    {
+        _rigidbody.velocity = Vector2.zero;
     }
 }

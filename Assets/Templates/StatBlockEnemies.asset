@@ -9,13 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16f44a02dd80da646b53829a8e6da4c7, type: 3}
-  m_Name: StatPlayer
-  m_EditorClassIdentifier: 
-  MaxHealth: 8
+  m_Script: {fileID: 0}
+  m_Name: StatBlockEnemies
+  m_EditorClassIdentifier: Assembly-CSharp::StatBlockEnemies
+  CurrentHealth: 0
+  MaxHealth: 100
   Damage: 10
-  Armor: 0
-  _walkingSpeed: 7
-  _runSpeed: 9
   SpeedPatrol: 3
-  SpeedChase: 5
+  SpeedChase: 7

@@ -22,9 +22,9 @@ public class PlayerAnimator : MonoBehaviour
 
     private void Update()
     {
-        _animator.SetFloat(_isSpeedHash, _playerMove.MainSpeed);
-        _animator.SetFloat(_directionXHash, _playerMove.DirectionVector2.x);
-        _animator.SetFloat(_directionYHash, _playerMove.DirectionVector2.y);
+        _animator.SetFloat(_isSpeedHash, _playerMove.CurrentSpeed);
+        _animator.SetFloat(_directionXHash, _playerMove.MainDirection.x);
+        _animator.SetFloat(_directionYHash, _playerMove.MainDirection.y);
        // _animator.SetFloat(_angularDirectionXHash, _playerMove.DirectionVector.x);
         //_animator.SetFloat(_angularDirectionYHash, _playerMove.DirectionVector.y);
         _animator.SetFloat(_newFloatHash, _playerMove.TransitionDirect);

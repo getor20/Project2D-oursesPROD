@@ -1,62 +1,43 @@
+using Assets.Script.Player;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerInput : MonoBehaviour
 {
-    private PlayerMove _playerMove;
-    
-    private Vector2 _angularVector = new Vector2(0.707107f, 0.707107f);
+    private PlayerController _playerController;
 
-    //public Vector2 input;
+    private PlayerInputData _inputData;
+
+    private void Update()
+    {
+        _playerController.SetInput(_inputData);
+
+        _inputData.IsAttacking = false;
+    }
+
 
     private void Awake()
     {
-        _playerMove = GetComponent<PlayerMove>();
+        _playerController = GetComponent<PlayerController>();
     }
-
-    private void FixedUpdate()
-    {
-        //DirectionVector();
-    }
-
-    /*public void DirectionVector()
-    {
-        if (input.y == _angularVector.y && input.x == _angularVector.x)
-        {
-            input = _angularVector;
-            Debug.Log("_vector1" + input);
-        }
-        else if (input.y == -_angularVector.y && input.x == -_angularVector.x)
-        {
-            Debug.Log("_vector2" + input);
-        }
-        else if (input.y == -_angularVector.y && input.x == _angularVector.x)
-        {
-            Debug.Log("_vector3" + input);
-        }
-        else if (input.y == _angularVector.y && input.x == -_angularVector.x)
-        {
-            Debug.Log("_vector4" + input);
-        }
-    }*/
 
     public void OnMove(InputAction.CallbackContext context)
     {
         /*context.control.displayName;
         context.control.name;
         context.control.device;*/
-        var i = context.action.name;
+        /*var i = context.action.name;
         if (i == "Wove")
         {
             //Debug.Log("Кнопка нажата: " + context.action.name);
-        }
+        }*/
 
-        var input = context.ReadValue<Vector2>();
-        _playerMove.SetDirection(input);
+        _inputData.MoveDirection = context.ReadValue<Vector2>();
+        //_playerController.SetDirection(input);
     }
 
     public void OnRun(InputAction.CallbackContext context)
     {
-        _playerMove.SetRunning(context.ReadValueAsButton());
+        _inputData.IsRunning = context.ReadValueAsButton();
     }
 }

@@ -5,7 +5,7 @@ public class StatPlayer : MonoBehaviour
 {
     private const int MinHealth = 0;
 
-    [SerializeField] private Stat _stats;
+    [SerializeField] private StatBlockPlayer _stats;
 
     public float WalkingSpeed { get; private set; }
     public float RunSpeed { get; private set; }

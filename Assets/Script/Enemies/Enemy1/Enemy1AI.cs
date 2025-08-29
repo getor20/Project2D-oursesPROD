@@ -1,4 +1,6 @@
 using UnityEngine;
+using System.Collections.Generic;
+using TMPro;
 
 public class Enemy1AI : MonoBehaviour
 {
@@ -19,6 +21,8 @@ public class Enemy1AI : MonoBehaviour
 
     private Enemy1Move _move;
     private Enemy1Animator _animator;
+    private Transform _target;
+    private readonly List<Transform> _targetsBuffer = new List<Transform>();
 
     private EnemyState _enemyState;
 
@@ -39,6 +43,24 @@ public class Enemy1AI : MonoBehaviour
     private void Update()
     {
         RunFSM();
+        UpdateTarget();
+    }
+
+    private void UpdateTarget()
+    {
+        _coneVision.FindTarget(_targetsBuffer);
+
+        if (_targetsBuffer.Count > 0)
+        {
+            _target = _targetsBuffer[0];
+            SwitchState(EnemyState.Chase);
+        }
+        else if (_targetsBuffer != null)
+        {
+            _target = null;
+            SwitchState(EnemyState.Patrol);
+        }
+
     }
 
     private void SwitchState(EnemyState newState)
@@ -57,17 +79,17 @@ public class Enemy1AI : MonoBehaviour
         switch (_enemyState)
         {
             case EnemyState.Patrol:
-                if (_coneVision.IsTargetInVision())
+                /*if (_coneVision.IsTargetInVision())
                 {
                     SwitchState(EnemyState.Chase);
-                }
+                }*/
                 ExecutePatrolState();
                 break;
             case EnemyState.Chase:
-                if (!_coneVision.IsTargetInVision())
+                /*if (!_coneVision.IsTargetInVision())
                 {
                     SwitchState(EnemyState.Patrol);
-                }
+                }*/
                 ExecuteChaseState();
                 break;
         }
@@ -98,16 +120,15 @@ public class Enemy1AI : MonoBehaviour
         _move.SetMoveDirection(direction);
         _animator.SetDirection(direction);
         _coneVision.SetDirection(direction);
-
+        _coneVision.SetPatrol();
         _move.SetSpeed(_stats.SpeedPatrol);
-        _coneVision.SetVisionRadius();
     }
 
     private void ExecuteChaseState()
     {
-        float distanceToTarget = Vector2.Distance(transform.position, _coneVision.Target.position);
+        float distanceToTarget = Vector2.Distance(transform.position, _target.position /*_coneVision.Target.position*/);
 
-        Vector2 direction = (_coneVision.Target.position - transform.position).normalized;
+        Vector2 direction = (/*_coneVision.Target.position*/ _target.position - transform.position).normalized;
 
         if (distanceToTarget > _attackDistance)
         {
@@ -120,8 +141,8 @@ public class Enemy1AI : MonoBehaviour
 
         _animator.SetDirection(direction);
         _coneVision.SetDirection(direction);
+        _coneVision.SetChase();
 
         _move.SetSpeed(_stats.SpeedChase);
-        _coneVision.SetVisionRadius();
     }
 }

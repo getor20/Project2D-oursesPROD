@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 2557257273435448415}
   - component: {fileID: 1218146865061963118}
   - component: {fileID: 5052645820727276608}
+  - component: {fileID: 3642144845284296975}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -310,7 +311,7 @@ MonoBehaviour:
   - {x: 0.25, y: -1.0625, z: 0}
   m_ShapePathHash: 0
   m_Mesh: {fileID: 0}
-  m_InstanceId: 32116
+  m_InstanceId: 32402
   m_LocalBounds:
     m_Center: {x: 0.03125, y: -0.09375, z: 0}
     m_Extent: {x: 0.21875, y: 0.96875, z: 0}
@@ -326,19 +327,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0e3a06833ba701438772607d77c34fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _stats: {fileID: 11400000, guid: 8d4e00eaf7fb466488b504c41fe88dd9, type: 2}
+  _stats: {fileID: 11400000, guid: 0260e752b0e50c4409809f6022d711bc, type: 2}
   OnDie:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Enemy1AI, Assembly-CSharp
-        m_MethodName: Die
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
+--- !u!114 &3642144845284296975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5698108747678711827}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6df6f9225fce50429141f0931bcbe6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

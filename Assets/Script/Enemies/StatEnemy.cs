@@ -5,7 +5,7 @@ public class StatEnemy : MonoBehaviour
 {
     private const int MinHealth = 0;
 
-    [SerializeField] private Stat _stats;
+    [SerializeField] private StatBlockEnemies _stats;
 
     public int MaxHealth { get; private set; }
     public int CurrentHealth { get; private set; }
@@ -28,7 +28,6 @@ public class StatEnemy : MonoBehaviour
         Damage = _stats.Damage;
         SpeedChase = _stats.SpeedChase;
         SpeedPatrol = _stats.SpeedPatrol;
-        Armor = _stats.Armor;
     }
 
     public void TakeDamage(int damage)
