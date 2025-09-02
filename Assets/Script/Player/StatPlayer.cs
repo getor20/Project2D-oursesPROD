@@ -3,9 +3,9 @@ using UnityEngine.Events;
 
 public class StatPlayer : MonoBehaviour
 {
-    private const int MinHealth = 0;
-
     [SerializeField] private StatBlockPlayer _stats;
+
+    private const int MinHealth = 0;
 
     public float WalkingSpeed { get; private set; }
     public float RunSpeed { get; private set; }

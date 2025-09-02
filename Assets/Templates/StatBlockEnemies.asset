@@ -16,4 +16,4 @@ MonoBehaviour:
   MaxHealth: 100
   Damage: 10
   SpeedPatrol: 3
-  SpeedChase: 7
+  SpeedChase: 4

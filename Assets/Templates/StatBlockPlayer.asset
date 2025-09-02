@@ -16,7 +16,5 @@ MonoBehaviour:
   MaxHealth: 100
   Damage: 10
   Armor: 0
-  WalkingSpeed: 7
-  RunSpeed: 9
-  SpeedPatrol: 3
-  SpeedChase: 5
+  WalkingSpeed: 4
+  RunSpeed: 6

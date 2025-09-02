@@ -11,15 +11,15 @@ GameObject:
   - component: {fileID: 3943381690839457181}
   - component: {fileID: 992281255661665079}
   - component: {fileID: 6302486670853843771}
-  - component: {fileID: 3174867943273548192}
   - component: {fileID: 8148212683737165989}
+  - component: {fileID: 3627809202562809395}
   - component: {fileID: 4603718398754339345}
   - component: {fileID: 3232022142827821681}
-  - component: {fileID: 8338645040537047855}
   - component: {fileID: 5360775011102273974}
   - component: {fileID: 3971197010227163128}
+  - component: {fileID: 309714405415147799}
   m_Layer: 9
-  m_Name: Enemy1
+  m_Name: Scrapper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -114,8 +114,35 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!61 &3174867943273548192
-BoxCollider2D:
+--- !u!50 &8148212683737165989
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 425876356420238833}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 99999
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 1
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
+--- !u!70 &3627809202562809395
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -147,45 +174,8 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.875, y: 0.9375}
-    newSize: {x: 0.875, y: 0.9375}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
   m_Size: {x: 0.875, y: 0.9375}
-  m_EdgeRadius: 0
---- !u!50 &8148212683737165989
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 425876356420238833}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 99999
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 1
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 4
+  m_Direction: 0
 --- !u!114 &4603718398754339345
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -212,7 +202,7 @@ MonoBehaviour:
   - {x: 0.125, y: -0.375, z: 0}
   m_ShapePathHash: 0
   m_Mesh: {fileID: 0}
-  m_InstanceId: 32330
+  m_InstanceId: 32034
   m_LocalBounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0.125, y: 0.375, z: 0}
@@ -226,18 +216,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 280b61689affc8a42a81865b03d0ab23, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &8338645040537047855
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 425876356420238833}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c747b7369b46aa44a8acee7e11163a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &5360775011102273974
@@ -255,9 +233,9 @@ MonoBehaviour:
   _coneVision: {fileID: 5713874993963388246}
   _patrolPath: {fileID: 0}
   _patrolPointThreshold: 0.5
-  _indexPatrol: 0
   _attackDistance: 2
   _waitTime: 0
+  _indexPatrol: 0
 --- !u!114 &3971197010227163128
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -274,6 +252,18 @@ MonoBehaviour:
   OnDie:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &309714405415147799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 425876356420238833}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26de8b0a7d863134d95faa65c124ab8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &438792898889324413
 GameObject:
   m_ObjectHideFlags: 0

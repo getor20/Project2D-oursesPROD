@@ -1,9 +1,9 @@
 using UnityEngine;
 
-public class Enemy1Animator : MonoBehaviour
+public class ScrapperAnimator : MonoBehaviour
 {
     private Animator _animator;
-    private Enemy1Move _enemy1Move;
+    private ScrapperMove _scrapperMove;
 
     private int _isSpeedHash = Animator.StringToHash("IsSpeed");
     private int _directionXHash = Animator.StringToHash("DirectionX");
@@ -12,12 +12,12 @@ public class Enemy1Animator : MonoBehaviour
     private void Awake()
     {
         _animator = GetComponent<Animator>();
-        _enemy1Move = GetComponent<Enemy1Move>();
+        _scrapperMove = GetComponent<ScrapperMove>();
     }
 
     private void Update()
     {
-        _animator.SetFloat(_isSpeedHash, _enemy1Move.CurrentSpeed);
+        _animator.SetFloat(_isSpeedHash, _scrapperMove.CurrentSpeed);
     }
 
     public void SetDirection(Vector2 direction)

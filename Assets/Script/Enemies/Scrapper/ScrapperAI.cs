@@ -1,35 +1,34 @@
 using UnityEngine;
 using System.Collections.Generic;
-using TMPro;
 
-public class Enemy1AI : MonoBehaviour
+public class ScrapperAI : MonoBehaviour
 {
-    public enum EnemyState
+    public enum ScrapperState
     {
         Patrol,
         Chase
     }
 
-    private StatEnemy _stats;
+    
     [SerializeField] private ConeVision _coneVision;
     [SerializeField] private PatrolPath _patrolPath;
-
-    [SerializeField] private float _patrolPointThreshold = 0.5f;
-    [SerializeField] private int _indexPatrol = 0;
+    [SerializeField] private float _patrolPointThreshold = 0.5f;    
     [SerializeField] private float _attackDistance = 2;
     [SerializeField] private float _waitTime = 0f;
+    [SerializeField] private int _indexPatrol = 0;
 
-    private Enemy1Move _move;
-    private Enemy1Animator _animator;
+    private StatEnemy _stats;
+    private ScrapperMove _move;
+    private ScrapperAnimator _animator;
     private Transform _target;
     private readonly List<Transform> _targetsBuffer = new List<Transform>();
 
-    private EnemyState _enemyState;
+    private ScrapperState _enemyState;
 
     private void Awake()
     {
-        _move = GetComponent<Enemy1Move>();
-        _animator = GetComponent<Enemy1Animator>();
+        _move = GetComponent<ScrapperMove>();
+        _animator = GetComponent<ScrapperAnimator>();
         _stats = GetComponent<StatEnemy>();
     }
 
@@ -37,7 +36,7 @@ public class Enemy1AI : MonoBehaviour
     {
         transform.position = _patrolPath.GetPoint(_indexPatrol).Position;
 
-        _enemyState = EnemyState.Patrol;
+        _enemyState = ScrapperState.Patrol;
     }
 
     private void Update()
@@ -53,17 +52,17 @@ public class Enemy1AI : MonoBehaviour
         if (_targetsBuffer.Count > 0)
         {
             _target = _targetsBuffer[0];
-            SwitchState(EnemyState.Chase);
+            SwitchState(ScrapperState.Chase);
         }
         else if (_targetsBuffer != null)
         {
             _target = null;
-            SwitchState(EnemyState.Patrol);
+            SwitchState(ScrapperState.Patrol);
         }
 
     }
 
-    private void SwitchState(EnemyState newState)
+    private void SwitchState(ScrapperState newState)
     {
         if (_enemyState == newState)
         {
@@ -78,14 +77,14 @@ public class Enemy1AI : MonoBehaviour
 
         switch (_enemyState)
         {
-            case EnemyState.Patrol:
+            case ScrapperState.Patrol:
                 /*if (_coneVision.IsTargetInVision())
                 {
                     SwitchState(EnemyState.Chase);
                 }*/
                 ExecutePatrolState();
                 break;
-            case EnemyState.Chase:
+            case ScrapperState.Chase:
                 /*if (!_coneVision.IsTargetInVision())
                 {
                     SwitchState(EnemyState.Patrol);

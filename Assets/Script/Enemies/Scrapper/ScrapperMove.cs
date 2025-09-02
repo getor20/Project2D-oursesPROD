@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Enemy1Move : MonoBehaviour
+public class ScrapperMove : MonoBehaviour
 {
     private Rigidbody2D _rigidbody2D;
     private Vector2 _directionVector2;
