@@ -8,17 +8,16 @@ public class PlayerInput : MonoBehaviour
 
     private PlayerInputData _inputData;
 
+    private void Awake()
+    {
+        _playerController = GetComponent<PlayerController>();
+    }
+
     private void Update()
     {
         _playerController.SetInput(_inputData);
 
         _inputData.IsAttacking = false;
-    }
-
-
-    private void Awake()
-    {
-        _playerController = GetComponent<PlayerController>();
     }
 
     public void OnMove(InputAction.CallbackContext context)
@@ -40,4 +39,13 @@ public class PlayerInput : MonoBehaviour
     {
         _inputData.IsRunning = context.ReadValueAsButton();
     }
+
+    public void OnAttack(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            _inputData.IsAttacking = true;
+        }
+    }
+    
 }

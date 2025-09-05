@@ -20,6 +20,7 @@ GameObject:
   - component: {fileID: 1218146865061963118}
   - component: {fileID: 5052645820727276608}
   - component: {fileID: 3642144845284296975}
+  - component: {fileID: 87496663370781032}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -214,6 +215,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: c72ac733-3aed-426e-8be0-3d1ee3c170fb
     m_ActionName: Player/Shift[/Keyboard/shift]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4803432724749424871}
+        m_TargetAssemblyTypeName: PlayerInput, Assembly-CSharp
+        m_MethodName: OnAttack
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: aaeff1e2-1de1-45eb-8205-336fa802d8a0
+    m_ActionName: Player/Attack[/Mouse/leftButton]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -302,7 +319,7 @@ MonoBehaviour:
   - {x: 0.125, y: -0.375, z: 0}
   m_ShapePathHash: 764802325
   m_Mesh: {fileID: 0}
-  m_InstanceId: 38028
+  m_InstanceId: -1356
   m_LocalBounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0.125, y: 0.375, z: 0}
@@ -334,6 +351,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6df6f9225fce50429141f0931bcbe6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _hitboxTransform: {fileID: 8568370013056785003}
+--- !u!114 &87496663370781032
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5698108747678711827}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 277862a644ef5f14d903af92efa8c062, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _attackCooldown: 0
+  _target:
+    serializedVersion: 2
+    m_Bits: 512
+  _hitboxTemplate: {fileID: 2668001295301531998}
 --- !u!1 &7063562746845783862
 GameObject:
   m_ObjectHideFlags: 0
@@ -376,7 +411,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3629838226824193490}
   - component: {fileID: 2668001295301531998}
-  - component: {fileID: 8166393622318707147}
   m_Layer: 6
   m_Name: MeleeHitboxes
   m_TagString: Untagged
@@ -393,7 +427,7 @@ Transform:
   m_GameObject: {fileID: 8051897929858925431}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.6, z: 0}
+  m_LocalPosition: {x: 0, y: 0.8, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -431,7 +465,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 0.5}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -442,17 +476,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.875, y: 2}
   m_EdgeRadius: 0
---- !u!114 &8166393622318707147
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8051897929858925431}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 277862a644ef5f14d903af92efa8c062, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

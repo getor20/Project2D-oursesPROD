@@ -12,6 +12,7 @@ public class StatPlayer : MonoBehaviour
     public float CurrentHealth { get; private set; }
     public int MaxHealth { get; private set; }
     public int Armor { get; private set; }
+    public int Damage { get; private set; }
 
     public UnityEvent OnDie;
 
@@ -27,13 +28,14 @@ public class StatPlayer : MonoBehaviour
         Armor = _stats.Armor;
         MaxHealth = _stats.MaxHealth;
         CurrentHealth = _stats.CurrentHealth;
+        Damage = _stats.Damage;
     }
 
     public void TakeDamage(int damage)
     {
         int damageTake = Mathf.Max(0, damage - Armor);
 
-        CurrentHealth -= Mathf.Clamp(damageTake - CurrentHealth, MinHealth, MaxHealth);
+        CurrentHealth -= Mathf.Clamp(CurrentHealth - damageTake, MinHealth, MaxHealth);
 
         if (CurrentHealth <= MinHealth)
         {

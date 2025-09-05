@@ -4,9 +4,12 @@ namespace Assets.Script.Player
 {
     public class PlayerController : MonoBehaviour
     {
+        [SerializeField] private Transform _hitboxTransform;
+
         private PlayerMove _mover;
         private StatPlayer _stats;
         private PlayerInputData _inputData;
+        private MeleeAttacker _meleeAttacker;
 
         public bool CanMove { get; set; } = true;
 
@@ -14,6 +17,7 @@ namespace Assets.Script.Player
         {
             _mover = GetComponent<PlayerMove>();
             _stats = GetComponent<StatPlayer>();
+            _meleeAttacker = GetComponent<MeleeAttacker>();
         }
 
         private void Update()
@@ -25,6 +29,7 @@ namespace Assets.Script.Player
             }
 
             HandleMovement();
+            HandleCombat();
         }
 
         private void HandleMovement()
@@ -40,6 +45,15 @@ namespace Assets.Script.Player
             }
         }
 
+        private void HandleCombat()
+        {
+            if (_inputData.IsAttacking)
+            {
+                _meleeAttacker.Attack();
+            }
+            TransformHelper.UpdateRotation(_hitboxTransform, _mover.MainDirection);
+        }
+            
         internal void SetInput(PlayerInputData inputData)
         {
             _inputData = inputData;
