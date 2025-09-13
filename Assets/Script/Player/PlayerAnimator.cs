@@ -9,10 +9,6 @@ public class PlayerAnimator : MonoBehaviour
     private int _isSpeedHash = Animator.StringToHash("IsSpeed");
     private int _directionXHash = Animator.StringToHash("DirectionX");
     private int _directionYHash = Animator.StringToHash("DirectionY");
-    private int _angularDirectionXHash = Animator.StringToHash("AngularDirectionX");
-    private int _angularDirectionYHash = Animator.StringToHash("AngularDirectionY");
-    private int _newFloatHash = Animator.StringToHash("New Float");
-    private int _transitionAngular = Animator.StringToHash("TransitionAngular");
 
     private void Awake()
     {
@@ -23,11 +19,7 @@ public class PlayerAnimator : MonoBehaviour
     private void Update()
     {
         _animator.SetFloat(_isSpeedHash, _playerMove.CurrentSpeed);
-        _animator.SetFloat(_directionXHash, _playerMove.MainDirection.x);
-        _animator.SetFloat(_directionYHash, _playerMove.MainDirection.y);
-       // _animator.SetFloat(_angularDirectionXHash, _playerMove.DirectionVector.x);
-        //_animator.SetFloat(_angularDirectionYHash, _playerMove.DirectionVector.y);
-        _animator.SetFloat(_newFloatHash, _playerMove.TransitionDirect);
-        _animator.SetFloat(_transitionAngular, _playerMove.TransitionAngular);
+        _animator.SetFloat(_directionXHash, _playerMove.DirectionVector.x);
+        _animator.SetFloat(_directionYHash, _playerMove.DirectionVector.y);
     }
 }

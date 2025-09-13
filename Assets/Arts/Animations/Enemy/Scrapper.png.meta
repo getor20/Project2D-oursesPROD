@@ -162,11 +162,11 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Enemy1_0
+      name: Scrapper_0
       rect:
         serializedVersion: 2
         x: 1
-        y: 384
+        y: 385
         width: 14
         height: 15
       alignment: 0
@@ -176,14 +176,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 65969e448464bde4792dab52efd5bbf5
-      internalID: -1056121461
+      spriteID: 8be1e189e59eb2842805d2e2f29c1e06
+      internalID: -987540877
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy1_1
+      name: Scrapper_1
       rect:
         serializedVersion: 2
         x: 17
@@ -197,18 +197,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4d2a07cb589fa2b49928b0aa5897359a
-      internalID: 1654347457
+      spriteID: 8371f6916d314754dbe0fde73b5bbfab
+      internalID: -1559921732
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy1_2
+      name: Scrapper_2
       rect:
         serializedVersion: 2
         x: 33
-        y: 384
+        y: 385
         width: 14
         height: 15
       alignment: 0
@@ -218,14 +218,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2620a374860d17849817f4f717288924
-      internalID: 906822774
+      spriteID: 9b9397afdce16a14abc20b958d4850c7
+      internalID: 1016461266
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy1_3
+      name: Scrapper_3
       rect:
         serializedVersion: 2
         x: 49
@@ -239,18 +239,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1442f23b4da897b46a02133d38eaaed1
-      internalID: 1562822404
+      spriteID: b301abbce19793a4bb1e13ab4d3c99df
+      internalID: 1561705226
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy1_4
+      name: Scrapper_4
       rect:
         serializedVersion: 2
         x: 2
-        y: 368
+        y: 369
         width: 11
         height: 15
       alignment: 0
@@ -260,14 +260,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e1704ed6281316b4880c518b7eaa7403
-      internalID: -1300036757
+      spriteID: e40f484914751ca47a06080500dccd4a
+      internalID: 1157787772
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy1_5
+      name: Scrapper_5
       rect:
         serializedVersion: 2
         x: 18
@@ -281,18 +281,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: aec9ff24c9d0ca7489afe8b8ce7eb994
-      internalID: 610805258
+      spriteID: d4286c348baae6f459d55c7709e06a0f
+      internalID: -1390061960
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy1_6
+      name: Scrapper_6
       rect:
         serializedVersion: 2
         x: 34
-        y: 368
+        y: 369
         width: 11
         height: 15
       alignment: 0
@@ -302,14 +302,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bc03f5b74ad142241b85258155b4e011
-      internalID: -1151020397
+      spriteID: 90cd434e09e01974197c0a63803ea792
+      internalID: -827324040
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy1_7
+      name: Scrapper_7
       rect:
         serializedVersion: 2
         x: 50
@@ -323,18 +323,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 704273abf2ef9a548b658bb2c9bdb2f2
-      internalID: -1205671248
+      spriteID: 470b8dd807d46a54c8baeb71173fd942
+      internalID: 390328089
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy1_8
+      name: Scrapper_8
       rect:
         serializedVersion: 2
         x: 2
-        y: 352
+        y: 353
         width: 10
         height: 15
       alignment: 0
@@ -344,14 +344,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ee07a31773a780142ba8107f02223f23
-      internalID: 1206242483
+      spriteID: ffbcbcb2d1adec04cb6e110baaa308c1
+      internalID: -1262377080
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy1_9
+      name: Scrapper_9
       rect:
         serializedVersion: 2
         x: 18
@@ -365,18 +365,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fd5402cfe27c83c4b837c038c55c4bfb
-      internalID: 1618463478
+      spriteID: 12aa705fe4789984dbe615c6154bbe50
+      internalID: 1975785123
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy1_10
+      name: Scrapper_10
       rect:
         serializedVersion: 2
         x: 34
-        y: 352
+        y: 353
         width: 10
         height: 15
       alignment: 0
@@ -386,14 +386,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b5c57ebccf2d6cc48bd9a4789060a5af
-      internalID: 1950176314
+      spriteID: 63bb2dea43068c5439e4c216af27b104
+      internalID: 805651495
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy1_11
+      name: Scrapper_11
       rect:
         serializedVersion: 2
         x: 50
@@ -407,18 +407,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ef8e3a2ca0d15c1478205c05589ed7fb
-      internalID: 1455678522
+      spriteID: 9d3ced229246f234e98e0880ff84b7fc
+      internalID: -538771131
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy1_12
+      name: Scrapper_12
       rect:
         serializedVersion: 2
         x: 2
-        y: 336
+        y: 337
         width: 11
         height: 15
       alignment: 0
@@ -428,14 +428,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 970069e8431c1344a81a6fd52b241782
-      internalID: -370122919
+      spriteID: e76c1d22ed699ae4fbf46eef10c3a452
+      internalID: 466210106
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy1_13
+      name: Scrapper_13
       rect:
         serializedVersion: 2
         x: 18
@@ -449,18 +449,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 35ae22ed3088d6a4d88a0cfd311190b1
-      internalID: 1824305670
+      spriteID: b207115e6fa3fea46964afc248734963
+      internalID: 894464115
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy1_14
+      name: Scrapper_14
       rect:
         serializedVersion: 2
         x: 34
-        y: 336
+        y: 337
         width: 11
         height: 15
       alignment: 0
@@ -470,14 +470,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cd3b990a55456a74c9fc3e85ba19ba40
-      internalID: -1871571506
+      spriteID: 2645cc09fd016114cbc3fe4af6968d0b
+      internalID: 1035310038
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy1_15
+      name: Scrapper_15
       rect:
         serializedVersion: 2
         x: 50
@@ -491,18 +491,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ecae7f13b4371b2448e28f8779a8150a
-      internalID: 472060014
+      spriteID: cd4a746a7c8b86e4d974e51f6c296977
+      internalID: -146129012
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy1_16
+      name: Scrapper_16
       rect:
         serializedVersion: 2
         x: 1
-        y: 320
+        y: 321
         width: 14
         height: 15
       alignment: 0
@@ -512,14 +512,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 23ff472dc6d9dc74685c01c22f38039f
-      internalID: -1642646022
+      spriteID: 31f756066f34d374397a09d4100c669e
+      internalID: 1020865799
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy1_17
+      name: Scrapper_17
       rect:
         serializedVersion: 2
         x: 17
@@ -533,18 +533,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7af1d5a1f5df6964390cbc2b6d0c39b9
-      internalID: -1158790579
+      spriteID: c25f41d700fe33444b239710db561b32
+      internalID: 374354917
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy1_18
+      name: Scrapper_18
       rect:
         serializedVersion: 2
         x: 33
-        y: 320
+        y: 321
         width: 14
         height: 15
       alignment: 0
@@ -554,14 +554,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d5a591f247753304da2ab7e750915a2d
-      internalID: -812455695
+      spriteID: 7e3903c6d0bdda64591cfc1b916150d0
+      internalID: -1168919370
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy1_19
+      name: Scrapper_19
       rect:
         serializedVersion: 2
         x: 49
@@ -575,18 +575,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 21e1a04443eb4364aa9bfea644761a55
-      internalID: -563580744
+      spriteID: ab78230e6b3d69f469d7a15971bc3cab
+      internalID: 565252845
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy1_20
+      name: Scrapper_20
       rect:
         serializedVersion: 2
         x: 3
-        y: 304
+        y: 305
         width: 11
         height: 15
       alignment: 0
@@ -596,14 +596,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fdfbcf2fd3af20945911cef6407dbe4b
-      internalID: 1967973923
+      spriteID: 2c6936271e8c5874e905d185baceb960
+      internalID: 1024741702
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy1_21
+      name: Scrapper_21
       rect:
         serializedVersion: 2
         x: 19
@@ -617,18 +617,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8697ab00fc375884aa7e48ad38917710
-      internalID: 1069911870
+      spriteID: ede4790e078bcdd4eaccbbc4b3e500fb
+      internalID: 242372587
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy1_22
+      name: Scrapper_22
       rect:
         serializedVersion: 2
         x: 35
-        y: 304
+        y: 305
         width: 11
         height: 15
       alignment: 0
@@ -638,14 +638,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7d2ee5e4f69428b43a284df1fd4d46ce
-      internalID: 866796788
+      spriteID: 3a936d9545c1e63498e2b8200d0fcac8
+      internalID: -132915786
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy1_23
+      name: Scrapper_23
       rect:
         serializedVersion: 2
         x: 51
@@ -659,18 +659,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 379043ce11a92d8429f6b185bd772a37
-      internalID: 1725627063
+      spriteID: e9aefe54d100aac479b30584293a1c7d
+      internalID: 1695379770
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy1_24
+      name: Scrapper_24
       rect:
         serializedVersion: 2
         x: 4
-        y: 288
+        y: 289
         width: 10
         height: 15
       alignment: 0
@@ -680,14 +680,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 471ac7dbed636974cae620767fead826
-      internalID: -1586382799
+      spriteID: fe7f95457eff7e842b8380dff83ab06c
+      internalID: 884150657
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy1_25
+      name: Scrapper_25
       rect:
         serializedVersion: 2
         x: 20
@@ -701,18 +701,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f86fcd0652c42be45b8ab946b2fc26ea
-      internalID: -1754010636
+      spriteID: 1f917b1e2855e8f4da765468cf821c6e
+      internalID: -1394532998
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy1_26
+      name: Scrapper_26
       rect:
         serializedVersion: 2
         x: 36
-        y: 288
+        y: 289
         width: 10
         height: 15
       alignment: 0
@@ -722,14 +722,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1816038563530e64484e35e664975062
-      internalID: 1903477113
+      spriteID: e2dc485ccd7537e47b640f78d736987c
+      internalID: -753999668
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy1_27
+      name: Scrapper_27
       rect:
         serializedVersion: 2
         x: 52
@@ -743,18 +743,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a52fa58730d95ad4a8804e29986b425d
-      internalID: -691294110
+      spriteID: 4d227460e70467645aca5cb74ff454cc
+      internalID: -2104662881
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy1_28
+      name: Scrapper_28
       rect:
         serializedVersion: 2
         x: 3
-        y: 272
+        y: 273
         width: 11
         height: 15
       alignment: 0
@@ -764,14 +764,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7235db1b36481a04da36f6485df950d2
-      internalID: 1891533252
+      spriteID: dbcee1e3d068e364d9dc9908fd61ab2c
+      internalID: 1025986202
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy1_29
+      name: Scrapper_29
       rect:
         serializedVersion: 2
         x: 19
@@ -785,18 +785,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 88ad3910b6b82b941acb35aa1270baf3
-      internalID: -864223505
+      spriteID: ecaae8b803d870f408cb0c82c496aad2
+      internalID: 158609658
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy1_30
+      name: Scrapper_30
       rect:
         serializedVersion: 2
         x: 35
-        y: 272
+        y: 273
         width: 11
         height: 15
       alignment: 0
@@ -806,14 +806,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 29ec9ec6a86739847a37d6697f04a381
-      internalID: -1554559380
+      spriteID: f6ebc04d65da0af4d94f081d462b30ea
+      internalID: -783406184
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy1_31
+      name: Scrapper_31
       rect:
         serializedVersion: 2
         x: 51
@@ -827,103 +827,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 647d2edfb2b6fe74d97dd33f01a73c97
-      internalID: -1641081252
+      spriteID: a5c64d1c2b6c363448d20a12e3b95c6d
+      internalID: 825456106
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy1_32
-      rect:
-        serializedVersion: 2
-        x: 1
-        y: 256
-        width: 14
-        height: 15
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 1d1f76c6f9fe2ed4ab7974242bad5d10
-      internalID: -1960312046
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Enemy1_33
-      rect:
-        serializedVersion: 2
-        x: 18
-        y: 257
-        width: 12
-        height: 15
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 14bbb1e050763f94c9cec19a141bbe4e
-      internalID: 852644965
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Enemy1_34
-      rect:
-        serializedVersion: 2
-        x: 33
-        y: 256
-        width: 14
-        height: 15
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ff9c003479be31742b1d52afc70e50da
-      internalID: -866130030
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Enemy1_35
-      rect:
-        serializedVersion: 2
-        x: 50
-        y: 257
-        width: 12
-        height: 15
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 40c659c50e946d0479c58798719579f7
-      internalID: -2004773216
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Enemy1_36
+      name: Scrapper_32
       rect:
         serializedVersion: 2
         x: 2
-        y: 240
-        width: 11
+        y: 257
+        width: 12
         height: 15
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -932,19 +848,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 39ff6aa6539b20049b98bdac073dd303
-      internalID: 515962103
+      spriteID: cdef1bc88a84a6449b598cd389e46eb9
+      internalID: -245556047
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy1_37
+      name: Scrapper_33
       rect:
         serializedVersion: 2
-        x: 18
-        y: 241
-        width: 11
+        x: 17
+        y: 256
+        width: 14
         height: 15
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -953,19 +869,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 88293614d24153046a542950d474a01b
-      internalID: -1094004938
+      spriteID: 204a33e0aa4fb74418a851a2c5e16798
+      internalID: 975763041
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy1_38
+      name: Scrapper_34
       rect:
         serializedVersion: 2
         x: 34
-        y: 240
-        width: 11
+        y: 257
+        width: 12
         height: 15
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -974,17 +890,80 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9dc0d687aa4795b47a11407b601ff470
-      internalID: 2082486130
+      spriteID: 1de8da4fab8a2024baa55f54a63d93a8
+      internalID: -1894176390
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy1_39
+      name: Scrapper_35
       rect:
         serializedVersion: 2
         x: 49
+        y: 256
+        width: 14
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 228826ab56b70ce4f9825e680640003f
+      internalID: 205555132
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Scrapper_36
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 241
+        width: 11
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 216c0374bd665bb4da40fa5de6a011b9
+      internalID: -409619330
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Scrapper_37
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 240
+        width: 11
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 96bf54385696849479f98fcd0851a8c5
+      internalID: 362237755
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Scrapper_38
+      rect:
+        serializedVersion: 2
+        x: 33
         y: 241
         width: 14
         height: 15
@@ -995,19 +974,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c9314f9ebd39f5143825cbb111ecfe67
-      internalID: -1390310855
+      spriteID: dc8bcb72b772440469272067dc868766
+      internalID: 864478209
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy1_40
+      name: Scrapper_39
       rect:
         serializedVersion: 2
-        x: 2
-        y: 224
-        width: 10
+        x: 50
+        y: 240
+        width: 11
         height: 15
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -1016,17 +995,17 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dbd9bcf24b9292246b8ee741e936bce0
-      internalID: 1663589869
+      spriteID: dc3771ef42e2bc548beec2c63f4d3285
+      internalID: 1372102254
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy1_41
+      name: Scrapper_40
       rect:
         serializedVersion: 2
-        x: 18
+        x: 2
         y: 225
         width: 11
         height: 15
@@ -1037,17 +1016,17 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a8d36a0be11d8354ca0868909e1e198a
-      internalID: -1043716311
+      spriteID: a851f84e7d967a74b8c95a570547e1e4
+      internalID: -804500926
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy1_42
+      name: Scrapper_41
       rect:
         serializedVersion: 2
-        x: 34
+        x: 18
         y: 224
         width: 10
         height: 15
@@ -1058,17 +1037,17 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d4ab4bd3cc1f64f4da001badfc046e84
-      internalID: -973832173
+      spriteID: da7555c354fc048429614be23782828b
+      internalID: -900675131
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy1_43
+      name: Scrapper_42
       rect:
         serializedVersion: 2
-        x: 50
+        x: 34
         y: 225
         width: 12
         height: 15
@@ -1079,19 +1058,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 114d58c8982920343b7f37e49eafb7d7
-      internalID: 1908610402
+      spriteID: 5094f2b606c923140a23c89ea274e96a
+      internalID: -185629693
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy1_44
+      name: Scrapper_43
       rect:
         serializedVersion: 2
-        x: 2
-        y: 208
-        width: 11
+        x: 50
+        y: 224
+        width: 10
         height: 15
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -1100,17 +1079,17 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5f8fcc5e12f6b784cbc11d8b2083d0e1
-      internalID: 1060410942
+      spriteID: 96fb74359d9e4054c934c9cc70f4a8d2
+      internalID: -357665273
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy1_45
+      name: Scrapper_44
       rect:
         serializedVersion: 2
-        x: 18
+        x: 2
         y: 209
         width: 13
         height: 15
@@ -1121,17 +1100,17 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1062ced761a463a4db24b0f64f090a76
-      internalID: 1968489870
+      spriteID: 4150cd6cb448a2d4f8236c45c47cd1d4
+      internalID: -628336176
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy1_46
+      name: Scrapper_45
       rect:
         serializedVersion: 2
-        x: 34
+        x: 18
         y: 208
         width: 11
         height: 15
@@ -1142,17 +1121,17 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: eaf14758098598f4a99218f8cb622fdd
-      internalID: 1903513272
+      spriteID: cfa0b810fa4208f4cb6c3efdefac8052
+      internalID: -1729095551
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy1_47
+      name: Scrapper_46
       rect:
         serializedVersion: 2
-        x: 50
+        x: 34
         y: 210
         width: 11
         height: 14
@@ -1163,102 +1142,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7cfe3c7d561355740a32a0e972b6e374
-      internalID: -1017635927
+      spriteID: 61fec2943d8c0324bb33037a0f9210bd
+      internalID: 2117237210
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy1_48
-      rect:
-        serializedVersion: 2
-        x: 1
-        y: 192
-        width: 14
-        height: 15
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e6bc434b83ced204fa7fcad47bf7171b
-      internalID: 989949714
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Enemy1_49
-      rect:
-        serializedVersion: 2
-        x: 18
-        y: 193
-        width: 12
-        height: 15
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: bcbc1cbe65a0aa941b1f7501e5a78082
-      internalID: 1920295226
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Enemy1_50
-      rect:
-        serializedVersion: 2
-        x: 33
-        y: 192
-        width: 14
-        height: 15
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 80e2ca410f9691840a02abcc78fbb468
-      internalID: -1835235137
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Enemy1_51
+      name: Scrapper_47
       rect:
         serializedVersion: 2
         x: 50
-        y: 193
-        width: 12
-        height: 15
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 4d96d70b7a119044cbf04aa5fabc6440
-      internalID: 1951893200
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Enemy1_52
-      rect:
-        serializedVersion: 2
-        x: 3
-        y: 176
+        y: 208
         width: 11
         height: 15
       alignment: 0
@@ -1268,17 +1163,101 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 693af2bf0daaa73449e121c4db7dd15c
-      internalID: 913884487
+      spriteID: 7b66b664fa0250a40af740d5356a5a23
+      internalID: -395051913
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy1_53
+      name: Scrapper_48
       rect:
         serializedVersion: 2
-        x: 19
+        x: 2
+        y: 193
+        width: 12
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5e4c6c8514a23af4a82aee1f5df1f53f
+      internalID: 1071560887
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Scrapper_49
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 192
+        width: 14
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b200f1f917992694cb7559c6ff4b07a0
+      internalID: 1197283149
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Scrapper_50
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 193
+        width: 12
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: def363331b788194ba65b0f93dc56b3c
+      internalID: 77284228
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Scrapper_51
+      rect:
+        serializedVersion: 2
+        x: 49
+        y: 192
+        width: 14
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a8647429d4f09a24885131b56fb53f19
+      internalID: 1634928377
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Scrapper_52
+      rect:
+        serializedVersion: 2
+        x: 3
         y: 178
         width: 11
         height: 14
@@ -1289,17 +1268,17 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 792451fd9b540914c89ea0ea7dfbbdb4
-      internalID: 1858768249
+      spriteID: 6c200a34338129b4187bcdfe19ee26b3
+      internalID: 1460876201
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy1_54
+      name: Scrapper_53
       rect:
         serializedVersion: 2
-        x: 35
+        x: 19
         y: 176
         width: 11
         height: 15
@@ -1310,17 +1289,17 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: edbe8db8e57da264caec1dedbd637b31
-      internalID: -207007137
+      spriteID: 6784920776ce749408801d0d04f76c11
+      internalID: 75094977
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy1_55
+      name: Scrapper_54
       rect:
         serializedVersion: 2
-        x: 49
+        x: 33
         y: 177
         width: 13
         height: 15
@@ -1331,19 +1310,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 732acd0fff621cf41b5e62f6811f80ae
-      internalID: -1138266871
+      spriteID: c388dbcdbe4d5f942ac7a22624a00095
+      internalID: 755739143
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy1_56
+      name: Scrapper_55
       rect:
         serializedVersion: 2
-        x: 4
-        y: 160
-        width: 10
+        x: 51
+        y: 176
+        width: 11
         height: 15
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -1352,17 +1331,17 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c4423c649d7d3ca42a0af0bdeac2dda4
-      internalID: -1505767895
+      spriteID: 985d90e0fffdbea4eb160c65b5d51f60
+      internalID: 338699735
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy1_57
+      name: Scrapper_56
       rect:
         serializedVersion: 2
-        x: 18
+        x: 2
         y: 161
         width: 12
         height: 15
@@ -1373,17 +1352,17 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 98451bc7b631dda42ae0d177a9efa60c
-      internalID: 1573957710
+      spriteID: 572db562d708ca449ab1dba24c5edad6
+      internalID: -74654219
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy1_58
+      name: Scrapper_57
       rect:
         serializedVersion: 2
-        x: 36
+        x: 20
         y: 160
         width: 10
         height: 15
@@ -1394,17 +1373,17 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d2548a1051d810044b228297a876c5b8
-      internalID: -2101584334
+      spriteID: 406e352977cfd1644bdb9b003c3db750
+      internalID: 1066686836
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy1_59
+      name: Scrapper_58
       rect:
         serializedVersion: 2
-        x: 51
+        x: 35
         y: 161
         width: 11
         height: 15
@@ -1415,19 +1394,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d4c7382d9a2add74b93e3e407bce32bf
-      internalID: -30141784
+      spriteID: 3140f8086c57b6d4882756a92a648aec
+      internalID: 255441235
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy1_60
+      name: Scrapper_59
       rect:
         serializedVersion: 2
-        x: 3
-        y: 144
-        width: 11
+        x: 52
+        y: 160
+        width: 10
         height: 15
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -1436,17 +1415,17 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7fcf227becb73b04693c94b8448eedfd
-      internalID: 1388049903
+      spriteID: 65d4d3edf27a8b346bf96d4c9182c79c
+      internalID: -1898004842
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy1_61
+      name: Scrapper_60
       rect:
         serializedVersion: 2
-        x: 17
+        x: 1
         y: 145
         width: 14
         height: 15
@@ -1457,17 +1436,17 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 75b58c56ef9d2f941868778253f21e30
-      internalID: -1144531483
+      spriteID: 3b01f888c0003844d8bbdca914b5a4c8
+      internalID: -1318011669
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy1_62
+      name: Scrapper_61
       rect:
         serializedVersion: 2
-        x: 35
+        x: 19
         y: 144
         width: 11
         height: 15
@@ -1478,17 +1457,17 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5587756475302af4e9a8f04ee7f12b0c
-      internalID: 462338670
+      spriteID: 980d186af788a384dacb73a758a29b07
+      internalID: -1846658714
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy1_63
+      name: Scrapper_62
       rect:
         serializedVersion: 2
-        x: 51
+        x: 35
         y: 145
         width: 11
         height: 15
@@ -1499,14 +1478,35 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1755a3d4145131147b04482dfd436c8d
-      internalID: -323463456
+      spriteID: 9af854d99f57fc44993f5f58c9f424a3
+      internalID: -1210101443
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy1_64
+      name: Scrapper_63
+      rect:
+        serializedVersion: 2
+        x: 51
+        y: 144
+        width: 11
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aa82e776829d46f459b54a5829695ee6
+      internalID: 1927879609
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Scrapper_64
       rect:
         serializedVersion: 2
         x: 2
@@ -1520,14 +1520,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4ee9db431d7653747b965b5d4cea1f89
-      internalID: 1106156282
+      spriteID: 57b38c0b67d9b114694305d40eb88895
+      internalID: -210719351
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy1_65
+      name: Scrapper_65
       rect:
         serializedVersion: 2
         x: 18
@@ -1541,14 +1541,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 34cfa3e348b90ef4ebec377f1c9da2a1
-      internalID: 1258103460
+      spriteID: 66697346c8208724e93d028e59414e8c
+      internalID: 76897473
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy1_66
+      name: Scrapper_66
       rect:
         serializedVersion: 2
         x: 34
@@ -1562,14 +1562,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ca52e84df5e7c8a49972aec0fbfba9b8
-      internalID: -1413649223
+      spriteID: 156200ac67745194c816d0de19e12b14
+      internalID: -1452995690
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy1_67
+      name: Scrapper_67
       rect:
         serializedVersion: 2
         x: 50
@@ -1583,14 +1583,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ce15cea93ae6f774fb9100ac707da187
-      internalID: -1993227013
+      spriteID: 262d298305fe6b9449a1395e8cd31f1f
+      internalID: 1321653110
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy1_68
+      name: Scrapper_68
       rect:
         serializedVersion: 2
         x: 1
@@ -1604,14 +1604,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fdddb82bce8b0f04cb0b19ae4ffd2411
-      internalID: 1217229239
+      spriteID: 342801c531e17094988b1f7e31f50c7e
+      internalID: -1296892006
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy1_69
+      name: Scrapper_69
       rect:
         serializedVersion: 2
         x: 18
@@ -1625,14 +1625,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c3899ed1fbe6f53488a69776c2d8058c
-      internalID: 778197823
+      spriteID: 1bc0ca4b8359967469d735ce4652c304
+      internalID: -1585369009
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy1_70
+      name: Scrapper_70
       rect:
         serializedVersion: 2
         x: 33
@@ -1646,14 +1646,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 577e833178ca2f54eac525940370f2d8
-      internalID: 1064547488
+      spriteID: b8621c5ae577c664da7c7fe4f441d0c0
+      internalID: -124350017
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy1_71
+      name: Scrapper_71
       rect:
         serializedVersion: 2
         x: 50
@@ -1667,14 +1667,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cbf7da744f60b4c43be012c382df70ea
-      internalID: 1989033991
+      spriteID: f5989c12cf51b984cbadacecc2c55479
+      internalID: -1202626561
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy1_72
+      name: Scrapper_72
       rect:
         serializedVersion: 2
         x: 2
@@ -1688,14 +1688,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3af2d65090f739e43b3f5cc99ef7c4a1
-      internalID: -1568763288
+      spriteID: 9a2f84fcc8e8ab7449f1545d1cd9db06
+      internalID: 879107548
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy1_73
+      name: Scrapper_73
       rect:
         serializedVersion: 2
         x: 18
@@ -1709,14 +1709,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 67fd4889be6c3cb49858c67b578335e4
-      internalID: 690826061
+      spriteID: 72d88a47969169a41b49b78e73339fbb
+      internalID: 947312424
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy1_74
+      name: Scrapper_74
       rect:
         serializedVersion: 2
         x: 34
@@ -1730,14 +1730,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 236c40424b9c6be43a36c93206351514
-      internalID: -639848415
+      spriteID: cb920a6045568834186503ad0750159c
+      internalID: -2145428011
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy1_75
+      name: Scrapper_75
       rect:
         serializedVersion: 2
         x: 50
@@ -1751,14 +1751,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 83d1c40c78b3fb045aa2d022b6364f13
-      internalID: 1341183253
+      spriteID: 84be9f64c464a714a8c3d3dae728c759
+      internalID: -1277555208
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy1_76
+      name: Scrapper_76
       rect:
         serializedVersion: 2
         x: 2
@@ -1772,14 +1772,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 93ab09c55ff1ebb48897400eb5699b67
-      internalID: -968223325
+      spriteID: 0bc9706a92caccc43938fa9a1749340e
+      internalID: 855817583
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy1_77
+      name: Scrapper_77
       rect:
         serializedVersion: 2
         x: 18
@@ -1793,14 +1793,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 461a9ebdcba86fd4284dc91fb99a4b12
-      internalID: 1559312409
+      spriteID: 047cf90ce073eb245affa6ae868260c9
+      internalID: -1541995809
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy1_78
+      name: Scrapper_78
       rect:
         serializedVersion: 2
         x: 34
@@ -1814,14 +1814,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 075c69a019bb6f94c8a9fb013e2cadba
-      internalID: 1835138382
+      spriteID: eefa56e231cd63b4ca646f142beaaf52
+      internalID: 216502459
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy1_79
+      name: Scrapper_79
       rect:
         serializedVersion: 2
         x: 50
@@ -1835,14 +1835,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fb89e06480ae95949b66198d9c0ce9f2
-      internalID: 392753863
+      spriteID: d0ef757d153daef499fd2a1626d19420
+      internalID: -1069742737
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy1_80
+      name: Scrapper_80
       rect:
         serializedVersion: 2
         x: 2
@@ -1856,14 +1856,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ea779dcc79b9a52438fcd5c630593d5b
-      internalID: 561510901
+      spriteID: 0e0df3d7ac522ff44ab6685748c26698
+      internalID: -200668214
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy1_81
+      name: Scrapper_81
       rect:
         serializedVersion: 2
         x: 18
@@ -1877,14 +1877,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2fa8843345440ca4fa4b833507f4702c
-      internalID: -1564419611
+      spriteID: b258fa9f7c1c6e74fb1a7c84b8202e2e
+      internalID: -1756818560
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy1_82
+      name: Scrapper_82
       rect:
         serializedVersion: 2
         x: 34
@@ -1898,14 +1898,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f6219ad9ead207b489035806358d54c2
-      internalID: 1452177582
+      spriteID: 0b355c70dc6040742bc02cb59979e1c7
+      internalID: 840739382
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy1_83
+      name: Scrapper_83
       rect:
         serializedVersion: 2
         x: 50
@@ -1919,14 +1919,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5893e3d7ca4c5d94dad6ce17a016a5cb
-      internalID: -607943714
+      spriteID: bd4ae666e8a46494d97e650a28a2988e
+      internalID: -1542211774
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy1_84
+      name: Scrapper_84
       rect:
         serializedVersion: 2
         x: 1
@@ -1940,14 +1940,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fc8146b8266b7a94a9dedf833b643483
-      internalID: 1838359992
+      spriteID: 1481d8759b63d2c4ab49a551a28586a6
+      internalID: -2120972564
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy1_85
+      name: Scrapper_85
       rect:
         serializedVersion: 2
         x: 19
@@ -1961,14 +1961,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ecc9d82792245f345ae10359a3cd2def
-      internalID: -1699567804
+      spriteID: a7d1a1110d57b374ab99ac94b9b520f7
+      internalID: -1285124517
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy1_86
+      name: Scrapper_86
       rect:
         serializedVersion: 2
         x: 33
@@ -1982,14 +1982,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 93d0f8b2e9411fc42be2a5b9ae1bc384
-      internalID: -234454205
+      spriteID: bcbab98d4fa9e5b40884bedcb6bae8bf
+      internalID: 2033128984
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy1_87
+      name: Scrapper_87
       rect:
         serializedVersion: 2
         x: 51
@@ -2003,14 +2003,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3212aace8f0f0cf43b6fa46fc3671152
-      internalID: 1214737852
+      spriteID: b59fefe2b46dd304a914750906db5567
+      internalID: 2140700198
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy1_88
+      name: Scrapper_88
       rect:
         serializedVersion: 2
         x: 3
@@ -2024,14 +2024,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 03584391ace16fa4c9885bb0d9e1cbc4
-      internalID: 1175013515
+      spriteID: 216cc74c5920a004abac8a94790cb9d2
+      internalID: -502229342
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy1_89
+      name: Scrapper_89
       rect:
         serializedVersion: 2
         x: 18
@@ -2045,14 +2045,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0918a96bf5061a2418bc069f55a8feef
-      internalID: -659140977
+      spriteID: 48e3b8200a74df24bb2da00e262f44b8
+      internalID: -618090415
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy1_90
+      name: Scrapper_90
       rect:
         serializedVersion: 2
         x: 35
@@ -2066,14 +2066,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0dfaa4d2ff7eb1a47aa89f34cc5d6bd4
-      internalID: -1723056776
+      spriteID: f160313186c762f42bc47ed8d8314f10
+      internalID: -1284011100
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy1_91
+      name: Scrapper_91
       rect:
         serializedVersion: 2
         x: 50
@@ -2087,14 +2087,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: efec3ad76bf382f4e91851ca189156b9
-      internalID: 1731783863
+      spriteID: 3ecb1e861bc00194d850486086c8be5a
+      internalID: -719026945
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy1_92
+      name: Scrapper_92
       rect:
         serializedVersion: 2
         x: 3
@@ -2108,14 +2108,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c3049cd2f48e93748959aa5988e352ec
-      internalID: 2047153019
+      spriteID: 58637558eedcba0408b641525672070d
+      internalID: -2130310046
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy1_93
+      name: Scrapper_93
       rect:
         serializedVersion: 2
         x: 17
@@ -2129,14 +2129,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 14df8f9e5a6358549ab263e7a80bfadf
-      internalID: 474057575
+      spriteID: a7058d86705c3264ab5958ca4ef6bc38
+      internalID: 2010699115
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy1_94
+      name: Scrapper_94
       rect:
         serializedVersion: 2
         x: 35
@@ -2150,14 +2150,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1d989b300761826479027e90d7a1d61a
-      internalID: -187487365
+      spriteID: f9b05f6e3f59cd04692d8cd77a42b94b
+      internalID: -1105375143
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy1_95
+      name: Scrapper_95
       rect:
         serializedVersion: 2
         x: 49
@@ -2171,8 +2171,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 47870e074883a424a86f5d00e74bf86d
-      internalID: 808429852
+      spriteID: d68473afe79839b41bae4cbb50c09521
+      internalID: 383510519
       vertices: []
       indices: 
       edges: []
@@ -2188,102 +2188,102 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Enemy1_0: -1056121461
-      Enemy1_1: 1654347457
-      Enemy1_10: 1950176314
-      Enemy1_11: 1455678522
-      Enemy1_12: -370122919
-      Enemy1_13: 1824305670
-      Enemy1_14: -1871571506
-      Enemy1_15: 472060014
-      Enemy1_16: -1642646022
-      Enemy1_17: -1158790579
-      Enemy1_18: -812455695
-      Enemy1_19: -563580744
-      Enemy1_2: 906822774
-      Enemy1_20: 1967973923
-      Enemy1_21: 1069911870
-      Enemy1_22: 866796788
-      Enemy1_23: 1725627063
-      Enemy1_24: -1586382799
-      Enemy1_25: -1754010636
-      Enemy1_26: 1903477113
-      Enemy1_27: -691294110
-      Enemy1_28: 1891533252
-      Enemy1_29: -864223505
-      Enemy1_3: 1562822404
-      Enemy1_30: -1554559380
-      Enemy1_31: -1641081252
-      Enemy1_32: -1960312046
-      Enemy1_33: 852644965
-      Enemy1_34: -866130030
-      Enemy1_35: -2004773216
-      Enemy1_36: 515962103
-      Enemy1_37: -1094004938
-      Enemy1_38: 2082486130
-      Enemy1_39: -1390310855
-      Enemy1_4: -1300036757
-      Enemy1_40: 1663589869
-      Enemy1_41: -1043716311
-      Enemy1_42: -973832173
-      Enemy1_43: 1908610402
-      Enemy1_44: 1060410942
-      Enemy1_45: 1968489870
-      Enemy1_46: 1903513272
-      Enemy1_47: -1017635927
-      Enemy1_48: 989949714
-      Enemy1_49: 1920295226
-      Enemy1_5: 610805258
-      Enemy1_50: -1835235137
-      Enemy1_51: 1951893200
-      Enemy1_52: 913884487
-      Enemy1_53: 1858768249
-      Enemy1_54: -207007137
-      Enemy1_55: -1138266871
-      Enemy1_56: -1505767895
-      Enemy1_57: 1573957710
-      Enemy1_58: -2101584334
-      Enemy1_59: -30141784
-      Enemy1_6: -1151020397
-      Enemy1_60: 1388049903
-      Enemy1_61: -1144531483
-      Enemy1_62: 462338670
-      Enemy1_63: -323463456
-      Enemy1_64: 1106156282
-      Enemy1_65: 1258103460
-      Enemy1_66: -1413649223
-      Enemy1_67: -1993227013
-      Enemy1_68: 1217229239
-      Enemy1_69: 778197823
-      Enemy1_7: -1205671248
-      Enemy1_70: 1064547488
-      Enemy1_71: 1989033991
-      Enemy1_72: -1568763288
-      Enemy1_73: 690826061
-      Enemy1_74: -639848415
-      Enemy1_75: 1341183253
-      Enemy1_76: -968223325
-      Enemy1_77: 1559312409
-      Enemy1_78: 1835138382
-      Enemy1_79: 392753863
-      Enemy1_8: 1206242483
-      Enemy1_80: 561510901
-      Enemy1_81: -1564419611
-      Enemy1_82: 1452177582
-      Enemy1_83: -607943714
-      Enemy1_84: 1838359992
-      Enemy1_85: -1699567804
-      Enemy1_86: -234454205
-      Enemy1_87: 1214737852
-      Enemy1_88: 1175013515
-      Enemy1_89: -659140977
-      Enemy1_9: 1618463478
-      Enemy1_90: -1723056776
-      Enemy1_91: 1731783863
-      Enemy1_92: 2047153019
-      Enemy1_93: 474057575
-      Enemy1_94: -187487365
-      Enemy1_95: 808429852
+      Scrapper_0: -987540877
+      Scrapper_1: -1559921732
+      Scrapper_10: 805651495
+      Scrapper_11: -538771131
+      Scrapper_12: 466210106
+      Scrapper_13: 894464115
+      Scrapper_14: 1035310038
+      Scrapper_15: -146129012
+      Scrapper_16: 1020865799
+      Scrapper_17: 374354917
+      Scrapper_18: -1168919370
+      Scrapper_19: 565252845
+      Scrapper_2: 1016461266
+      Scrapper_20: 1024741702
+      Scrapper_21: 242372587
+      Scrapper_22: -132915786
+      Scrapper_23: 1695379770
+      Scrapper_24: 884150657
+      Scrapper_25: -1394532998
+      Scrapper_26: -753999668
+      Scrapper_27: -2104662881
+      Scrapper_28: 1025986202
+      Scrapper_29: 158609658
+      Scrapper_3: 1561705226
+      Scrapper_30: -783406184
+      Scrapper_31: 825456106
+      Scrapper_32: -245556047
+      Scrapper_33: 975763041
+      Scrapper_34: -1894176390
+      Scrapper_35: 205555132
+      Scrapper_36: -409619330
+      Scrapper_37: 362237755
+      Scrapper_38: 864478209
+      Scrapper_39: 1372102254
+      Scrapper_4: 1157787772
+      Scrapper_40: -804500926
+      Scrapper_41: -900675131
+      Scrapper_42: -185629693
+      Scrapper_43: -357665273
+      Scrapper_44: -628336176
+      Scrapper_45: -1729095551
+      Scrapper_46: 2117237210
+      Scrapper_47: -395051913
+      Scrapper_48: 1071560887
+      Scrapper_49: 1197283149
+      Scrapper_5: -1390061960
+      Scrapper_50: 77284228
+      Scrapper_51: 1634928377
+      Scrapper_52: 1460876201
+      Scrapper_53: 75094977
+      Scrapper_54: 755739143
+      Scrapper_55: 338699735
+      Scrapper_56: -74654219
+      Scrapper_57: 1066686836
+      Scrapper_58: 255441235
+      Scrapper_59: -1898004842
+      Scrapper_6: -827324040
+      Scrapper_60: -1318011669
+      Scrapper_61: -1846658714
+      Scrapper_62: -1210101443
+      Scrapper_63: 1927879609
+      Scrapper_64: -210719351
+      Scrapper_65: 76897473
+      Scrapper_66: -1452995690
+      Scrapper_67: 1321653110
+      Scrapper_68: -1296892006
+      Scrapper_69: -1585369009
+      Scrapper_7: 390328089
+      Scrapper_70: -124350017
+      Scrapper_71: -1202626561
+      Scrapper_72: 879107548
+      Scrapper_73: 947312424
+      Scrapper_74: -2145428011
+      Scrapper_75: -1277555208
+      Scrapper_76: 855817583
+      Scrapper_77: -1541995809
+      Scrapper_78: 216502459
+      Scrapper_79: -1069742737
+      Scrapper_8: -1262377080
+      Scrapper_80: -200668214
+      Scrapper_81: -1756818560
+      Scrapper_82: 840739382
+      Scrapper_83: -1542211774
+      Scrapper_84: -2120972564
+      Scrapper_85: -1285124517
+      Scrapper_86: 2033128984
+      Scrapper_87: 2140700198
+      Scrapper_88: -502229342
+      Scrapper_89: -618090415
+      Scrapper_9: 1975785123
+      Scrapper_90: -1284011100
+      Scrapper_91: -719026945
+      Scrapper_92: -2130310046
+      Scrapper_93: 2010699115
+      Scrapper_94: -1105375143
+      Scrapper_95: 383510519
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

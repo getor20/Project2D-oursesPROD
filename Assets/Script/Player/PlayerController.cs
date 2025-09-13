@@ -51,7 +51,7 @@ namespace Assets.Script.Player
             {
                 _meleeAttacker.Attack();
             }
-            TransformHelper.UpdateRotation(_hitboxTransform, _mover.MainDirection);
+            TransformHelper.UpdateRotation(_hitboxTransform, _mover.DirectionVector);
         }
             
         internal void SetInput(PlayerInputData inputData)
