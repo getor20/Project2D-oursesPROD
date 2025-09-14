@@ -1,59 +1,51 @@
-using Unity.VisualScripting;
+using Assets.Script.Player;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Windows;
 
 public class PlayerInput : MonoBehaviour
 {
-    private PlayerMove _playerMove;
-    public Vector2 input;
-    private Vector2 _angularVector = new Vector2(0.707107f, 0.707107f);
+    private PlayerController _playerController;
+
+    private PlayerInputData _inputData;
 
     private void Awake()
     {
-        _playerMove = GetComponent<PlayerMove>();
+        _playerController = GetComponent<PlayerController>();
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
-        //DirectionVector();
-    }
+        _playerController.SetInput(_inputData);
 
-    public void DirectionVector()
-    {
-        if (input.y == _angularVector.y && input.x == _angularVector.x)
-        {
-            input = _angularVector;
-            Debug.Log("_vector1" + input);
-        }
-        else if (input.y == -_angularVector.y && input.x == -_angularVector.x)
-        {
-            Debug.Log("_vector2" + input);
-        }
-        else if (input.y == -_angularVector.y && input.x == _angularVector.x)
-        {
-            Debug.Log("_vector3" + input);
-        }
-        else if (input.y == _angularVector.y && input.x == -_angularVector.x)
-        {
-            Debug.Log("_vector4" + input);
-        }
+        _inputData.IsAttacking = false;
     }
 
     public void OnMove(InputAction.CallbackContext context)
     {
-        var i = context.action.name;
+        /*context.control.displayName;
+        context.control.name;
+        context.control.device;*/
+        /*var i = context.action.name;
         if (i == "Wove")
         {
-            Debug.Log("Кнопка нажата: " + context.action.name);
-        }
+            //Debug.Log("Кнопка нажата: " + context.action.name);
+        }*/
 
-        input = context.ReadValue<Vector2>();
-        _playerMove.SetDirection(input);
+        _inputData.MoveDirection = context.ReadValue<Vector2>();
+        //_playerController.SetDirection(input);
     }
 
     public void OnRun(InputAction.CallbackContext context)
     {
-        _playerMove.SetRunning(context.ReadValueAsButton());
+        _inputData.IsRunning = context.ReadValueAsButton();
     }
+
+    public void OnAttack(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            _inputData.IsAttacking = true;
+        }
+    }
+    
 }

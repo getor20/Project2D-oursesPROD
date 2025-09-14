@@ -2,140 +2,78 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
-    private Rigidbody2D _rigidbody2D;
+    [SerializeField] private float _timerDelay = 0.07f; // Задержка таймера
 
-    public Vector2 _directionVector2 { get; private set; }
-    public Vector2 _directionVector { get; private set; }
-    private Vector2 _directVector = new Vector2(0, 0);
-    private Vector2 _angularVector = new Vector2(0.707107f, 0.707107f);
+    private Rigidbody2D _rigidbody;
 
-    [SerializeField]
-    public float _mainSpeed { get; private set; }
-    [SerializeField]
-    private float _walkingSpeed = 7f;
-    [SerializeField]
-    private float _runSpeed = 10f;
+    private Vector2 _mainDirection;
+    private Vector2 _angularVector = Vector2.zero;
 
-    private bool _isMoving;
-    private bool _isRunning;
-    private bool _isAngularDirection;
-    public float _transitionDirect { get; private set; }
-    public float _transitionAngular { get; private set; }
+    private float _timer;
+    
+    public Vector2 DirectionVector { get; private set; }
+    public float CurrentSpeed => _rigidbody.velocity.magnitude;
 
     private void Awake()
     {
-        _rigidbody2D = GetComponent<Rigidbody2D>();
+        _rigidbody = GetComponent<Rigidbody2D>();
     }
 
     private void FixedUpdate()
     {
-        Move();
-        AngularDirection();
-        //DirectVector();
-        Debug.Log("AngularDirection: " + _isAngularDirection);
-        Debug.Log(_directionVector2);
-        //Debug.Log("_isMoving: " + _isMoving);
-        if (!_isMoving && _isAngularDirection)
+        UpdateDirectionVector();
+    }
+
+    private void UpdateDirectionVector()
+    {
+        if (CurrentSpeed > 0)
         {
-            _transitionAngular = 1;
-            Debug.Log("угол да");
-        }
-        if (_directionVector2 == Vector2.up)
-        {
-            Debug.Log("На верх");
+            //  движение прямым
+            bool isDirect = Mathf.Approximately(_mainDirection.x, 0) || Mathf.Approximately(_mainDirection.y, 0);
+
+            //  последнее движение угловым
+            bool isAngular = _angularVector != Vector2.zero;
+
+            if (isDirect)
+            {
+                if (isAngular)
+                {
+                    // Переход с углового на прямое. Запуск таймер.
+                    _timer += Time.fixedDeltaTime;
+                    if (_timer >= _timerDelay)
+                    {
+                        // переход
+                        DirectionVector = _mainDirection;
+                        _angularVector = Vector2.zero;
+                        _timer = 0; // Обнуляем таймер
+                    }
+                }
+                else
+                {
+                    // Движение по прямой
+                    _timer = 0;
+                    DirectionVector = _mainDirection;
+                    _angularVector = Vector2.zero;
+                }
+            }
+            else
+            {
+                // Движение по диагонали
+                _timer = 0; // Обнуляем таймер
+                DirectionVector = _mainDirection;
+                _angularVector = _mainDirection;
+            }
         }
     }
 
-    public void DirectVector()
+    public void Move(Vector2 direction, float speed)
     {
-        if (_directionVector2.y == _directVector.y && _directionVector2.x > _directVector.x)
-        {
-
-        }
-        else if (_directionVector2.y == _directVector.y && _directionVector2.x < _directVector.x)
-        {
-
-        }
-        else if (_directionVector2.y > _directVector.y && _directionVector2.x == _directVector.x)
-        {
-
-        }
-        else if (_directionVector2.y < _directVector.y && _directionVector2.x == _directVector.x)
-        {
-
-        }
-
+        _mainDirection = direction;
+        _rigidbody.velocity = direction.normalized * speed;
     }
 
-    public void AngularDirection()
+    public void Stop()
     {
-        if (_directionVector2.y == _angularVector.y && _directionVector2.x == _angularVector.x)
-        {
-            _isAngularDirection = true;
-            _directionVector = _directionVector2;
-            _transitionAngular = 1;
-            //Debug.Log("_isAngularDirection: " + _isAngularDirection);
-            //Debug.Log("_vector1" + _directionVector2);
-        }
-        else if (_directionVector2.y == -_angularVector.y && _directionVector2.x == -_angularVector.x)
-        {
-            _isAngularDirection = true;
-            _directionVector = _directionVector2;
-            _transitionAngular = 1;
-            //Debug.Log("_isAngularDirection: " + _isAngularDirection);
-            //Debug.Log("_vector2" + _directionVector2);
-        }
-        else if (_directionVector2.y == -_angularVector.y && _directionVector2.x == _angularVector.x)
-        {
-            _isAngularDirection = true;
-            _directionVector = _directionVector2;
-            _transitionAngular = 1;
-            //Debug.Log("_isAngularDirection: " + _isAngularDirection);
-            //Debug.Log("_vector3" + _directionVector2);
-        }
-        else if (_directionVector2.y == _angularVector.y && _directionVector2.x == -_angularVector.x)
-        {
-            _isAngularDirection = true;
-            _directionVector = _directionVector2;
-            _transitionAngular = 1;
-            //Debug.Log("_isAngularDirection: " + _isAngularDirection);
-            //Debug.Log("_vector4" + _directionVector2);
-        }
-        else
-        {
-            _transitionAngular = 0;
-            _isAngularDirection = false;
-        }
-    }
-
-    public void SetDirection(Vector2 direction)
-    {
-        if (direction == Vector2.zero)
-        {
-            _isMoving = false;
-        }
-        else
-        {
-            _directionVector2 = direction;
-            _isMoving = true;
-        }
-    }
-
-    private void Move()
-    {
-        if (!_isMoving)
-        {
-            _mainSpeed = 0;
-            _rigidbody2D.velocity = Vector2.zero;
-            return;
-        }
-
-        _mainSpeed = _isRunning ? _runSpeed : _walkingSpeed;
-        _rigidbody2D.velocity = _directionVector2 * _mainSpeed;
-    }
-
-    public void SetRunning(bool isRunning)
-    {
-        _isRunning = isRunning;
+        _rigidbody.velocity = Vector2.zero;
     }
 }
