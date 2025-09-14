@@ -5,7 +5,7 @@ public class StatEnemy : MonoBehaviour
 {
     private const int MinHealth = 0;
 
-    [SerializeField] private StatBlockEnemies _stats;
+    [SerializeField] private EnemyStatBlock _stats;
 
     public int MaxHealth { get; private set; }
     public int CurrentHealth { get; private set; }

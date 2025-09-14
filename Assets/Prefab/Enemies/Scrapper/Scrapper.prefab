@@ -202,7 +202,7 @@ MonoBehaviour:
   - {x: 0.125, y: -0.375, z: 0}
   m_ShapePathHash: 0
   m_Mesh: {fileID: 0}
-  m_InstanceId: -1360
+  m_InstanceId: -1358
   m_LocalBounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0.125, y: 0.375, z: 0}
@@ -235,6 +235,7 @@ MonoBehaviour:
   _patrolPointThreshold: 0.5
   _attackDistance: 2
   _waitTime: 0
+  _timerDelay: 0.1
   _indexPatrol: 0
 --- !u!114 &3971197010227163128
 MonoBehaviour:
@@ -248,7 +249,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2ae85e7bb585204eaba8fdc1878cdb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _stats: {fileID: 11400000, guid: 5081809b69976b448b6e50e57f3aff6b, type: 2}
+  _stats: {fileID: 11400000, guid: baa23ca28dd850e479227470c329bc7d, type: 2}
   OnDie:
     m_PersistentCalls:
       m_Calls: []

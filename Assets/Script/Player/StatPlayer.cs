@@ -3,7 +3,7 @@ using UnityEngine.Events;
 
 public class StatPlayer : MonoBehaviour
 {
-    [SerializeField] private StatBlockPlayer _stats;
+    [SerializeField] private PlayerStatBlock _stats;
 
     private const int MinHealth = 0;
 

@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 0}
-  m_Name: StatBlockEnemies
-  m_EditorClassIdentifier: Assembly-CSharp::StatBlockEnemies
+  m_Name: EnemyStatBlock
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyStatBlock
   CurrentHealth: 0
   MaxHealth: 100
-  Damage: 10
-  SpeedPatrol: 3
+  Damage: 0
+  SpeedPatrol: 2
   SpeedChase: 4

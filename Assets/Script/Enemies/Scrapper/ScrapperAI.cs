@@ -15,6 +15,7 @@ public class ScrapperAI : MonoBehaviour
     [SerializeField] private float _patrolPointThreshold = 0.5f;    
     [SerializeField] private float _attackDistance = 2;
     [SerializeField] private float _waitTime = 0f;
+    [SerializeField] private float _timerDelay = 0.1f;
     [SerializeField] private int _indexPatrol = 0;
 
     private StatEnemy _stats;
@@ -22,6 +23,8 @@ public class ScrapperAI : MonoBehaviour
     private ScrapperAnimator _animator;
     private Transform _target;
     private readonly List<Transform> _targetsBuffer = new List<Transform>();
+
+    private float _timer;
 
     private ScrapperState _enemyState;
 
@@ -78,17 +81,9 @@ public class ScrapperAI : MonoBehaviour
         switch (_enemyState)
         {
             case ScrapperState.Patrol:
-                /*if (_coneVision.IsTargetInVision())
-                {
-                    SwitchState(EnemyState.Chase);
-                }*/
                 ExecutePatrolState();
                 break;
             case ScrapperState.Chase:
-                /*if (!_coneVision.IsTargetInVision())
-                {
-                    SwitchState(EnemyState.Patrol);
-                }*/
                 ExecuteChaseState();
                 break;
         }
@@ -117,7 +112,6 @@ public class ScrapperAI : MonoBehaviour
         }
 
         _move.SetMoveDirection(direction);
-        _animator.SetDirection(direction);
         _coneVision.SetDirection(direction);
         _coneVision.SetPatrol();
         _move.SetSpeed(_stats.SpeedPatrol);
@@ -125,11 +119,11 @@ public class ScrapperAI : MonoBehaviour
 
     private void ExecuteChaseState()
     {
-        float distanceToTarget = Vector2.Distance(transform.position, _target.position /*_coneVision.Target.position*/);
+        float distanceToTarget = Vector2.Distance(transform.position, _target.position);
 
-        Vector2 direction = (/*_coneVision.Target.position*/ _target.position - transform.position).normalized;
+        Vector2 direction = (_target.position - transform.position).normalized;
 
-        if (distanceToTarget > _attackDistance)
+        if (distanceToTarget >= _attackDistance)
         {
             _move.SetMoveDirection(direction);
         }

@@ -9,6 +9,7 @@ public class ScrapperMove : MonoBehaviour
    
     public float CurrentSpeed => _rigidbody2D.velocity.magnitude;
 
+
     private void Awake()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();

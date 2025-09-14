@@ -3,7 +3,6 @@ using System.Collections.Generic;
 
 public class ConeVision : MonoBehaviour
 {
-    //[SerializeField] private Transform _target;
     [SerializeField] private LayerMask _targetLayerMask;
     [SerializeField] private LayerMask _obstacleLayerMask;
 
@@ -14,10 +13,7 @@ public class ConeVision : MonoBehaviour
 
     private Vector2 _forwardDirection;
 
-    //public Transform Target => _target;
-
     private List<Transform> _targets = new List<Transform>();
-
 
     public void SetDirection(Vector2 direction)
     {
@@ -50,33 +46,6 @@ public class ConeVision : MonoBehaviour
         }
     }
 
-    /*public bool IsTargetInVision()
-    {
-        if (_target is null)
-            return false;
-
-        float distanceToTarget = Vector2.Distance(transform.position, _target.position);
-
-        if (distanceToTarget > _mainVisionRadius)
-            return false;
-
-        Vector2 directionToTarget = (_target.position - transform.position).normalized;
-
-        if (Vector2.Angle(_forwardDirection, directionToTarget) > _visionAngle / 2)
-            return false;
-
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, directionToTarget, distanceToTarget, _layerMask);
-
-        if (hit.collider is not null)
-            return false;
-
-        return true;
-    }
-
-    public void SetVisionRadius()
-    {
-        _mainVisionRadius = SetDirection() ? _chaseVisionRadius : _patrolVisionRadius;
-    }*/
     public void SetPatrol()
     {
         _mainVisionRadius = _patrolVisionRadius;
@@ -99,12 +68,6 @@ public class ConeVision : MonoBehaviour
 
         Gizmos.DrawLine(transform.position, transform.position + viewAngleA * _mainVisionRadius);
         Gizmos.DrawLine(transform.position, transform.position + viewAngleB * _mainVisionRadius);
-
-        /*if (IsTargetInVision())
-        {
-            Gizmos.color = Color.red;
-            Gizmos.DrawLine(transform.position, _target.position);
-        }*/
 
         Gizmos.color = Color.red;
         foreach (var target in _targets)
