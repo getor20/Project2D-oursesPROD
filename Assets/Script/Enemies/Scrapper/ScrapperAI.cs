@@ -111,6 +111,7 @@ public class ScrapperAI : MonoBehaviour
             currentPoint = _patrolPath.GetPoint(random);
         }
 
+        
         _move.SetMoveDirection(direction);
         _coneVision.SetDirection(direction);
         _coneVision.SetPatrol();
@@ -123,11 +124,15 @@ public class ScrapperAI : MonoBehaviour
 
         Vector2 direction = (_target.position - transform.position).normalized;
 
-        if (distanceToTarget >= _attackDistance)
+        float speed = _target.GetComponent<Rigidbody2D>().velocity.magnitude;
+
+        Debug.Log(speed);
+
+        if (distanceToTarget >= _attackDistance && speed >= 0)
         {
             _move.SetMoveDirection(direction);
         }
-        else
+        else if (distanceToTarget <= _attackDistance && speed <= 0)
         {
             _move.SetMoveDirection(Vector2.zero);
         }
