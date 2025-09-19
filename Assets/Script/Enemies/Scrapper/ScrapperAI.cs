@@ -99,20 +99,19 @@ public class ScrapperAI : MonoBehaviour
         {
             _waitTime -= Time.deltaTime;
             _move.SetMoveDirection(Vector2.zero);
-            _animator.SetDirection(direction);
             _coneVision.SetDirection(direction);
             return;
         }
-        int random = Random.Range(0, 4);
+
         if (Vector2.Distance(transform.position, currentPoint.Position) < _patrolPointThreshold)
         {
             _waitTime = currentPoint.WaitTime;
-            _indexPatrol = (random) % _patrolPath.Length;
-            currentPoint = _patrolPath.GetPoint(random);
+            _indexPatrol = Random.Range(0, _patrolPath.Length);
         }
 
         
         _move.SetMoveDirection(direction);
+        _animator.SetDirection(direction);
         _coneVision.SetDirection(direction);
         _coneVision.SetPatrol();
         _move.SetSpeed(_stats.SpeedPatrol);
