@@ -1064,6 +1064,27 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Sample-InventorySlotsSet_43
+      rect:
+        serializedVersion: 2
+        x: 117
+        y: 40
+        width: 14
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fbe9392289af0e4438c1ba61c3cf70c0
+      internalID: 1120787328
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -1113,6 +1134,7 @@ TextureImporter:
       Sample-InventorySlotsSet_40: -160751319
       Sample-InventorySlotsSet_41: -1895576864
       Sample-InventorySlotsSet_42: -1243378609
+      Sample-InventorySlotsSet_43: 1120787328
       Sample-InventorySlotsSet_5: 1356714078
       Sample-InventorySlotsSet_6: -1151145906
       Sample-InventorySlotsSet_7: -1536903530
