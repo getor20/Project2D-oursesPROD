@@ -8,7 +8,6 @@ public class ScrapperAI : MonoBehaviour
         Patrol,
         Chase
     }
-
     
     [SerializeField] private ConeVision _coneVision;
     [SerializeField] private PatrolPath _patrolPath;
@@ -124,8 +123,6 @@ public class ScrapperAI : MonoBehaviour
         Vector2 direction = (_target.position - transform.position).normalized;
 
         float speed = _target.GetComponent<Rigidbody2D>().velocity.magnitude;
-
-        Debug.Log(speed);
 
         if (distanceToTarget >= _attackDistance && speed >= 0)
         {

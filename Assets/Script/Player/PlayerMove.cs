@@ -31,7 +31,7 @@ public class PlayerMove : MonoBehaviour
             //  движение прямым
             bool isDirect = Mathf.Approximately(_mainDirection.x, 0) || Mathf.Approximately(_mainDirection.y, 0);
 
-            //  последнее движение угловым
+            //  движение угловым
             bool isAngular = _angularVector != Vector2.zero;
 
             if (isDirect)
