@@ -46,7 +46,7 @@ public class PlayerInput : MonoBehaviour
         {
             Debug.Log("Inventory opened");
         }
-        else
+        else if (context.canceled)
         {
             Debug.Log("Inventory closed");
         }
