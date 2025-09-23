@@ -40,6 +40,18 @@ public class PlayerInput : MonoBehaviour
         _inputData.IsRunning = context.ReadValueAsButton();
     }
 
+    public void OnInventory(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            Debug.Log("Inventory opened");
+        }
+        else
+        {
+            Debug.Log("Inventory closed");
+        }
+    }
+
     public void OnAttack(InputAction.CallbackContext context)
     {
         if (context.performed)
