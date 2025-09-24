@@ -1,20 +1,27 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InventorySlot : MonoBehaviour
 {
+    [SerializeField] private Image _icon;
     private Items _item;
 
+    private void Start()
+    {
+        DisplayItem();
+    }
     // Метод для отображения предмета в слоте
+    public void DisplayItem()
+    {
+       // _icon.sprite = _item.Icon;
+        _icon.enabled = true; // Делаем иконку видимой.
+    }
 
     // Метод для очистки слота
     public void ClearSlot()
     {
-        _item = null;
-        // Логика очистки слота
-    }
-    public void DisplayItem(Items item)
-    {
-        _item = item;
-        // Логика отображения предмета в слоте
+        _icon.sprite = null;
+        _icon.enabled = false; // Делаем иконку невидимой.
     }
 }
+
