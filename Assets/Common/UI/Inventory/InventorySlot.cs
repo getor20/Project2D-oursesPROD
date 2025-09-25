@@ -8,7 +8,8 @@ public class InventorySlot : MonoBehaviour
 
     private void Start()
     {
-        DisplayItem();
+        // DisplayItem();
+        //ClearSlot();
     }
     // Метод для отображения предмета в слоте
     public void DisplayItem()
@@ -16,11 +17,11 @@ public class InventorySlot : MonoBehaviour
        // _icon.sprite = _item.Icon;
         _icon.enabled = true; // Делаем иконку видимой.
     }
-
+    
     // Метод для очистки слота
     public void ClearSlot()
     {
-        _icon.sprite = null;
+        //_icon.sprite = null;
         _icon.enabled = false; // Делаем иконку невидимой.
     }
 }

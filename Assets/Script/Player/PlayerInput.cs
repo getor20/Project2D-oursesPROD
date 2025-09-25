@@ -5,8 +5,9 @@ using UnityEngine.InputSystem;
 public class PlayerInput : MonoBehaviour
 {
     private PlayerController _playerController;
-
     private PlayerInputData _inputData;
+
+    public bool _displayInventory { get; private set; }
 
     private void Awake()
     {
@@ -44,11 +45,8 @@ public class PlayerInput : MonoBehaviour
     {
         if (context.performed)
         {
-            Debug.Log("Inventory opened");
-        }
-        else if (context.canceled)
-        {
-            Debug.Log("Inventory closed");
+            _displayInventory = !_displayInventory;
+            //Debug.Log("Toggle state: " + _displayInventory);
         }
     }
 

@@ -245,7 +245,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_ActionId: 75d2cfc8-9ff4-40f5-85e7-d38dfe456533
+    m_ActionId: cb7de5b3-ba54-4443-ae32-455a60443115
     m_ActionName: Player/Inventory[/Keyboard/e]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
@@ -336,7 +336,7 @@ MonoBehaviour:
   - {x: 0.125, y: -0.375, z: 0}
   m_ShapePathHash: 764802325
   m_Mesh: {fileID: 0}
-  m_InstanceId: -1648
+  m_InstanceId: -1632
   m_LocalBounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0.125, y: 0.375, z: 0}
@@ -381,11 +381,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 277862a644ef5f14d903af92efa8c062, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _attackCooldown: 0
   _target:
     serializedVersion: 2
     m_Bits: 512
+  _hitboxObject: {fileID: 5698108747678711827}
   _hitboxTemplate: {fileID: 2668001295301531998}
+  _boxSize: {x: 0.875, y: 1.5}
+  _boxCenter: {x: 0, y: 1}
+  _attackCooldown: 0
 --- !u!1 &7063562746845783862
 GameObject:
   m_ObjectHideFlags: 0

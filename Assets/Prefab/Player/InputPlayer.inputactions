@@ -35,7 +35,7 @@
                 {
                     "name": "Inventory",
                     "type": "Button",
-                    "id": "75d2cfc8-9ff4-40f5-85e7-d38dfe456533",
+                    "id": "cb7de5b3-ba54-4443-ae32-455a60443115",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -177,8 +177,8 @@
                 },
                 {
                     "name": "",
-                    "id": "eaafbae1-dc8a-47a5-827a-4d32536860b7",
-                    "path": "<Keyboard>/e",
+                    "id": "e274031a-a4d3-4315-b71e-a1fe94e45167",
+                    "path": "<Keyboard>/q",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
