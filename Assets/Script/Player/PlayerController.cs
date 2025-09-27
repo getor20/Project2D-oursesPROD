@@ -61,6 +61,9 @@ namespace Assets.Script.Player
             Debug.Log($"Interaction state: {IsInteraction}");
         }
 
+        public void SetInventory(bool isInInventory)
+        {
+        }
 
         internal void SetInput(PlayerInputData inputData)
         {

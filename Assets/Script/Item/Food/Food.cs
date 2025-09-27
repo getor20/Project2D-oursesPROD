@@ -24,7 +24,7 @@ public class Food : MonoBehaviour
         _image.sprite = _item.Icon;
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         // Debug.Log(_hitboxObject.IsInteraction);
         /*if (_isInteraction && _hitboxObject.IsInteraction)
@@ -33,7 +33,7 @@ public class Food : MonoBehaviour
         }*/
         Interaction();
     }
-
+    
     private void OnTriggerEnter2D(Collider2D collider)
     {
         /*if (_playerInput != null && _playerInput.IsInteraction)

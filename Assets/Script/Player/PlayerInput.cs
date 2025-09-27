@@ -75,6 +75,10 @@ public class PlayerInput : MonoBehaviour
         {
             _inputData.IsAttacking = true;
         }
+        else if (context.canceled)
+        {
+            _inputData.IsAttacking = false;
+        }
     }
     
 }
