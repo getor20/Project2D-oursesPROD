@@ -17,3 +17,4 @@ public class UiController : MonoBehaviour
         _inventoryUI.gameObject.SetActive(_playerInput.DisplayInventory);
     }
 }
+
