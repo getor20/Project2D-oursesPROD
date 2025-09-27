@@ -7,18 +7,19 @@ public class PlayerInput : MonoBehaviour
     private PlayerController _playerController;
     private PlayerInputData _inputData;
 
-    public bool _displayInventory { get; private set; }
+    public bool IsInteraction { get; private set; }
+    public bool DisplayInventory { get; private set; }
 
     private void Awake()
     {
         _playerController = GetComponent<PlayerController>();
+        DisplayInventory = false;
     }
 
     private void Update()
     {
         _playerController.SetInput(_inputData);
 
-        _inputData.IsAttacking = false;
     }
 
     public void OnMove(InputAction.CallbackContext context)
@@ -45,8 +46,26 @@ public class PlayerInput : MonoBehaviour
     {
         if (context.performed)
         {
-            _displayInventory = !_displayInventory;
+            DisplayInventory = !DisplayInventory;
             //Debug.Log("Toggle state: " + _displayInventory);
+        }
+    }
+
+    public void OnInteraction(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            _playerController.SetInteraction(true);
+            IsInteraction = true;
+            //Debug.Log("Interaction performed");
+            // Implement interaction logic here
+        }
+        if (context.canceled)
+        {
+            _playerController.SetInteraction(false);
+            IsInteraction = false;
+            //Debug.Log("Interaction canceled");
+            // Implement interaction logic here
         }
     }
 

@@ -14,6 +14,6 @@ public class UiController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        _inventoryUI.gameObject.SetActive(_playerInput._displayInventory);
+        _inventoryUI.gameObject.SetActive(_playerInput.DisplayInventory);
     }
 }

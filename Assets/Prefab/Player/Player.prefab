@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 5052645820727276608}
   - component: {fileID: 3642144845284296975}
   - component: {fileID: 87496663370781032}
+  - component: {fileID: 2591792478769369483}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -83,7 +84,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -2104494739
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 176260414, guid: 3f92075956ef1d14fa607698b842b476, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -247,6 +248,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: cb7de5b3-ba54-4443-ae32-455a60443115
     m_ActionName: Player/Inventory[/Keyboard/e]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4803432724749424871}
+        m_TargetAssemblyTypeName: PlayerInput, Assembly-CSharp
+        m_MethodName: OnInteraction
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 4ccac829-f726-461c-868a-487464c585a0
+    m_ActionName: Player/Interaction[/Keyboard/e]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -336,7 +353,7 @@ MonoBehaviour:
   - {x: 0.125, y: -0.375, z: 0}
   m_ShapePathHash: 764802325
   m_Mesh: {fileID: 0}
-  m_InstanceId: -1632
+  m_InstanceId: -1444
   m_LocalBounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0.125, y: 0.375, z: 0}
@@ -389,6 +406,18 @@ MonoBehaviour:
   _boxSize: {x: 0.875, y: 1.5}
   _boxCenter: {x: 0, y: 1}
   _attackCooldown: 0
+--- !u!114 &2591792478769369483
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5698108747678711827}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b34db7ef27f683d49962eb6b7762e403, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7063562746845783862
 GameObject:
   m_ObjectHideFlags: 0

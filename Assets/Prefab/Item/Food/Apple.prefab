@@ -10,8 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 3526575378044103246}
   - component: {fileID: 2917466900770113171}
-  - component: {fileID: 1330546217191612253}
-  m_Layer: 0
+  - component: {fileID: 7076219060919391553}
+  - component: {fileID: 459849342075540629}
+  - component: {fileID: 6071183373970385587}
+  m_Layer: 11
   m_Name: Apple
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72,7 +74,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 72274773
-  m_SortingLayer: 6
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 511797473, guid: 1ee1b3ab7fd93aa4a9bb81f4d644f354, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -85,7 +87,69 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1330546217191612253
+--- !u!50 &7076219060919391553
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3290738908658133573}
+  m_BodyType: 2
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!70 &459849342075540629
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3290738908658133573}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 3.5, y: 3.5}
+  m_Direction: 0
+--- !u!114 &6071183373970385587
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -94,7 +158,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 3290738908658133573}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6e64928f23c024e498b7d6c025d9edcf, type: 3}
+  m_Script: {fileID: 11500000, guid: 762c921461ba00149b180468b8ee46cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _hitboxObject: {fileID: 0}
+  _playerInput: {fileID: 0}
   _item: {fileID: 11400000, guid: 194ac56297d5a8a4d8d0a5bb9447232f, type: 2}
