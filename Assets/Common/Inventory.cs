@@ -1,12 +1,29 @@
+using Assets.Script.Player;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
-    // Подобрать формат хранения предметов
+    [SerializeField] private List<Food> _items = new List<Food>();
 
-    // Методы для добавления и удаления предметов
+    private PlayerController _playerController;
 
-    // Универсальный скрипт для игрока, сундука, торговца, шкафа и т.д.
-    
+    private void Awake()
+    {
+        _playerController = FindObjectOfType<PlayerController>();
 
+    }
+    private void Update()
+    {
+        Interaction();
+    }
+    private void Interaction()
+    {
+        if ( _playerController.IsInteraction)
+        {
+            Debug.Log($"Trigger entered by . Interaction successful.");
+            //Destroy(gameObject._items);
+            // Here you can add code to add the item to the player's inventory
+        }
+    }
 }

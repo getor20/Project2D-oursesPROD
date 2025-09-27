@@ -5,10 +5,10 @@ public class MeleeAttacker : MonoBehaviour
     [SerializeField] private LayerMask _target;
     [SerializeField] private BoxCollider2D _hitboxTemplate;
     [SerializeField] private float _attackCooldown;
-    
+
     private StatPlayer _stats;
     private Animator _animator;
-    private float _lastAttackTime = -1f;
+    private float _lastAttackTime = 0f;
 
     private void Awake()
     {
@@ -34,11 +34,9 @@ public class MeleeAttacker : MonoBehaviour
         _lastAttackTime = Time.time;
         _animator.SetTrigger("Attack");
         //_animator.Play("Attack");
-        Vector2 boxCenter = transform.position;
+        Vector2 boxCenter = _hitboxTemplate.transform.position;
         Vector2 boxSize = _hitboxTemplate.size;
-        float boxAngle = transform.eulerAngles.z;
-
-        //Debug.Log($"Box Center: {boxCenter}, Box Size: {boxSize}, Box Angle: {boxAngle}");
+        float boxAngle = _hitboxTemplate.transform.eulerAngles.z;
 
         Collider2D[] hitTargets = Physics2D.OverlapBoxAll(boxCenter, boxSize, boxAngle, _target);
 

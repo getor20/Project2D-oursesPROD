@@ -12,6 +12,7 @@ namespace Assets.Script.Player
         private MeleeAttacker _meleeAttacker;
 
         public bool IsInteraction { get; private set; }
+        public bool DisplayInventory { get; private set; }
         public bool CanMove { get; set; } = true;
 
         private void Awake()
@@ -55,14 +56,16 @@ namespace Assets.Script.Player
             TransformHelper.UpdateRotation(_hitboxTransform, _mover.DirectionVector);
         }
 
+        public void SetInventory(bool isInInventory)
+        {
+            DisplayInventory = isInInventory;
+            //Debug.Log($"Inventory state: {DisplayInventory}");
+        } 
+
         public void SetInteraction(bool isInteracting)
         {
             IsInteraction = isInteracting;
-            Debug.Log($"Interaction state: {IsInteraction}");
-        }
-
-        public void SetInventory(bool isInInventory)
-        {
+            //Debug.Log($"Interaction state: {IsInteraction}");
         }
 
         internal void SetInput(PlayerInputData inputData)

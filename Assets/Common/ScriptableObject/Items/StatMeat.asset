@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec12a29c15f409547a684b60798f3107, type: 3}
   m_Name: StatMeat
   m_EditorClassIdentifier: 
+  ID: 2
   Name: Meat
   Icon: {fileID: -84782468, guid: 1ee1b3ab7fd93aa4a9bb81f4d644f354, type: 3}
   Description: Good Meat
