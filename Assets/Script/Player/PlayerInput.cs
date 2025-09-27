@@ -60,7 +60,7 @@ public class PlayerInput : MonoBehaviour
             //Debug.Log("Interaction performed");
             // Implement interaction logic here
         }
-        if (context.canceled)
+        else if (context.canceled)
         {
             _playerController.SetInteraction(false);
             IsInteraction = false;

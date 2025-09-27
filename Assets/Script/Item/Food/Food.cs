@@ -11,6 +11,7 @@ public class Food : MonoBehaviour
 
     private SpriteRenderer _image;
     private CapsuleCollider2D _collider2D;
+    private bool _isInteraction;
 
     private void Awake()
     {
@@ -23,39 +24,38 @@ public class Food : MonoBehaviour
         _image.sprite = _item.Icon;
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         // Debug.Log(_hitboxObject.IsInteraction);
+        /*if (_isInteraction && _hitboxObject.IsInteraction)
+        {
+            Debug.Log($"Trigger entered by . SSSSSSSSSSSSSSSS");
+        }*/
+        Interaction();
     }
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        /*Debug.Log(_hitboxObject.IsInteraction);
-        //int otherObjectLayer = collider.gameObject.layer;
-        if (_hitboxObject.IsInteraction == true)
+        /*if (_playerInput != null && _playerInput.IsInteraction)
         {
             Debug.Log($"Trigger entered by {collider.gameObject.name}. SSSSSSSSSSSSSSSS");
-        }
-        if (_target == (_target | (1 << otherObjectLayer)))
-        {
-            Debug.Log($"{_target}");
-
         }*/
+        _isInteraction = true;
+        
+    }
 
-        //Debug.Log("Interaction component is missing or _hitboxObject is not assigned.");
+    private void OnTriggerExit2D(Collider2D collider)
+    {
+        _isInteraction = false;
+        
+    }
 
-        if (_hitboxObject == null)
+    private void Interaction()
+    {
+        if (_isInteraction && _hitboxObject.IsInteraction)
         {
-            Debug.LogError("Interaction component is missing or _hitboxObject is not assigned.");
-            return; // Stop execution to prevent NullReferenceException
-        }
-
-        // NOW you can correctly access the property on the component:
-        //Debug.Log(_hitboxObject.IsInteraction);
-
-        if (_playerInput != null && _playerInput.IsInteraction)
-        {
-            Debug.Log($"Trigger entered by {collider.gameObject.name}. SSSSSSSSSSSSSSSS");
+            Debug.Log($"Trigger entered by . Interaction successful.");
+            // Here you can add code to add the item to the player's inventory
         }
     }
 }
