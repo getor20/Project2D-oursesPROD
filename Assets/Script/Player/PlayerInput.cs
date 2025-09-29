@@ -21,17 +21,7 @@ public class PlayerInput : MonoBehaviour
 
     public void OnMove(InputAction.CallbackContext context)
     {
-        /*context.control.displayName;
-        context.control.name;
-        context.control.device;*/
-        /*var i = context.action.name;
-        if (i == "Wove")
-        {
-            //Debug.Log("Кнопка нажата: " + context.action.name);
-        }*/
-
         _inputData.MoveDirection = context.ReadValue<Vector2>();
-        //_playerController.SetDirection(input);
     }
 
     public void OnRun(InputAction.CallbackContext context)
@@ -46,8 +36,7 @@ public class PlayerInput : MonoBehaviour
 
     public void OnInteraction(InputAction.CallbackContext context)
     {
-        _playerController.SetInteraction(context.started);
-        //Debug.Log(context.started);
+        _playerController.SetInteraction(context.performed);
     }
 
     public void OnAttack(InputAction.CallbackContext context)

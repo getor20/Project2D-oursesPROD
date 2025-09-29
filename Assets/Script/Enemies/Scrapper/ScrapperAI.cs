@@ -13,8 +13,7 @@ public class ScrapperAI : MonoBehaviour
     [SerializeField] private PatrolPath _patrolPath;
     [SerializeField] private float _patrolPointThreshold = 0.5f;    
     [SerializeField] private float _attackDistance = 2;
-    [SerializeField] private float _waitTime = 0f;
-    [SerializeField] private float _timerDelay = 0.1f;
+    [SerializeField] private float _waitTime = 0;
     [SerializeField] private int _indexPatrol = 0;
 
     private StatEnemy _stats;
@@ -45,6 +44,10 @@ public class ScrapperAI : MonoBehaviour
     {
         RunFSM();
         UpdateTarget();
+        if (_waitTime < 0)
+        {
+            _waitTime = 0;
+        }
     }
 
     private void UpdateTarget()

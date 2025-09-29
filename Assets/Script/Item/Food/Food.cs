@@ -1,16 +1,17 @@
-using Assets.Script.Player;
 using UnityEngine;
 
 public class Food : MonoBehaviour
 {
-    [SerializeField] private PlayerController _hitboxObject;
     [SerializeField] private Items _item;
-    [SerializeField] private Inventory _inventory;
-    
-    private SpriteRenderer _image;
-    private int _index;
 
-    public bool IsInteraction { get; private set; }
+    private SpriteRenderer _image;
+
+    public int ID { get; private set; }
+    public string Name { get; private set; }
+    public Sprite Icon { get; private set; }
+    public string Description { get; private set; }
+
+    public bool IsTrigger { get; private set; }
 
     private void Awake()
     {
@@ -19,34 +20,20 @@ public class Food : MonoBehaviour
 
     private void Start()
     {
-        _index = _item.ID;
         _image.sprite = _item.Icon;
+
+        ID = _item.ID;
+        Name = _item.Name;
+        Icon = _item.Icon;
+        Description = _item.Description;
     }
 
-    private void Update()
-    {
-        Interaction();
-    }
-    
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        IsInteraction = true;
-        
+        IsTrigger = true;
     }
-
     private void OnTriggerExit2D(Collider2D collider)
-    {
-        IsInteraction = false;
-        
-    }
-
-    private void Interaction()
-    {
-        if (IsInteraction && _hitboxObject.IsInteraction)
-        {
-            Debug.Log($"Trigger entered by . Interaction successful.");
-            Destroy(gameObject);
-            // Here you can add code to add the item to the player's inventory
-        }
+    {   
+        IsTrigger = false;
     }
 }

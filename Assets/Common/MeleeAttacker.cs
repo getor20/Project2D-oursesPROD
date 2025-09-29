@@ -40,7 +40,7 @@ public class MeleeAttacker : MonoBehaviour
 
         Collider2D[] hitTargets = Physics2D.OverlapBoxAll(boxCenter, boxSize, boxAngle, _target);
 
-        Debug.Log($"{hitTargets.Length}");
+        //Debug.Log($"{hitTargets.Length}");
 
         foreach (var hit in hitTargets)
         {
