@@ -16,7 +16,7 @@ TagManager:
   - MapBoundaries
   - Enemy
   - Building
-  - 
+  - Item
   - 
   - 
   - 
@@ -43,6 +43,9 @@ TagManager:
     locked: 0
   - name: Level
     uniqueID: 2493518131
+    locked: 0
+  - name: Items
+    uniqueID: 72274773
     locked: 0
   - name: Player
     uniqueID: 2190472557

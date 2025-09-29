@@ -6,9 +6,7 @@ public class ScrapperMove : MonoBehaviour
     private Vector2 _directionVector2;
 
     private float _speedMain;
-   
     public float CurrentSpeed => _rigidbody2D.velocity.magnitude;
-
 
     private void Awake()
     {

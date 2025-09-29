@@ -8,14 +8,12 @@ public class ScrapperAI : MonoBehaviour
         Patrol,
         Chase
     }
-
     
     [SerializeField] private ConeVision _coneVision;
     [SerializeField] private PatrolPath _patrolPath;
     [SerializeField] private float _patrolPointThreshold = 0.5f;    
     [SerializeField] private float _attackDistance = 2;
-    [SerializeField] private float _waitTime = 0f;
-    [SerializeField] private float _timerDelay = 0.1f;
+    [SerializeField] private float _waitTime = 0;
     [SerializeField] private int _indexPatrol = 0;
 
     private StatEnemy _stats;
@@ -46,6 +44,10 @@ public class ScrapperAI : MonoBehaviour
     {
         RunFSM();
         UpdateTarget();
+        if (_waitTime < 0)
+        {
+            _waitTime = 0;
+        }
     }
 
     private void UpdateTarget()
@@ -99,19 +101,19 @@ public class ScrapperAI : MonoBehaviour
         {
             _waitTime -= Time.deltaTime;
             _move.SetMoveDirection(Vector2.zero);
-            _animator.SetDirection(direction);
             _coneVision.SetDirection(direction);
             return;
         }
-        int random = Random.Range(0, 4);
+
         if (Vector2.Distance(transform.position, currentPoint.Position) < _patrolPointThreshold)
         {
             _waitTime = currentPoint.WaitTime;
-            _indexPatrol = (random) % _patrolPath.Length;
-            currentPoint = _patrolPath.GetPoint(random);
+            _indexPatrol = Random.Range(0, _patrolPath.Length);
         }
 
+        
         _move.SetMoveDirection(direction);
+        _animator.SetDirection(direction);
         _coneVision.SetDirection(direction);
         _coneVision.SetPatrol();
         _move.SetSpeed(_stats.SpeedPatrol);
@@ -123,11 +125,13 @@ public class ScrapperAI : MonoBehaviour
 
         Vector2 direction = (_target.position - transform.position).normalized;
 
-        if (distanceToTarget >= _attackDistance)
+        float speed = _target.GetComponent<Rigidbody2D>().velocity.magnitude;
+
+        if (distanceToTarget >= _attackDistance && speed >= 0)
         {
             _move.SetMoveDirection(direction);
         }
-        else
+        else if (distanceToTarget <= _attackDistance && speed <= 0)
         {
             _move.SetMoveDirection(Vector2.zero);
         }
