@@ -6,10 +6,13 @@ namespace Assets.Script.Player
     {
         [SerializeField] private Transform _hitboxTransform;
 
+        private PlayerInputData _inputData;
+
         private PlayerMove _mover;
         private StatPlayer _stats;
-        private PlayerInputData _inputData;
         private MeleeAttacker _meleeAttacker;
+        private LiftingObjects _liftingObjects;
+
 
         public bool IsInteraction { get; private set; }
         public bool DisplayInventory { get; private set; }
@@ -20,6 +23,7 @@ namespace Assets.Script.Player
             _mover = GetComponent<PlayerMove>();
             _stats = GetComponent<StatPlayer>();
             _meleeAttacker = GetComponent<MeleeAttacker>();
+            _liftingObjects = GetComponent<LiftingObjects>();
         }
 
         private void Update()
@@ -65,6 +69,7 @@ namespace Assets.Script.Player
         public void SetInteraction(bool isInteracting)
         {
             IsInteraction = isInteracting;
+            _liftingObjects.Interaction(IsInteraction);
             //Debug.Log($"Interaction state: {IsInteraction}");
         }
 
