@@ -1,34 +1,24 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.PlayerLoop;
 
 public class Inventory : MonoBehaviour
 {
-    // масив хранения
-    //private 
+    // Список для хранения всех отдельных предметов в инвентаре
+    public List<Item> items = new List<Item>(); 
 
-    public int ID { get; private set; }
-    public string Name { get; private set; }
-    public Sprite Icon { get; private set; }
-    public int Stack { get; private set; }
-    public string Description { get; private set; }
-
-    public void In(int iD, string name, Sprite icon, string description)
+    // Добавление нового экземпляра предмета
+    public void AddNewItemInstance(int iD, string name, Sprite icon, string description)
     {
-        ID = iD;
-        Name = name;
-        Icon = icon;
-        Description = description;
-        Debug.Log(ID);
+        // Создаем новый объект Item с количеством 1
+        Item newItem = new Item(iD, name, icon, description, 1);
+        items.Add(newItem);
+        Debug.Log($"Предмет {name} (ID: {iD}) добавлен как новый экземпляр.");
     }
-
-    public void f()
+    
+    // Получение всех предметов с определенным ID
+    public List<Item> GetItemsByID(int iD)
     {
-        if (ID == 1)
-        {
-
-        }
-        else if (ID == 2)
-        {
-
-        }
+        return items.FindAll(item => item.ID == iD);
     }
 }

@@ -7,11 +7,14 @@ public class LiftingObjects : MonoBehaviour
     [SerializeField] private List<Food> _items = new List<Food>();
 
     private Inventory _inventory;
+    private Item _item;
     public int _selectedItemIndex { get; private set; } = 100;
 
     private void Awake()
     {
         _inventory = GetComponent<Inventory>();
+        _item = GetComponent<Item>();
+
         Food[] foundFoods = FindObjectsOfType<Food>();
         _items = foundFoods.ToList();
 
@@ -41,7 +44,8 @@ public class LiftingObjects : MonoBehaviour
                     // Здесь можно добавить логику для ID 2
                 }
                 //Debug.Log($"Взаимодействие с Food ID {foodItem.ID}");
-                _inventory.In(foodItem.ID, foodItem.Name, foodItem.Icon, foodItem.Description);
+                _item.Initialization(foodItem.ID, foodItem.Name, foodItem.Icon, foodItem.Description);
+                _item.SetStack(_item.Stack + 1);
                 // ВАЖНО: Уничтожаем объект
                 Destroy(foodItem.gameObject);
 
