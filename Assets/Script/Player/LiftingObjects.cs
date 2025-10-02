@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class LiftingObjects : MonoBehaviour
@@ -12,6 +11,7 @@ public class LiftingObjects : MonoBehaviour
 
     private void Awake()
     {
+        _inventory = GetComponent<Inventory>();
         Food[] foundFoods = FindObjectsOfType<Food>();
         _items = foundFoods.ToList();
 
@@ -19,7 +19,7 @@ public class LiftingObjects : MonoBehaviour
     }
 
     public void Interaction(bool isInteraction)
-    {
+    { 
         // ИСПРАВЛЕНО: Используем ОБРАТНЫЙ цикл 'for' для безопасного удаления элементов (Destroy)
         for (int i = _items.Count - 1; i >= 0; i--)
         {
