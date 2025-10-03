@@ -1,24 +1,26 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
+using static UnityEditor.Progress;
 
 public class Inventory : MonoBehaviour
 {
     // Список для хранения всех отдельных предметов в инвентаре
-    public List<Item> items = new List<Item>(); 
+    private Dictionary<int, Item> items = new Dictionary<int, Item>();
 
-    // Добавление нового экземпляра предмета
-    public void AddNewItemInstance(int iD, string name, Sprite icon, string description)
+    private void Update()
     {
-        // Создаем новый объект Item с количеством 1
-        Item newItem = new Item(iD, name, icon, description, 1);
-        items.Add(newItem);
-        Debug.Log($"Предмет {name} (ID: {iD}) добавлен как новый экземпляр.");
+        Debug.Log($"Найдено объектов Food: {items.Count}");
     }
-    
-    // Получение всех предметов с определенным ID
-    public List<Item> GetItemsByID(int iD)
+
+    public void Initialization(bool isInteraction)
     {
-        return items.FindAll(item => item.ID == iD);
+        // ИСПРАВЛЕНО: Используем ОБРАТНЫЙ цикл 'for' для безопасного удаления элементов (Destroy)
+        for (int i = items.Count - 1; i >= 0; i--)
+        {
+            Item item = items[i];
+
+            
+        }
     }
 }

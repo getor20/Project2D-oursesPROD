@@ -26,13 +26,13 @@ public class Item : MonoBehaviour
         Icon = icon;
         Description = description;
         // Stack может быть установлен в 1 или оставлен как есть
-        Debug.Log("Инициализация предмета ID: " + ID);
+        //Debug.Log("Инициализация предмета ID: " + ID);
     }
 
     // Метод для изменения количества (стэка)
     public void SetStack(int newStack)
     {
         Stack = newStack;
-        Debug.Log("Количество предметов (Stack) обновлено: " + Stack);
+        //Debug.Log("Количество предметов (Stack) обновлено: " + Stack);
     }
 }

@@ -23,33 +23,23 @@ public class LiftingObjects : MonoBehaviour
 
     public void Interaction(bool isInteraction)
     { 
-        // ИСПРАВЛЕНО: Используем ОБРАТНЫЙ цикл 'for' для безопасного удаления элементов (Destroy)
         for (int i = _items.Count - 1; i >= 0; i--)
         {
             Food foodItem = _items[i];
 
-            // Проверяем, что объект еще не null (на всякий случай)
             if (foodItem != null && foodItem.IsTrigger == true && isInteraction)
             {
                 if (foodItem.ID == 1)
                 {
-                    //Debug.Log($"Взаимодействие с Food ID {foodItem.ID}");
-                    //_inventory.In();
-                    //foodItem
-                    // Здесь можно добавить логику для ID 1
+                    // Логика для ID 1
                 }
                 else if (foodItem.ID == 2)
                 {
-                    //Debug.Log($"Взаимодействие с Food ID {foodItem.ID}");
-                    // Здесь можно добавить логику для ID 2
+                    // Логика для ID 2
                 }
-                //Debug.Log($"Взаимодействие с Food ID {foodItem.ID}");
+                // Преобразуем список Food в список Item
                 _item.Initialization(foodItem.ID, foodItem.Name, foodItem.Icon, foodItem.Description);
-                _item.SetStack(_item.Stack + 1);
-                // ВАЖНО: Уничтожаем объект
                 Destroy(foodItem.gameObject);
-
-                // Объект Food должен сам вызвать DeregisterFood() в своем OnDestroy().
             }
         }
     }
