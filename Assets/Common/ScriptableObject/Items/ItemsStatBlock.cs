@@ -1,10 +1,11 @@
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Inventory/Item")]
-public class Items : ScriptableObject
+public class ItemsStatBlock : ScriptableObject
 {
     public int ID;
     public string Name;
     public Sprite Icon;
     public string Description;
+    public int MaxDurability;
 }   

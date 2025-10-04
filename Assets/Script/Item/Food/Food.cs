@@ -1,15 +1,14 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Food : MonoBehaviour
 {
-    [SerializeField] private Items _item;
+    // ⚡ Ссылка на ScriptableObject, а не на другой MonoBehaviour
+    [SerializeField] private ItemsStatBlock _data;
 
     private SpriteRenderer _image;
 
-    public int ID { get; private set; }
-    public string Name { get; private set; }
-    public Sprite Icon { get; private set; }
-    public string Description { get; private set; }
+    // ⚡ Публичное свойство, чтобы Inventory мог получить данные
+    public ItemsStatBlock Data => _data;
 
     public bool IsTrigger { get; private set; }
 
@@ -20,12 +19,10 @@ public class Food : MonoBehaviour
 
     private void Start()
     {
-        _image.sprite = _item.Icon;
-
-        ID = _item.ID;
-        Name = _item.Name;
-        Icon = _item.Icon;
-        Description = _item.Description;
+        if (_data != null)
+        {
+            _image.sprite = _data.Icon;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collider)
@@ -33,7 +30,7 @@ public class Food : MonoBehaviour
         IsTrigger = true;
     }
     private void OnTriggerExit2D(Collider2D collider)
-    {   
+    {
         IsTrigger = false;
     }
 }
