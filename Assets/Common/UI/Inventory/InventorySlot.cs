@@ -1,28 +1,32 @@
-using UnityEngine;
+п»їusing UnityEngine;
 using UnityEngine.UI;
 
 public class InventorySlot : MonoBehaviour
 {
-    [SerializeField] private Image _icon;
-    private Items _item;
+    [SerializeField] private Image _itemIcon;
+    [SerializeField] private Text _itemCountText;
 
-    private void Start()
+    // Р¤Р»Р°Рі, РєРѕС‚РѕСЂС‹Р№ РѕРїСЂРµРґРµР»СЏРµС‚, РЅР°С…РѕРґРёС‚СЃСЏ Р»Рё РІ СЃР»РѕС‚Рµ РїСЂРµРґРјРµС‚.
+    // Р­С‚Рѕ РєР»СЋС‡РµРІРѕРµ РїРѕР»Рµ РґР»СЏ РІР°С€РµРіРѕ Р·Р°РїСЂРѕСЃР°.
+    public bool IsOccupied { get; private set; } = false;
+
+    // РњРµС‚РѕРґ РґР»СЏ СѓСЃС‚Р°РЅРѕРІРєРё РїСЂРµРґРјРµС‚Р° (Р·Р°РЅРёРјР°РµС‚ СЃР»РѕС‚)
+    public void SetItem(Sprite icon, int count)
     {
-        // DisplayItem();
-        //ClearSlot();
+        _itemIcon.sprite = icon;
+        _itemCountText.text = count.ToString();
+        _itemIcon.enabled = true;
+        _itemCountText.enabled = true;
+        IsOccupied = true;
     }
-    // Метод для отображения предмета в слоте
-    public void DisplayItem()
-    {
-       // _icon.sprite = _item.Icon;
-        _icon.enabled = true; // Делаем иконку видимой.
-    }
-    
-    // Метод для очистки слота
+
+    // РњРµС‚РѕРґ РґР»СЏ РѕС‡РёСЃС‚РєРё СЃР»РѕС‚Р° (РѕСЃРІРѕР±РѕР¶РґР°РµС‚ СЃР»РѕС‚)
     public void ClearSlot()
     {
-        //_icon.sprite = null;
-        _icon.enabled = false; // Делаем иконку невидимой.
+        _itemIcon.sprite = null;
+        _itemCountText.text = "";
+        _itemIcon.enabled = false;
+        _itemCountText.enabled = false;
+        IsOccupied = false;
     }
 }
-

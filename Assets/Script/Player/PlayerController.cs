@@ -6,13 +6,17 @@ namespace Assets.Script.Player
     {
         [SerializeField] private Transform _hitboxTransform;
 
+        private PlayerInputData _inputData;
+
         private PlayerMove _mover;
         private StatPlayer _stats;
-        private PlayerInputData _inputData;
         private MeleeAttacker _meleeAttacker;
+        private LiftingObjects _liftingObjects;
+
 
         public bool IsInteraction { get; private set; }
         public bool DisplayInventory { get; private set; }
+        public bool IsTrigger { get; private set; }
         public bool CanMove { get; set; } = true;
 
         private void Awake()
@@ -20,6 +24,7 @@ namespace Assets.Script.Player
             _mover = GetComponent<PlayerMove>();
             _stats = GetComponent<StatPlayer>();
             _meleeAttacker = GetComponent<MeleeAttacker>();
+            _liftingObjects = GetComponent<LiftingObjects>();
         }
 
         private void Update()
@@ -29,6 +34,25 @@ namespace Assets.Script.Player
                 _mover.Stop();
                 return;
             }
+
+            if (IsInteraction == true)
+            {
+                // Заняты другим делом, отключаем индикатор
+                IsTrigger = false;
+            }
+            // 2. ИЛИ проверяем, открыт ли инвентарь
+            else if (DisplayInventory == true)
+            {
+                // Инвентарь открыт, отключаем индикатор
+                IsTrigger = false;
+            }
+            // 3. Иначе (если ничто не блокирует) — используем реальное значение от скрипта подбора
+            else
+            {
+                IsTrigger = _liftingObjects.IsTrigger;
+            }
+
+
 
             HandleMovement();
             HandleCombat();
@@ -65,6 +89,7 @@ namespace Assets.Script.Player
         public void SetInteraction(bool isInteracting)
         {
             IsInteraction = isInteracting;
+            _liftingObjects.Interaction(IsInteraction);
             //Debug.Log($"Interaction state: {IsInteraction}");
         }
 

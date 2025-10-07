@@ -5,15 +5,18 @@ public class UiController : MonoBehaviour
 {
     [SerializeField] private PlayerController _playerController;
     [SerializeField] private GameObject _inventoryUI;
+    [SerializeField] private GameObject _interaction;
 
     private void Start()
     {
-        _inventoryUI.gameObject.SetActive(false);
+        _inventoryUI.SetActive(false);
+        _interaction.SetActive(false);
     }
 
     private void Update()
     {
-        _inventoryUI.gameObject.SetActive(_playerController.DisplayInventory);
+        _inventoryUI.SetActive(_playerController.DisplayInventory);
+        _interaction.SetActive(_playerController.IsTrigger);
     }
 }
 

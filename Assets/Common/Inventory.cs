@@ -1,62 +1,44 @@
-﻿using Assets.Script.Player;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class Inventory : MonoBehaviour
-{ 
-    [SerializeField] private List<Food> _items = new List<Food>();
+{
+    // Словарь для хранения стеков: [ID Предмета] -> [Количество в стеке]
+    private Dictionary<int, int> _items = new Dictionary<int, int>();
 
-    private PlayerController _playerController;
-
-    public int _selectedItemIndex { get; private set; } = 100;
-
-    private void Awake()
+    // Метод, который вызывается из LiftingObjects
+    public void AddItem(List<ItemsStatBlock> items)
     {
-        _playerController = FindObjectOfType<PlayerController>();
+        // Проверяем на пустоту
+        if (items == null || items.Count == 0) return;
 
-        Food[] foundFoods = FindObjectsOfType<Food>();
-        _items = foundFoods.ToList();
+        int itemsAdded = 0;
 
-        Debug.Log($"Найдено объектов Food: {_items.Count}");
-    }
-
-    private void Update()
-    {
-        Interaction();
-    }
-
-    private void Interaction()
-    {
-        // ИСПРАВЛЕНО: Используем ОБРАТНЫЙ цикл 'for' для безопасного удаления элементов (Destroy)
-        for (int i = _items.Count - 1; i >= 0; i--)
+        foreach (var itemData in items)
         {
-            Food foodItem = _items[i];
+            // Пропускаем, если ID невалиден
+            if (itemData.ID <= 0) continue;
 
-            // Проверяем, что объект еще не null (на всякий случай)
-            if (foodItem != null && foodItem.IsTrigger == true && _playerController.IsInteraction)
-            {
-                if (foodItem.ID == 1)
-                {
-                    Debug.Log($"Взаимодействие с Food ID {foodItem.ID}");
-                    //foodItem
-                    // Здесь можно добавить логику для ID 1
-                }
-                else if (foodItem.ID == 2)
-                {
-                    Debug.Log($"Взаимодействие с Food ID {foodItem.ID}");
-                    // Здесь можно добавить логику для ID 2
-                }
-                else
-                {
-                    Debug.Log($"Взаимодействие с Food ID {foodItem.ID}");
-                    // Логика для других ID
-                }
-                // ВАЖНО: Уничтожаем объект
-                Destroy(foodItem.gameObject);
+            int itemKey = itemData.ID;
 
-                // Объект Food должен сам вызвать DeregisterFood() в своем OnDestroy().
-            }
+            // 1. Получаем текущее количество (currentCount) по ID. 
+            // Если ID нет в словаре, TryGetValue вернет 0 (значение по умолчанию для int).
+            _items.TryGetValue(itemKey, out int currentCount);
+
+            // 2. Устанавливаем новое значение: старое количество + 1.
+            // Этот синтаксис одновременно добавляет новый ключ И обновляет существующий.
+            _items[itemKey] = currentCount + 1;
+
+            itemsAdded++;
         }
+
+        Debug.Log($"Добавлено {itemsAdded} предметов в инвентарь. Теперь предметов типа ID {items[0].ID} в стеке: {GetItemCount(items[0].ID)}.");
+    }
+
+    // Метод для получения количества предмета по его ID
+    public int GetItemCount(int itemID)
+    {
+        // Если ID есть в словаре, возвращаем количество, иначе возвращаем 0.
+        return _items.GetValueOrDefault(itemID);
     }
 }
