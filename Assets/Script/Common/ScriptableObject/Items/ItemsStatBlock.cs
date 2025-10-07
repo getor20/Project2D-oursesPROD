@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Inventory/Item")]
+[CreateAssetMenu(menuName = "Items/Item")]
 public class ItemsStatBlock : ScriptableObject
 {
     public int ID;
