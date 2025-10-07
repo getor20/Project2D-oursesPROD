@@ -1,61 +1,44 @@
-﻿// Inventory.cs (MonoBehaviour)
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using System; // 👈 Не забудьте добавить System
 
 public class Inventory : MonoBehaviour
 {
-    // InventoryItem можно оставить вне класса Inventory,
-    // но в том же файле, или лучше, как вложенный класс (см. предыдущий ответ).
+    // Словарь для хранения стеков: [ID Предмета] -> [Количество в стеке]
+    private Dictionary<int, int> _items = new Dictionary<int, int>();
 
-    // ⚠️ ВАЖНО: Класс должен быть помечен [System.Serializable]
-    [Serializable]
-    public class InventoryItem
+    // Метод, который вызывается из LiftingObjects
+    public void AddItem(List<ItemsStatBlock> items)
     {
-        // 1. Ссылка на статические данные
-        public ItemsStatBlock Data;
+        // Проверяем на пустоту
+        if (items == null || items.Count == 0) return;
 
-        // 2. ⚡️ УНИКАЛЬНЫЕ ПЕРЕМЕННЫЕ, которые вы хотите доставать/менять
-        public int CurrentDurability;
-        public int StackSize;
+        int itemsAdded = 0;
 
-        public InventoryItem(ItemsStatBlock data, int stackSize = 1)
+        foreach (var itemData in items)
         {
-            Data = data;
-            StackSize = stackSize;
-            CurrentDurability = data.MaxDurability;
+            // Пропускаем, если ID невалиден
+            if (itemData.ID <= 0) continue;
+
+            int itemKey = itemData.ID;
+
+            // 1. Получаем текущее количество (currentCount) по ID. 
+            // Если ID нет в словаре, TryGetValue вернет 0 (значение по умолчанию для int).
+            _items.TryGetValue(itemKey, out int currentCount);
+
+            // 2. Устанавливаем новое значение: старое количество + 1.
+            // Этот синтаксис одновременно добавляет новый ключ И обновляет существующий.
+            _items[itemKey] = currentCount + 1;
+
+            itemsAdded++;
         }
+
+        Debug.Log($"Добавлено {itemsAdded} предметов в инвентарь. Теперь предметов типа ID {items[0].ID} в стеке: {GetItemCount(items[0].ID)}.");
     }
 
-    [SerializeField] private List<InventoryItem> _items = new List<InventoryItem>();
-
-    // Метод получения: создает контейнер состояния
-    public void ReceiveAndAddItems(List<ItemsStatBlock> newItemsData)
+    // Метод для получения количества предмета по его ID
+    public int GetItemCount(int itemID)
     {
-        foreach (var data in newItemsData)
-        {
-            // Создаём новый экземпляр состояния (InventoryItem)
-            _items.Add(new InventoryItem(data, 1));
-        }
+        // Если ID есть в словаре, возвращаем количество, иначе возвращаем 0.
+        return _items.GetValueOrDefault(itemID);
     }
-
-    // ⚡️ ДОСТАВАНИЕ УНИКАЛЬНЫХ ПЕРЕМЕННЫХ
-    public int GetCurrentDurability(int index)
-    {
-        if (index < 0 || index >= _items.Count) return 0;
-
-        // Достаём уникальное, текущее значение
-        return _items[index].CurrentDurability;
-    }
-
-    // ⚡️ ДОСТАВАНИЕ СТАТИЧЕСКИХ ПЕРЕМЕННЫХ
-    public Sprite GetItemIcon(int index)
-    {
-        if (index < 0 || index >= _items.Count) return null;
-
-        // Достаём статическое значение через .Data
-        return _items[index].Data.Icon;
-    }
-
-    // ... Другие методы для взаимодействия (UseItem)
 }

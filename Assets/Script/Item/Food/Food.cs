@@ -1,30 +1,17 @@
-﻿using UnityEngine;
+﻿// Food.cs
+
+using UnityEngine;
 
 public class Food : MonoBehaviour
 {
-    // ⚡ Ссылка на ScriptableObject, а не на другой MonoBehaviour
-    [SerializeField] private ItemsStatBlock _data;
+    // Ссылка на данные ScriptableObject.
+    // Вы будете прикреплять конкретный ItemsStatBlock через Inspector.
+    [field: SerializeField] public ItemsStatBlock Data { get; private set; }
 
-    private SpriteRenderer _image;
-
-    // ⚡ Публичное свойство, чтобы Inventory мог получить данные
-    public ItemsStatBlock Data => _data;
-
+    // Это свойство должно устанавливаться через триггеры (OnTriggerEnter/Exit)
     public bool IsTrigger { get; private set; }
 
-    private void Awake()
-    {
-        _image = GetComponent<SpriteRenderer>();
-    }
-
-    private void Start()
-    {
-        if (_data != null)
-        {
-            _image.sprite = _data.Icon;
-        }
-    }
-
+    // Unity-метод для обработки коллизий
     private void OnTriggerEnter2D(Collider2D collider)
     {
         IsTrigger = true;

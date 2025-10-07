@@ -1,4 +1,4 @@
-﻿// InventoryItem.cs (Класс данных, [System.Serializable])
+﻿/*// InventoryItem.cs (Класс данных, [System.Serializable])
 using System;
 using UnityEngine;
 
@@ -19,4 +19,4 @@ public class InventoryItem
         // Копируем базовое значение прочности в уникальное состояние
         CurrentDurability = data.MaxDurability;
     }
-}
+}*/

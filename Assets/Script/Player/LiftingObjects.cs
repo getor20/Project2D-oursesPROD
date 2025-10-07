@@ -1,55 +1,77 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 public class LiftingObjects : MonoBehaviour
 {
-    // ⚠️ Убран [SerializeField] или заменен на [NonSerialized] для предотвращения 
-    // ошибок Editor'а при уничтожении объектов, на которые он ссылается.
-    [NonSerialized] private List<Food> _items = new List<Food>();
+    private List<Food> _items = new List<Food>();        // Список всех объектов Food в мире (которые могут быть подняты)
+    private Inventory _inventory;                       // Ссылка на компонент инвентаря
 
-    private Inventory _inventory;
-    // ... другие поля ...
+    public bool IsTrigger { get; private set; }         // Флаг: True, если хотя бы один предмет находится в зоне подбора
 
     private void Awake()
     {
+        // Попытка получить компонент Inventory на том же игровом объекте
         _inventory = GetComponent<Inventory>();
-
-        // FindObjectsOfType() остается для начальной инициализации
-        Food[] foundFoods = FindObjectsOfType<Food>();
-        _items = foundFoods.ToList();
-        Debug.Log($"Найдено предметов Food: {_items.Count}");
-    }
-
-    public void Interaction(bool isInteraction)
-    {
-        if (!isInteraction) return;
-
-        List<ItemsStatBlock> itemsDataToAdd = new List<ItemsStatBlock>();
-
-        for (int i = _items.Count - 1; i >= 0; i--)
+        if (_inventory == null)
         {
-            Food foodItem = _items[i];
-
-            if (foodItem != null && foodItem.IsTrigger == true)
-            {
-                // 1. Извлекаем данные (ScriptableObject)
-                if (foodItem.Data != null)
-                {
-                    itemsDataToAdd.Add(foodItem.Data);
-                }
-
-                _items.RemoveAt(i);
-                // 2. Уничтожаем GameObject в мире
-                Destroy(foodItem.gameObject);
-            }
+            Debug.LogError("КРИТИЧНАЯ ОШИБКА: Компонент Inventory не найден! Подбор невозможен.", this);
         }
 
-        // 3. Отправляем только ДАННЫЕ в инвентарь
-        if (_inventory != null && itemsDataToAdd.Count > 0)
+        // Находим все объекты типа Food в сцене при старте
+        // FindObjectsByType - более современный аналог FindObjectsOfType
+        _items = FindObjectsByType<Food>(FindObjectsSortMode.None).ToList();
+    }
+
+    private void Update()
+    {
+        // Проверяем с помощью LINQ Any(), активен ли IsTrigger хотя бы у одного предмета в списке
+        IsTrigger = _items.Any(food => food != null && food.IsTrigger);
+    }
+
+    // Метод, вызываемый при взаимодействии игрока (например, нажатии кнопки "Взять")
+    public void Interaction(bool isInteraction)
+    {
+        // Выходим, если взаимодействие неактивно или инвентарь не найден
+        if (!isInteraction || _inventory == null) return;
+
+        // Определяем критерий (условие) для подбора:
+        // Объект существует, его триггер активен, и к нему прикреплены данные (ItemsStatBlock)
+        System.Predicate<Food> canBePickedUp = food =>
+            food != null && food.IsTrigger && food.Data != null;
+
+        // ШАГ 1: Сбор данных для инвентаря (используем LINQ)
+        List<ItemsStatBlock> itemsDataToAdd = _items
+            .Where(canBePickedUp.Invoke) // 1. Фильтруем список, оставляя только те, что можно поднять
+            .Select(food => food.Data)   // 2. Извлекаем (проецируем) только объект данных (ItemsStatBlock)
+            .ToList();                   // 3. Преобразуем результат в List
+
+        // ШАГ 2: Добавление в инвентарь и очистка мира
+        if (itemsDataToAdd.Count > 0)
         {
-            _inventory.ReceiveAndAddItems(itemsDataToAdd);
+            // Передаем собранные данные в инвентарь для стекирования
+            _inventory.AddItem(itemsDataToAdd);
+
+            Debug.Log($"Собрано {itemsDataToAdd.Count} предметов для добавления.");
+
+            // Очистка сцены:
+
+            // 3a. Уничтожаем GameObject'ы в мире
+            // Получаем список ссылок на объекты, которые нужно уничтожить
+            List<Food> itemsToDestroy = _items.Where(canBePickedUp.Invoke).ToList();
+
+            foreach (var foodItem in itemsToDestroy)
+            {
+                Destroy(foodItem.gameObject); // Уничтожаем визуальный объект
+            }
+
+            // 3b. Очистка внутреннего списка _items
+            // Удаляем все подбираемые элементы из списка отслеживания с помощью RemoveAll
+            _items.RemoveAll(canBePickedUp.Invoke);
+        }
+        else
+        {
+            Debug.LogWarning("Собрано 0 предметов для добавления (Триггер не активен или отсутствуют данные).");
         }
     }
 }

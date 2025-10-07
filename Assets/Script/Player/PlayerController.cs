@@ -16,6 +16,7 @@ namespace Assets.Script.Player
 
         public bool IsInteraction { get; private set; }
         public bool DisplayInventory { get; private set; }
+        public bool IsTrigger { get; private set; }
         public bool CanMove { get; set; } = true;
 
         private void Awake()
@@ -33,6 +34,25 @@ namespace Assets.Script.Player
                 _mover.Stop();
                 return;
             }
+
+            if (IsInteraction == true)
+            {
+                // Заняты другим делом, отключаем индикатор
+                IsTrigger = false;
+            }
+            // 2. ИЛИ проверяем, открыт ли инвентарь
+            else if (DisplayInventory == true)
+            {
+                // Инвентарь открыт, отключаем индикатор
+                IsTrigger = false;
+            }
+            // 3. Иначе (если ничто не блокирует) — используем реальное значение от скрипта подбора
+            else
+            {
+                IsTrigger = _liftingObjects.IsTrigger;
+            }
+
+
 
             HandleMovement();
             HandleCombat();
