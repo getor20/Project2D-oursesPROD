@@ -919,7 +919,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb33cb67fe188eb44be4e0a1003a7656, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _inventory: {fileID: 2591792478769369483}
+  playerInventory: {fileID: 2591792478769369483}
   _slotParent: {fileID: 384998966181091468}
 --- !u!1 &5698108747678711827
 GameObject:
