@@ -37,8 +37,7 @@ public class LiftingObjects : MonoBehaviour
 
         // Определяем критерий (условие) для подбора:
         // Объект существует, его триггер активен, и к нему прикреплены данные (ItemsStatBlock)
-        System.Predicate<Food> canBePickedUp = food =>
-            food != null && food.IsTrigger && food.Data != null;
+        System.Predicate<Food> canBePickedUp = food => food != null && food.IsTrigger && food.Data != null;
 
         // ШАГ 1: Сбор данных для инвентаря (используем LINQ)
         List<ItemsStatBlock> itemsDataToAdd = _items
