@@ -1,69 +1,133 @@
-﻿// InventoryUI.cs
-
-using UnityEngine;
+﻿using UnityEngine;
 
 public class InventoryUI : MonoBehaviour
 {
-    // Ссылка на компонент инвентаря игрока
-    [SerializeField] private Inventory playerInventory;
-
-
+    [SerializeField] private Inventory _inventory;
     [SerializeField] private Transform _slotParent;
 
-    // Массив для хранения всех компонентов InventorySlot для удобного доступа
+    [SerializeField] private int _maxStack = 15;
+
     private InventorySlot[] _slots;
 
 
     private void Awake()
     {
+        // Получаем все компоненты InventorySlot, прикрепленные к дочерним объектам _slotParent
         _slots = _slotParent.GetComponentsInChildren<InventorySlot>();
+
+        if (_slots.Length == 0)
+        {
+            Debug.LogError("Не найден ни один компонент InventorySlot. Убедитесь, что слоты правильно настроены.", this);
+        }
     }
 
     private void Start()
     {
-        if (playerInventory == null)
+        if (_inventory == null)
         {
-            Debug.LogError("Ошибка: Ссылка на Inventory не установлена в UIController.");
+            Debug.LogError("Ошибка: Ссылка на Inventory не установлена в UIController. Перетащите компонент Inventory в Инспекторе.", this);
             return;
         }
 
-        // !!! ПОДПИСКА !!!
-        // Подписываем метод RefreshDisplay на событие.
-        playerInventory.OnInventoryUpdated += RefreshDisplay;
+        // Подписываемся на событие обновления инвентаря
+        _inventory.OnInventoryUpdated += RefreshDisplay;
 
-        // Первоначальное обновление при старте игры
+        // Первое отображение при старте
         RefreshDisplay();
     }
 
+    /// <summary>
+    /// Полностью очищает все UI-слоты, делая их пустыми.
+    /// </summary>
+    private void ClearAllSlots()
+    {
+        foreach (var slot in _slots)
+        {
+            // Использует метод ClearSlot из InventorySlot
+            slot.ClearSlot();
+        }
+    }
+
+    /// <summary>
+    /// Получает спрайт предмета, обращаясь к статическому реестру, 
+    /// который был заполнен классом Inventory при подборе предмета.
+    /// </summary>
+    private Sprite GetItemIcon(int itemID)
+    {
+        // Используем статический вложенный класс Inventory.ItemDataRegistry
+        Sprite icon = Inventory.ItemDataRegistry.GetIcon(itemID);
+
+        if (icon == null)
+        {
+            Debug.LogWarning($"Иконка для ID {itemID} не найдена. Проверьте, что предмет имеет спрайт и был зарегистрирован.");
+        }
+
+        return icon;
+    }
+
+    /// <summary>
+    /// Основной метод: обновляет отображение инвентаря на основе данных из Inventory.
+    /// Реализует логику разделения стеков по MAX_UI_STACK_SIZE.
+    /// </summary>
     private void RefreshDisplay()
     {
-        Debug.Log("[InventoryUI] Получено событие. Обновляю отображение!");
+        //Debug.Log("[InventoryUI] Обновление отображения.");
 
-        // 1. Получаем актуальные данные из инвентаря через публичное свойство
-        var currentItems = playerInventory.Items;
+        // 1. Очищаем все слоты перед обновлением
+        ClearAllSlots();
 
-        // 2. Логика очистки и обновления UI-слотов
-        // ClearSlots(); 
+        // Получаем текущие данные инвентаря [ID -> TotalCount]
+        var currentItems = _inventory.Items;
+        int slotIndex = 0; // Индекс для перебора UI-слотов
 
+        // 2. Проходим по всем уникальным типам предметов в инвентаре
         foreach (var itemEntry in currentItems)
         {
             int itemID = itemEntry.Key;
-            int stackCount = itemEntry.Value;
+            int totalCount = itemEntry.Value;
+            int remainingCount = totalCount;
 
-            // Здесь должна быть логика поиска иконки/имени по itemID
-            // И создание/обновление UI-элементов
+            // 3. Логика разделения стека (Stack Splitting)
+            // Продолжаем, пока не отобразим все количество предмета
+            while (remainingCount > 0)
+            {
+                // Проверка на заполненность UI (если UI слотов меньше, чем нужно)
+                if (slotIndex >= _slots.Length)
+                {
+                    Debug.LogWarning($"Все UI-слоты ({_slots.Length}) заполнены. Не могу отобразить оставшиеся предметы.");
+                    return;
+                }
 
-            Debug.Log($"[UI] Рисую: ID {itemID}, Количество {stackCount}");
-            // UpdateSlot(itemID, stackCount);
+                InventorySlot currentSlot = _slots[slotIndex];
+
+                // Определяем, сколько поместится в текущий слот (максимум 99)
+                int countForThisSlot = Mathf.Min(remainingCount, _maxStack);
+                remainingCount -= countForThisSlot;
+
+                // Получаем иконку предмета
+                Sprite itemIcon = GetItemIcon(itemID);
+
+                if (itemIcon == null)
+                {
+                    // Если иконка не найдена, пропускаем этот предмет и переходим к следующему типу
+                    break;
+                }
+
+                // Устанавливаем иконку и количество в слот
+                currentSlot.SetItem(itemIcon, countForThisSlot);
+
+                // Переходим к следующему UI-слоту
+                slotIndex++;
+            }
         }
     }
 
     private void OnDestroy()
     {
-        // ВАЖНО: Всегда отписывайтесь от событий при уничтожении объекта UI
-        if (playerInventory != null)
+        // Отписываемся от события, чтобы избежать утечек памяти или ошибок
+        if (_inventory != null)
         {
-            playerInventory.OnInventoryUpdated -= RefreshDisplay;
+            _inventory.OnInventoryUpdated -= RefreshDisplay;
         }
     }
 }

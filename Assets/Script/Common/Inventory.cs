@@ -1,33 +1,66 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using System; // !!! НЕОБХОДИМО ДЛЯ ТИПА Action !!!
+using System;
+using System.Linq; // Убедитесь, что эта директива есть
 
 public class Inventory : MonoBehaviour
 {
-    // Словарь для хранения стеков: [ID Предмета] -> [Количество в стеке]
+    // --------------------------------------------------------------------------------
+    // 1. ВЛОЖЕННЫЙ СТАТИЧЕСКИЙ КЛАСС (ЗАМЕНЯЕТ ItemDataProvider.cs)
+    // Этот класс будет доступен статически как Inventory.ItemDataRegistry
+    // --------------------------------------------------------------------------------
+    public static class ItemDataRegistry
+    {
+        // Словарь для хранения спрайтов, зарегистрированных при поднятии
+        public static Dictionary<int, Sprite> RegisteredIcons = new Dictionary<int, Sprite>();
+
+        // Вызывается из экземпляра Inventory при добавлении предмета
+        public static void RegisterItemIcon(int itemID, Sprite itemSprite)
+        {
+            if (itemSprite == null) return;
+
+            if (!RegisteredIcons.ContainsKey(itemID))
+            {
+                RegisteredIcons.Add(itemID, itemSprite);
+                Debug.Log($"Спрайт для предмета ID {itemID} успешно зарегистрирован.");
+            }
+        }
+
+        // Вызывается из InventoryUI для получения спрайта
+        public static Sprite GetIcon(int itemID)
+        {
+            RegisteredIcons.TryGetValue(itemID, out Sprite icon);
+            return icon;
+        }
+    }
+    // --------------------------------------------------------------------------------
+
+
+    // 2. ПОЛЯ ОСНОВНОГО КЛАССА Inventory
     private Dictionary<int, int> _items = new Dictionary<int, int>();
     public IReadOnlyDictionary<int, int> Items => _items;
 
-    // Событие, которое оповещает UI и другие системы об изменении инвентаря
     public event Action OnInventoryUpdated;
 
     // Метод, который вызывается из LiftingObjects
     public void AddItem(List<ItemsStatBlock> items)
     {
-        // Проверяем на пустоту
         if (items == null || items.Count == 0) return;
 
         int itemsAdded = 0;
-        int firstAddedItemID = 0; // Для более безопасного лога
+        int firstAddedItemID = 0;
 
         foreach (var itemData in items)
         {
-            // Проверка на null-ссылку и невалидный ID
             if (itemData == null || itemData.ID <= 0) continue;
 
             int itemKey = itemData.ID;
 
-            // 1. Получаем текущее количество. TryGetValue вернет 0, если ID нет.
+            // !!! ИСПОЛЬЗОВАНИЕ: Регистрируем спрайт через вложенный класс !!!
+            // Мы предполагаем, что ItemsStatBlock.Icon содержит Sprite.
+            ItemDataRegistry.RegisterItemIcon(itemData.ID, itemData.Icon);
+
+            // 1. Получаем текущее количество.
             _items.TryGetValue(itemKey, out int currentCount);
 
             // 2. Устанавливаем новое значение: старое количество + 1.
@@ -35,27 +68,22 @@ public class Inventory : MonoBehaviour
 
             if (itemsAdded == 0)
             {
-                firstAddedItemID = itemData.ID; // Сохраняем ID для лога
+                firstAddedItemID = itemData.ID;
             }
             itemsAdded++;
         }
 
-        // Если предметы были добавлены:
         if (itemsAdded > 0)
         {
-            // !!! ВЫЗОВ СОБЫТИЯ !!!
-            // Уведомляем всех подписчиков (например, InventoryUI), что инвентарь изменился.
             OnInventoryUpdated?.Invoke();
 
-            // БЕЗОПАСНЫЙ LOG: Используем firstAddedItemID, который мы сохранили
             Debug.Log($"Добавлено {itemsAdded} предметов в инвентарь. Теперь предметов типа ID {firstAddedItemID} в стеке: {GetItemCount(firstAddedItemID)}.");
         }
     }
 
-    // Метод для получения количества предмета по его ID
     public int GetItemCount(int itemID)
     {
-        // Если ID есть в словаре, возвращаем количество, иначе возвращаем 0.
+        // Убедитесь, что у вас есть using System.Linq; для GetValueOrDefault
         return _items.GetValueOrDefault(itemID);
     }
 }
