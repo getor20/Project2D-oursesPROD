@@ -5,9 +5,12 @@ public class InventoryUI : MonoBehaviour
     [SerializeField] private Inventory _inventory;
     [SerializeField] private Transform _slotParent;
 
-    [SerializeField] private int _maxStack = 15;
+    [field: SerializeField] public int MaxStack { get; private set; }
 
     private InventorySlot[] _slots;
+
+    // Новое свойство для получения общего количества доступных UI слотов
+    public int TotalSlotsCount => _slots != null ? _slots.Length : 0;
 
 
     private void Awake()
@@ -100,8 +103,8 @@ public class InventoryUI : MonoBehaviour
 
                 InventorySlot currentSlot = _slots[slotIndex];
 
-                // Определяем, сколько поместится в текущий слот (максимум 99)
-                int countForThisSlot = Mathf.Min(remainingCount, _maxStack);
+                // Определяем, сколько поместится в текущий слот
+                int countForThisSlot = Mathf.Min(remainingCount, MaxStack);
                 remainingCount -= countForThisSlot;
 
                 // Получаем иконку предмета

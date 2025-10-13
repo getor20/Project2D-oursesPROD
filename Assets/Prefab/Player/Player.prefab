@@ -921,7 +921,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _inventory: {fileID: 2591792478769369483}
   _slotParent: {fileID: 384998966181091468}
-  _maxStack: 15
+  _maxStack: 3
 --- !u!1 &5698108747678711827
 GameObject:
   m_ObjectHideFlags: 0
@@ -1351,6 +1351,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c9a4b1ebbf75ea48aba3d07e1032a96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _inventoryUI: {fileID: 7086797482514606052}
 --- !u!1 &5994415243144899263
 GameObject:
   m_ObjectHideFlags: 0

@@ -42,6 +42,40 @@ public class Inventory : MonoBehaviour
 
     public event Action OnInventoryUpdated;
 
+    public bool CanAddItem(List<ItemsStatBlock> itemsToAdd, int totalSlots, int maxStackSize)
+    {
+        if (itemsToAdd == null || itemsToAdd.Count == 0) return true;
+        if (totalSlots <= 0) return false;
+
+        // Создаем временную копию текущего инвентаря
+        Dictionary<int, int> simulatedItems = new Dictionary<int, int>(_items);
+
+        // 1. Симулируем добавление предметов
+        foreach (var itemData in itemsToAdd)
+        {
+            if (itemData == null || itemData.ID <= 0) continue;
+            int itemKey = itemData.ID;
+
+            // Увеличиваем количество на 1 (каждый Food на сцене - это 1 экземпляр)
+            simulatedItems.TryGetValue(itemKey, out int currentCount);
+            simulatedItems[itemKey] = currentCount + 1;
+        }
+
+        // 2. Вычисляем общее количество требуемых UI-слотов
+        int requiredSlots = 0;
+        foreach (var itemEntry in simulatedItems)
+        {
+            int totalCount = itemEntry.Value;
+
+            // Расчет количества стеков (Ceiling division: Mathf.Ceil(totalCount / maxStackSize))
+            // (10 предметов при MaxStack=4: (10 + 4 - 1) / 4 = 13 / 4 = 3 слота)
+            requiredSlots += (totalCount + maxStackSize - 1) / maxStackSize;
+        }
+
+        // 3. Проверяем, не превышает ли требуемое количество доступное
+        return requiredSlots <= totalSlots;
+    }
+
     // Метод, который вызывается из LiftingObjects
     public void AddItem(List<ItemsStatBlock> items)
     {
