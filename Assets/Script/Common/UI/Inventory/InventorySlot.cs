@@ -1,11 +1,20 @@
 ﻿using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems; // Для обработки клика
 
-public class InventorySlot : MonoBehaviour
+public class InventorySlot : MonoBehaviour, IPointerClickHandler
 {
     [SerializeField] private Image _itemIcon;
     [SerializeField] private TextMeshProUGUI _itemStack;
+
+    [Tooltip("Сохранять ли пропорции спрайта при отображении.")]
+    [SerializeField] private bool _preserveAspectRatio = true;
+
+    // Ссылка на InventoryUI — посредника
+    [SerializeField] private InventoryUI _inventoryUI;
+
+    private int _itemID = 0; // ID предмета, хранящегося в слоте
 
     public bool IsOccupied { get; private set; } = false;
 
@@ -15,37 +24,67 @@ public class InventorySlot : MonoBehaviour
         {
             Debug.LogError($"Ошибка: Ссылки на UI-компоненты не установлены в InventorySlot на объекте {gameObject.name}. ПРОВЕРЬТЕ INSPECTOR!");
         }
+
+        // Поиск InventoryUI, если не назначен в Инспекторе
+        if (_inventoryUI == null)
+        {
+            // Предполагаем, что InventoryUI находится где-то выше в иерархии
+            _inventoryUI = GetComponentInParent<InventoryUI>();
+        }
+
+        _itemIcon.preserveAspect = true;
+        
     }
-    public void SetItem(Sprite icon, int count)
+
+    private void Start()
     {
-        // Проверка от NullReferenceException
+        ClearSlot();
+    }
+
+    /// <summary>
+    /// Устанавливает предмет в слот и сохраняет его ID.
+    /// </summary>
+    public void SetItem(Sprite icon, int count, int id)
+    {
         if (_itemIcon == null || _itemStack == null) return;
+
+        _itemID = id; // Сохраняем ID
 
         _itemIcon.sprite = icon;
         _itemStack.text = count.ToString();
 
-        _itemIcon.enabled = true; // Image можно включать/выключать через .enabled
-
-        // !!! ИСПРАВЛЕНИЕ: Используем SetActive() для TextMeshProUGUI !!!
-        // Показываем счетчик только если предметов больше одного
+        _itemIcon.enabled = true;
         _itemStack.gameObject.SetActive(count > 1);
 
         IsOccupied = true;
     }
 
+    /// <summary>
+    /// Очищает слот.
+    /// </summary>
     public void ClearSlot()
     {
-        // Проверка от NullReferenceException
         if (_itemIcon == null || _itemStack == null) return;
 
         _itemIcon.sprite = null;
         _itemStack.text = "";
 
         _itemIcon.enabled = false;
-
-        // !!! ИСПРАВЛЕНИЕ: Используем SetActive(false) для TextMeshProUGUI !!!
         _itemStack.gameObject.SetActive(false);
 
+        _itemID = 0; // Сбрасываем ID
+
         IsOccupied = false;
+    }
+
+    /// <summary>
+    /// Обрабатывает клик левой кнопкой мыши по слоту.
+    /// </summary>
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        if (eventData.button != PointerEventData.InputButton.Left) return;
+
+        // Передаем ID предмета посреднику InventoryUI для отображения описания
+        _inventoryUI.ShowItemDescription(_itemID);
     }
 }

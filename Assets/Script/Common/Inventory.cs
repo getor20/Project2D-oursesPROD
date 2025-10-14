@@ -1,32 +1,56 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using System;
-using System.Linq; // Убедитесь, что эта директива есть
+using System.Linq; // Добавляем using System.Linq для GetValueOrDefault, если он не был добавлен
 
 public class Inventory : MonoBehaviour
 {
     // --------------------------------------------------------------------------------
-    // 1. ВЛОЖЕННЫЙ СТАТИЧЕСКИЙ КЛАСС (ЗАМЕНЯЕТ ItemDataProvider.cs)
-    // Этот класс будет доступен статически как Inventory.ItemDataRegistry
+    // 1. ВЛОЖЕННЫЙ СТАТИЧЕСКИЙ КЛАСС (РЕЕСТР ДАННЫХ)
     // --------------------------------------------------------------------------------
     public static class ItemDataRegistry
     {
-        // Словарь для хранения спрайтов, зарегистрированных при поднятии
+        // !!! ИСПРАВЛЕНИЕ 1: Словарь для хранения ВСЕГО блока данных ItemsStatBlock
+        public static Dictionary<int, ItemsStatBlock> RegisteredItems = new Dictionary<int, ItemsStatBlock>();
+
+        // Оставляем словарь для спрайтов (RegisteredIcons) для GetIcon
         public static Dictionary<int, Sprite> RegisteredIcons = new Dictionary<int, Sprite>();
 
-        // Вызывается из экземпляра Inventory при добавлении предмета
-        public static void RegisterItemIcon(int itemID, Sprite itemSprite)
+        /// <summary>
+        /// Регистрирует полный блок данных предмета.
+        /// </summary>
+        public static void RegisterItemData(ItemsStatBlock data)
         {
-            if (itemSprite == null) return;
+            if (data == null || data.ID <= 0) return;
 
-            if (!RegisteredIcons.ContainsKey(itemID))
+            if (!RegisteredItems.ContainsKey(data.ID))
             {
-                RegisteredIcons.Add(itemID, itemSprite);
-                Debug.Log($"Спрайт для предмета ID {itemID} успешно зарегистрирован.");
+                RegisteredItems.Add(data.ID, data);
+                // Регистрируем иконку для GetIcon
+                RegisteredIcons.TryAdd(data.ID, data.Icon);
+                Debug.Log($"Данные для предмета ID {data.ID} успешно зарегистрированы.");
             }
         }
 
-        // Вызывается из InventoryUI для получения спрайта
+        /// <summary>
+        /// !!! ИСПРАВЛЕНИЕ 2: Метод для получения полного блока данных предмета.
+        /// </summary>
+        public static ItemsStatBlock GetItemData(int itemID)
+        {
+            RegisteredItems.TryGetValue(itemID, out ItemsStatBlock data);
+            return data;
+        }
+
+        // Оригинальный метод (используется для обратной совместимости с GetIcon)
+        public static void RegisterItemIcon(int itemID, Sprite itemSprite)
+        {
+            if (itemSprite == null) return;
+            if (!RegisteredIcons.ContainsKey(itemID))
+            {
+                RegisteredIcons.Add(itemID, itemSprite);
+            }
+        }
+
         public static Sprite GetIcon(int itemID)
         {
             RegisteredIcons.TryGetValue(itemID, out Sprite icon);
@@ -42,23 +66,36 @@ public class Inventory : MonoBehaviour
 
     public event Action OnInventoryUpdated;
 
-    public bool CanAddItem(List<ItemsStatBlock> itemsToAdd, int totalSlots, int maxStackSize)
+    private int _maxSlots;
+    private int _maxStack;
+
+    public void SetInventoryLimits(int totalSlots, int maxStackSize)
+    {
+        _maxSlots = totalSlots;
+        _maxStack = maxStackSize;
+    }
+
+
+    public bool CanAddItem(List<ItemsStatBlock> itemsToAdd)
     {
         if (itemsToAdd == null || itemsToAdd.Count == 0) return true;
-        if (totalSlots <= 0) return false;
 
-        // Создаем временную копию текущего инвентаря
-        Dictionary<int, int> simulatedItems = new Dictionary<int, int>(_items);
+        if (_maxSlots <= 0 || _maxStack <= 0)
+        {
+            Debug.LogWarning("Лимиты инвентаря не установлены (InventoryUI.Start не был вызван). Подбор невозможен.");
+            return false;
+        }
 
         // 1. Симулируем добавление предметов
+        Dictionary<int, int> simulatedItems = new Dictionary<int, int>(_items);
+
         foreach (var itemData in itemsToAdd)
         {
             if (itemData == null || itemData.ID <= 0) continue;
             int itemKey = itemData.ID;
 
-            // Увеличиваем количество на 1 (каждый Food на сцене - это 1 экземпляр)
             simulatedItems.TryGetValue(itemKey, out int currentCount);
-            simulatedItems[itemKey] = currentCount + 1;
+            simulatedItems[itemKey] = currentCount + 1; // Увеличение на 1
         }
 
         // 2. Вычисляем общее количество требуемых UI-слотов
@@ -67,14 +104,14 @@ public class Inventory : MonoBehaviour
         {
             int totalCount = itemEntry.Value;
 
-            // Расчет количества стеков (Ceiling division: Mathf.Ceil(totalCount / maxStackSize))
-            // (10 предметов при MaxStack=4: (10 + 4 - 1) / 4 = 13 / 4 = 3 слота)
-            requiredSlots += (totalCount + maxStackSize - 1) / maxStackSize;
+            // Расчет количества стеков (Целочисленное деление с округлением вверх)
+            requiredSlots += (totalCount + _maxStack - 1) / _maxStack;
         }
 
         // 3. Проверяем, не превышает ли требуемое количество доступное
-        return requiredSlots <= totalSlots;
+        return requiredSlots <= _maxSlots;
     }
+
 
     // Метод, который вызывается из LiftingObjects
     public void AddItem(List<ItemsStatBlock> items)
@@ -90,9 +127,8 @@ public class Inventory : MonoBehaviour
 
             int itemKey = itemData.ID;
 
-            // !!! ИСПОЛЬЗОВАНИЕ: Регистрируем спрайт через вложенный класс !!!
-            // Мы предполагаем, что ItemsStatBlock.Icon содержит Sprite.
-            ItemDataRegistry.RegisterItemIcon(itemData.ID, itemData.Icon);
+            // !!! ИСПРАВЛЕНИЕ 3: Регистрируем ПОЛНЫЙ блок данных.
+            ItemDataRegistry.RegisterItemData(itemData);
 
             // 1. Получаем текущее количество.
             _items.TryGetValue(itemKey, out int currentCount);
@@ -117,7 +153,6 @@ public class Inventory : MonoBehaviour
 
     public int GetItemCount(int itemID)
     {
-        // Убедитесь, что у вас есть using System.Linq; для GetValueOrDefault
         return _items.GetValueOrDefault(itemID);
     }
 }

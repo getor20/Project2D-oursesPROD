@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
-    [SerializeField] private float _timerDelay = 0.07f; // Задержка таймера
+    [SerializeField] private float _timerDelay; // Задержка таймера
 
     private Rigidbody2D _rigidbody;
 

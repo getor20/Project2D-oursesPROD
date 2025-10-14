@@ -1,26 +1,29 @@
 ﻿using UnityEngine;
+using System.Linq;
 
 public class InventoryUI : MonoBehaviour
 {
     [SerializeField] private Inventory _inventory;
     [SerializeField] private Transform _slotParent;
 
+    [Tooltip("Максимальное количество предметов в одном UI-стеке.")]
     [field: SerializeField] public int MaxStack { get; private set; }
+
+    // Ссылка на компонент Description (целевой объект для отображения информации)
+    [SerializeField] private Description _description;
 
     private InventorySlot[] _slots;
 
-    // Новое свойство для получения общего количества доступных UI слотов
     public int TotalSlotsCount => _slots != null ? _slots.Length : 0;
 
 
     private void Awake()
     {
-        // Получаем все компоненты InventorySlot, прикрепленные к дочерним объектам _slotParent
         _slots = _slotParent.GetComponentsInChildren<InventorySlot>();
 
         if (_slots.Length == 0)
         {
-            Debug.LogError("Не найден ни один компонент InventorySlot. Убедитесь, что слоты правильно настроены.", this);
+            Debug.LogError("Не найден ни один компонент InventorySlot.");
         }
     }
 
@@ -28,98 +31,102 @@ public class InventoryUI : MonoBehaviour
     {
         if (_inventory == null)
         {
-            Debug.LogError("Ошибка: Ссылка на Inventory не установлена в UIController. Перетащите компонент Inventory в Инспекторе.", this);
+            Debug.LogError("Ошибка: Ссылка на Inventory не установлена в InventoryUI.");
             return;
         }
 
-        // Подписываемся на событие обновления инвентаря
+        // Передаем лимиты UI в компонент Inventory
+        _inventory.SetInventoryLimits(TotalSlotsCount, MaxStack);
+
         _inventory.OnInventoryUpdated += RefreshDisplay;
 
-        // Первое отображение при старте
-        RefreshDisplay();
+        // Скрываем описание при старте
+        //HideDescription();
     }
 
+    // --------------------------------------------------------------------------------
+    // МЕТОДЫ УПРАВЛЕНИЯ ОПИСАНИЕМ (ПОСРЕДНИК)
+    // --------------------------------------------------------------------------------
+
     /// <summary>
-    /// Полностью очищает все UI-слоты, делая их пустыми.
+    /// Вызывается InventorySlot. Получает данные и отображает описание.
     /// </summary>
+    public void ShowItemDescription(int itemID)
+    {
+        // ПРОВЕРКА 1: Проверка ссылки на Description
+        if (_description == null)
+        {
+            Debug.LogError("КРИТИЧЕСКАЯ ОШИБКА: Компонент Description не привязан к InventoryUI. Проверьте Inspector.");
+            return;
+        }
+
+        Debug.Log($"[UI Diagnostic] Клик по слоту! Запрошен ID: {itemID}"); // <-- ЛОГ 1
+
+        // 1. Получаем полные данные из реестра Inventory
+        ItemsStatBlock data = Inventory.ItemDataRegistry.GetItemData(itemID);
+
+        if (data != null)
+        {
+            Debug.Log($"[UI Diagnostic] Данные получены. Имя предмета: {data.Name}"); // <-- ЛОГ 2
+
+            // 2. Вызываем метод Show в Description (Description выполняет отображение)
+            _description.Show(data.Icon, data.Name, data.Description);
+        }
+    }
+
+    // --------------------------------------------------------------------------------
+    // МЕТОДЫ ОБНОВЛЕНИЯ ОТОБРАЖЕНИЯ
+    // --------------------------------------------------------------------------------
+
     private void ClearAllSlots()
     {
+        // Вызываем ClearSlot на всех слотах, что также скроет описание, если оно было активно
         foreach (var slot in _slots)
         {
-            // Использует метод ClearSlot из InventorySlot
             slot.ClearSlot();
         }
     }
 
-    /// <summary>
-    /// Получает спрайт предмета, обращаясь к статическому реестру, 
-    /// который был заполнен классом Inventory при подборе предмета.
-    /// </summary>
     private Sprite GetItemIcon(int itemID)
     {
-        // Используем статический вложенный класс Inventory.ItemDataRegistry
-        Sprite icon = Inventory.ItemDataRegistry.GetIcon(itemID);
-
-        if (icon == null)
-        {
-            Debug.LogWarning($"Иконка для ID {itemID} не найдена. Проверьте, что предмет имеет спрайт и был зарегистрирован.");
-        }
-
-        return icon;
+        // Получаем иконку из реестра Inventory
+        return Inventory.ItemDataRegistry.GetIcon(itemID);
     }
 
     /// <summary>
-    /// Основной метод: обновляет отображение инвентаря на основе данных из Inventory.
-    /// Реализует логику разделения стеков по MAX_UI_STACK_SIZE.
+    /// Обновляет отображение инвентаря на основе данных из Inventory.
     /// </summary>
     private void RefreshDisplay()
     {
-        //Debug.Log("[InventoryUI] Обновление отображения.");
-
-        // 1. Очищаем все слоты перед обновлением
         ClearAllSlots();
 
-        // Получаем текущие данные инвентаря [ID -> TotalCount]
         var currentItems = _inventory.Items;
-        int slotIndex = 0; // Индекс для перебора UI-слотов
+        int slotIndex = 0;
 
-        // 2. Проходим по всем уникальным типам предметов в инвентаре
         foreach (var itemEntry in currentItems)
         {
             int itemID = itemEntry.Key;
             int totalCount = itemEntry.Value;
             int remainingCount = totalCount;
 
-            // 3. Логика разделения стека (Stack Splitting)
-            // Продолжаем, пока не отобразим все количество предмета
             while (remainingCount > 0)
             {
-                // Проверка на заполненность UI (если UI слотов меньше, чем нужно)
                 if (slotIndex >= _slots.Length)
                 {
-                    Debug.LogWarning($"Все UI-слоты ({_slots.Length}) заполнены. Не могу отобразить оставшиеся предметы.");
+                    Debug.LogWarning($"Все UI-слоты ({_slots.Length}) заполнены.");
                     return;
                 }
 
                 InventorySlot currentSlot = _slots[slotIndex];
 
-                // Определяем, сколько поместится в текущий слот
                 int countForThisSlot = Mathf.Min(remainingCount, MaxStack);
                 remainingCount -= countForThisSlot;
 
-                // Получаем иконку предмета
                 Sprite itemIcon = GetItemIcon(itemID);
 
-                if (itemIcon == null)
-                {
-                    // Если иконка не найдена, пропускаем этот предмет и переходим к следующему типу
-                    break;
-                }
+                // Передаем ID предмета в SetItem
+                currentSlot.SetItem(itemIcon, countForThisSlot, itemID);
 
-                // Устанавливаем иконку и количество в слот
-                currentSlot.SetItem(itemIcon, countForThisSlot);
-
-                // Переходим к следующему UI-слоту
                 slotIndex++;
             }
         }
@@ -127,7 +134,6 @@ public class InventoryUI : MonoBehaviour
 
     private void OnDestroy()
     {
-        // Отписываемся от события, чтобы избежать утечек памяти или ошибок
         if (_inventory != null)
         {
             _inventory.OnInventoryUpdated -= RefreshDisplay;
