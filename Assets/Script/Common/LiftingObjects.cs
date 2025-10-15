@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class LiftingObjects : MonoBehaviour
 {
-    private List<Food> _items = new List<Food>();        // Список всех объектов Food в мире (которые могут быть подняты)
-    private Inventory _inventory;                       // Ссылка на компонент инвентаря
+    [field: SerializeField] private List<Food> _items = new List<Food>();
+    private Inventory _inventory;
 
-    public bool IsTrigger { get; private set; }         // Флаг: True, если хотя бы один предмет находится в зоне подбора
+    // Ссылка на InventoryUI удалена, зависимость только от Inventory
+    public bool IsTrigger { get; private set; }
 
     private void Awake()
     {
@@ -19,12 +20,12 @@ public class LiftingObjects : MonoBehaviour
         }
 
         // Находим все объекты типа Food в сцене при старте
-        // FindObjectsByType - более современный аналог FindObjectsOfType
-        _items = FindObjectsByType<Food>(FindObjectsSortMode.None).ToList();
+        
     }
 
     private void Update()
     {
+        _items = FindObjectsByType<Food>(FindObjectsSortMode.None).ToList();
         // Проверяем с помощью LINQ Any(), активен ли IsTrigger хотя бы у одного предмета в списке
         IsTrigger = _items.Any(food => food != null && food.IsTrigger);
     }
@@ -35,29 +36,32 @@ public class LiftingObjects : MonoBehaviour
         // Выходим, если взаимодействие неактивно или инвентарь не найден
         if (!isInteraction || _inventory == null) return;
 
-        // Определяем критерий (условие) для подбора:
-        // Объект существует, его триггер активен, и к нему прикреплены данные (ItemsStatBlock)
-        System.Predicate<Food> canBePickedUp = food =>
-            food != null && food.IsTrigger && food.Data != null;
+        // Определяем критерий (условие) для подбора
+        System.Predicate<Food> canBePickedUp = food => food != null && food.IsTrigger && food.Data != null;
 
-        // ШАГ 1: Сбор данных для инвентаря (используем LINQ)
+        // ШАГ 1: Сбор данных для инвентаря
         List<ItemsStatBlock> itemsDataToAdd = _items
-            .Where(canBePickedUp.Invoke) // 1. Фильтруем список, оставляя только те, что можно поднять
-            .Select(food => food.Data)   // 2. Извлекаем (проецируем) только объект данных (ItemsStatBlock)
-            .ToList();                   // 3. Преобразуем результат в List
+            .Where(canBePickedUp.Invoke) // 1. Фильтруем список
+            .Select(food => food.Data)  // 2. Извлекаем объект данных
+            .ToList();
 
-        // ШАГ 2: Добавление в инвентарь и очистка мира
         if (itemsDataToAdd.Count > 0)
         {
-            // Передаем собранные данные в инвентарь для стекирования
+            // ШАГ 1.5: ПРОВЕРКА ВМЕСТИМОСТИ ИНВЕНТАРЯ
+            // Inventory сам знает свои лимиты
+            if (!_inventory.CanAddItem(itemsDataToAdd))
+            {
+                Debug.LogWarning($"Инвентарь полон. Невозможно подобрать {itemsDataToAdd.Count} предметов.");
+                return; // Прекращаем подбор
+            }
+
+            // ШАГ 2: Добавление в инвентарь и очистка мира
+
             _inventory.AddItem(itemsDataToAdd);
 
             Debug.Log($"Собрано {itemsDataToAdd.Count} предметов для добавления.");
 
             // Очистка сцены:
-
-            // 3a. Уничтожаем GameObject'ы в мире
-            // Получаем список ссылок на объекты, которые нужно уничтожить
             List<Food> itemsToDestroy = _items.Where(canBePickedUp.Invoke).ToList();
 
             foreach (var foodItem in itemsToDestroy)
@@ -65,8 +69,7 @@ public class LiftingObjects : MonoBehaviour
                 Destroy(foodItem.gameObject); // Уничтожаем визуальный объект
             }
 
-            // 3b. Очистка внутреннего списка _items
-            // Удаляем все подбираемые элементы из списка отслеживания с помощью RemoveAll
+            // Очистка внутреннего списка _items
             _items.RemoveAll(canBePickedUp.Invoke);
         }
         else
