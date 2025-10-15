@@ -20,11 +20,12 @@ public class LiftingObjects : MonoBehaviour
         }
 
         // Находим все объекты типа Food в сцене при старте
-        _items = FindObjectsByType<Food>(FindObjectsSortMode.None).ToList();
+        
     }
 
     private void Update()
     {
+        _items = FindObjectsByType<Food>(FindObjectsSortMode.None).ToList();
         // Проверяем с помощью LINQ Any(), активен ли IsTrigger хотя бы у одного предмета в списке
         IsTrigger = _items.Any(food => food != null && food.IsTrigger);
     }

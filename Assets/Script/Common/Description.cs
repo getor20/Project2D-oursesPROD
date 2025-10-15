@@ -8,12 +8,9 @@ public class Description : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _itemName;
     [SerializeField] private TextMeshProUGUI _itemDescription;
 
-    [Tooltip("Объект, который нужно активировать/деактивировать (обычно это родительская панель)")]
-    [SerializeField] private GameObject _panel;
-
     private void Awake()
     {
-        if (_itemIcon == null || _itemName == null || _itemDescription == null || _panel == null)
+        if (_itemIcon == null || _itemName == null || _itemDescription == null)
         {
             Debug.LogError("Ошибка: Не все ссылки на UI-компоненты или панель установлены в Description.", this);
         }
@@ -33,7 +30,6 @@ public class Description : MonoBehaviour
     public void Show(Sprite icon, string name, string desc)
     {
         if (_itemIcon == null || _itemName == null || _itemDescription == null) return;
-        _panel.SetActive(true);
 
         _itemIcon.sprite = icon;
         _itemIcon.enabled = (icon != null); 

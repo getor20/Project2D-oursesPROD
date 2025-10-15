@@ -155,4 +155,41 @@ public class Inventory : MonoBehaviour
     {
         return _items.GetValueOrDefault(itemID);
     }
+
+    /// <summary>
+    /// Удаляет указанное количество предметов из инвентаря.
+    /// </summary>
+    /// <param name="itemID">ID предмета для удаления.</param>
+    /// <param name="countToRemove">Количество для удаления (обычно 1 или MaxStack).</param>
+    /// <returns>Фактическое количество удаленных предметов.</returns>
+   
+
+    public int RemoveItem(int itemID, int countToRemove)
+    {
+        if (!_items.TryGetValue(itemID, out int currentCount))
+        {
+            return 0; // Предмет не найден
+        }
+
+        // Определяем фактическое количество, которое можно удалить (не больше, чем есть)
+        int actualRemoved = Mathf.Min(currentCount, countToRemove);
+
+        if (currentCount - actualRemoved <= 0)
+        {
+            _items.Remove(itemID); // Удаляем запись, если предметов больше не осталось
+        }
+        else
+        {
+            _items[itemID] = currentCount - actualRemoved; // Уменьшаем счетчик
+        }
+
+        if (actualRemoved > 0)
+        {
+            // Оповещаем UI об изменении
+            OnInventoryUpdated?.Invoke();
+            Debug.Log($"Удалено {actualRemoved} предметов ID {itemID}. Остаток: {GetItemCount(itemID)}.");
+        }
+
+        return actualRemoved;
+    }
 }

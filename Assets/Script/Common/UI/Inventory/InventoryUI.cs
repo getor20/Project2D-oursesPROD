@@ -5,6 +5,7 @@ public class InventoryUI : MonoBehaviour
 {
     [SerializeField] private Inventory _inventory;
     [SerializeField] private Transform _slotParent;
+    [SerializeField] private ItemDropper _itemDropper;
 
     [Tooltip("Максимальное количество предметов в одном UI-стеке.")]
     [field: SerializeField] public int MaxStack { get; private set; }
@@ -14,6 +15,7 @@ public class InventoryUI : MonoBehaviour
 
     private InventorySlot[] _slots;
 
+    private int _activeItemID;
     public int TotalSlotsCount => _slots != null ? _slots.Length : 0;
 
 
@@ -44,6 +46,16 @@ public class InventoryUI : MonoBehaviour
         //HideDescription();
     }
 
+    public void HideDescription()
+    {
+        if (_description != null)
+        {
+            // _description.Hide(); // Предполагаем, что этот метод существует
+        }
+        // --- СБРОС ID АКТИВНОГО ПРЕДМЕТА ---
+        _activeItemID = 0;
+    }
+
     // --------------------------------------------------------------------------------
     // МЕТОДЫ УПРАВЛЕНИЯ ОПИСАНИЕМ (ПОСРЕДНИК)
     // --------------------------------------------------------------------------------
@@ -59,6 +71,8 @@ public class InventoryUI : MonoBehaviour
             Debug.LogError("КРИТИЧЕСКАЯ ОШИБКА: Компонент Description не привязан к InventoryUI. Проверьте Inspector.");
             return;
         }
+
+        _activeItemID = itemID;
 
         Debug.Log($"[UI Diagnostic] Клик по слоту! Запрошен ID: {itemID}"); // <-- ЛОГ 1
 
@@ -138,5 +152,42 @@ public class InventoryUI : MonoBehaviour
         {
             _inventory.OnInventoryUpdated -= RefreshDisplay;
         }
+    }
+
+    // Фрагмент кода для InventoryUI.OnDrop()
+    public void OnDrop()
+    {
+        if (_activeItemID <= 0)
+        {
+            Debug.Log("Нет активного предмета для сброса.");
+            return;
+        }
+
+        const int countToDrop = 1; // Удаляем один предмет
+
+        // 1. Удаляем предмет из модели Inventory
+        int itemsRemoved = _inventory.RemoveItem(_activeItemID, countToDrop);
+
+        if (itemsRemoved > 0)
+        {
+            // 2. Вызываем ItemDropper для спавна
+            if (_itemDropper != null)
+            {
+                // ItemDropper сам получит PrefabObject через ItemDataRegistry
+                _itemDropper.Drop(_activeItemID, itemsRemoved);
+            }
+            else
+            {
+                Debug.LogError("ItemDropper не привязан к InventoryUI!");
+            }
+
+            // 3. Скрываем описание и сбрасываем _activeItemID
+            HideDescription();
+        }
+    }
+
+    public void OnUse()
+    {
+        Debug.Log("OnUse");
     }
 }

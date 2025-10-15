@@ -16,3 +16,4 @@ MonoBehaviour:
   Name: Apple
   Icon: {fileID: 511797473, guid: 1ee1b3ab7fd93aa4a9bb81f4d644f354, type: 3}
   Description: Good Apple
+  PrefabObject: {fileID: 3290738908658133573, guid: 527c2de7e53f89148bf5748e75191b00, type: 3}

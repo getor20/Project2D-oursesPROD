@@ -8,9 +8,6 @@ public class InventorySlot : MonoBehaviour, IPointerClickHandler
     [SerializeField] private Image _itemIcon;
     [SerializeField] private TextMeshProUGUI _itemStack;
 
-    [Tooltip("Сохранять ли пропорции спрайта при отображении.")]
-    [SerializeField] private bool _preserveAspectRatio = true;
-
     // Ссылка на InventoryUI — посредника
     [SerializeField] private InventoryUI _inventoryUI;
 
@@ -24,14 +21,8 @@ public class InventorySlot : MonoBehaviour, IPointerClickHandler
         {
             Debug.LogError($"Ошибка: Ссылки на UI-компоненты не установлены в InventorySlot на объекте {gameObject.name}. ПРОВЕРЬТЕ INSPECTOR!");
         }
-
-        // Поиск InventoryUI, если не назначен в Инспекторе
-        if (_inventoryUI == null)
-        {
             // Предполагаем, что InventoryUI находится где-то выше в иерархии
-            _inventoryUI = GetComponentInParent<InventoryUI>();
-        }
-
+        _inventoryUI = GetComponentInParent<InventoryUI>();
         _itemIcon.preserveAspect = true;
         
     }
