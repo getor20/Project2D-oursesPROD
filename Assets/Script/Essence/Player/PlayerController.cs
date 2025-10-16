@@ -5,6 +5,7 @@ namespace Assets.Script.Player
     public class PlayerController : MonoBehaviour
     {
         [SerializeField] private Transform _hitboxTransform;
+        [SerializeField] private InventoryUI _inventoryUI;
 
         private PlayerInputData _inputData;
 
@@ -12,7 +13,7 @@ namespace Assets.Script.Player
         private StatPlayer _stats;
         private MeleeAttacker _meleeAttacker;
         private LiftingObjects _liftingObjects;
-
+        private ItemDropper _itemDropper;
 
         public bool IsInteraction { get; private set; }
         public bool DisplayInventory { get; private set; }
@@ -25,6 +26,7 @@ namespace Assets.Script.Player
             _stats = GetComponent<StatPlayer>();
             _meleeAttacker = GetComponent<MeleeAttacker>();
             _liftingObjects = GetComponent<LiftingObjects>();
+            _itemDropper = GetComponent<ItemDropper>();
         }
 
         private void Update()
@@ -91,6 +93,13 @@ namespace Assets.Script.Player
             IsInteraction = isInteracting;
             _liftingObjects.Interaction(IsInteraction);
             //Debug.Log($"Interaction state: {IsInteraction}");
+        }
+
+        public void SetDropItem()
+        {
+            Debug.Log($"Drop item");
+            _inventoryUI.OnDrop();
+            //_itemDropper.DropItem();
         }
 
         internal void SetInput(PlayerInputData inputData)

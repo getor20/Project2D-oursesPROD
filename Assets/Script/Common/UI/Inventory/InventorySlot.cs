@@ -3,13 +3,12 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems; // Для обработки клика
 
-public class InventorySlot : MonoBehaviour, IPointerClickHandler
+public class InventorySlot : MonoBehaviour/*, IPointerClickHandler*/
 {
     [SerializeField] private Image _itemIcon;
     [SerializeField] private TextMeshProUGUI _itemStack;
-
-    // Ссылка на InventoryUI — посредника
     [SerializeField] private InventoryUI _inventoryUI;
+    [SerializeField] private GameObject _interaction;
 
     private int _itemID = 0; // ID предмета, хранящегося в слоте
 
@@ -24,7 +23,9 @@ public class InventorySlot : MonoBehaviour, IPointerClickHandler
             // Предполагаем, что InventoryUI находится где-то выше в иерархии
         _inventoryUI = GetComponentInParent<InventoryUI>();
         _itemIcon.preserveAspect = true;
-        
+        _interaction.SetActive(false);
+
+
     }
 
     private void Start()
@@ -71,11 +72,11 @@ public class InventorySlot : MonoBehaviour, IPointerClickHandler
     /// <summary>
     /// Обрабатывает клик левой кнопкой мыши по слоту.
     /// </summary>
-    public void OnPointerClick(PointerEventData eventData)
-    {
-        if (eventData.button != PointerEventData.InputButton.Left) return;
+    /// 
+    private bool _isDescriptionActive = false;
 
-        // Передаем ID предмета посреднику InventoryUI для отображения описания
+    public void OnPointerClick()
+    {
         _inventoryUI.ShowItemDescription(_itemID);
     }
 }

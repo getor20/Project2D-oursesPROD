@@ -15,6 +15,8 @@ public class InventoryUI : MonoBehaviour
 
     private InventorySlot[] _slots;
 
+    private bool _isDrop;
+
     private int _activeItemID;
     public int TotalSlotsCount => _slots != null ? _slots.Length : 0;
 
@@ -53,7 +55,6 @@ public class InventoryUI : MonoBehaviour
             // _description.Hide(); // Предполагаем, что этот метод существует
         }
         // --- СБРОС ID АКТИВНОГО ПРЕДМЕТА ---
-        _activeItemID = 0;
     }
 
     // --------------------------------------------------------------------------------
