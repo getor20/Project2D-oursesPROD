@@ -1,24 +1,17 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using System;
-using System.Linq; // Добавляем using System.Linq для GetValueOrDefault, если он не был добавлен
+using System.Linq; // Добавляем using System.Linq для GetValueOrDefault
 
 public class Inventory : MonoBehaviour
 {
-    // --------------------------------------------------------------------------------
-    // 1. ВЛОЖЕННЫЙ СТАТИЧЕСКИЙ КЛАСС (РЕЕСТР ДАННЫХ)
-    // --------------------------------------------------------------------------------
+    // ... (Остальная часть класса ItemDataRegistry остается без изменений) ...
     public static class ItemDataRegistry
     {
-        // !!! ИСПРАВЛЕНИЕ 1: Словарь для хранения ВСЕГО блока данных ItemsStatBlock
+        // ... (Код ItemDataRegistry) ...
         public static Dictionary<int, ItemsStatBlock> RegisteredItems = new Dictionary<int, ItemsStatBlock>();
-
-        // Оставляем словарь для спрайтов (RegisteredIcons) для GetIcon
         public static Dictionary<int, Sprite> RegisteredIcons = new Dictionary<int, Sprite>();
 
-        /// <summary>
-        /// Регистрирует полный блок данных предмета.
-        /// </summary>
         public static void RegisterItemData(ItemsStatBlock data)
         {
             if (data == null || data.ID <= 0) return;
@@ -26,22 +19,17 @@ public class Inventory : MonoBehaviour
             if (!RegisteredItems.ContainsKey(data.ID))
             {
                 RegisteredItems.Add(data.ID, data);
-                // Регистрируем иконку для GetIcon
                 RegisteredIcons.TryAdd(data.ID, data.Icon);
                 Debug.Log($"Данные для предмета ID {data.ID} успешно зарегистрированы.");
             }
         }
 
-        /// <summary>
-        /// !!! ИСПРАВЛЕНИЕ 2: Метод для получения полного блока данных предмета.
-        /// </summary>
         public static ItemsStatBlock GetItemData(int itemID)
         {
             RegisteredItems.TryGetValue(itemID, out ItemsStatBlock data);
             return data;
         }
 
-        // Оригинальный метод (используется для обратной совместимости с GetIcon)
         public static void RegisterItemIcon(int itemID, Sprite itemSprite)
         {
             if (itemSprite == null) return;
@@ -127,13 +115,9 @@ public class Inventory : MonoBehaviour
 
             int itemKey = itemData.ID;
 
-            // !!! ИСПРАВЛЕНИЕ 3: Регистрируем ПОЛНЫЙ блок данных.
             ItemDataRegistry.RegisterItemData(itemData);
 
-            // 1. Получаем текущее количество.
             _items.TryGetValue(itemKey, out int currentCount);
-
-            // 2. Устанавливаем новое значение: старое количество + 1.
             _items[itemKey] = currentCount + 1;
 
             if (itemsAdded == 0)
@@ -156,14 +140,26 @@ public class Inventory : MonoBehaviour
         return _items.GetValueOrDefault(itemID);
     }
 
+    // ====================================================================
+    /// <summary>
+    /// Проверяет, есть ли предмет с указанным ID в инвентаре (количество > 0).
+    /// </summary>
+    /// <param name="itemID">ID предмета.</param>
+    /// <returns>True, если предмет есть в инвентаре; иначе False.</returns>
+    public bool ContainsItem(int itemID)
+    {
+        // Проверяем, существует ли ключ И его значение больше 0.
+        // GetValueOrDefault(itemID) вернет 0, если ключа нет.
+        return _items.GetValueOrDefault(itemID) > 0;
+    }
+    // ====================================================================
+
     /// <summary>
     /// Удаляет указанное количество предметов из инвентаря.
     /// </summary>
     /// <param name="itemID">ID предмета для удаления.</param>
     /// <param name="countToRemove">Количество для удаления (обычно 1 или MaxStack).</param>
     /// <returns>Фактическое количество удаленных предметов.</returns>
-   
-
     public int RemoveItem(int itemID, int countToRemove)
     {
         if (!_items.TryGetValue(itemID, out int currentCount))

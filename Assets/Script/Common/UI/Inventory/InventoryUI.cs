@@ -15,8 +15,6 @@ public class InventoryUI : MonoBehaviour
 
     private InventorySlot[] _slots;
 
-    private bool _isDrop;
-
     private int _activeItemID;
     public int TotalSlotsCount => _slots != null ? _slots.Length : 0;
 
@@ -43,17 +41,11 @@ public class InventoryUI : MonoBehaviour
         _inventory.SetInventoryLimits(TotalSlotsCount, MaxStack);
 
         _inventory.OnInventoryUpdated += RefreshDisplay;
-
-        // Скрываем описание при старте
-        //HideDescription();
     }
 
     public void HideDescription()
     {
-        if (_description != null)
-        {
-            // _description.Hide(); // Предполагаем, что этот метод существует
-        }
+        _description.Hide();
         // --- СБРОС ID АКТИВНОГО ПРЕДМЕТА ---
     }
 
@@ -164,31 +156,51 @@ public class InventoryUI : MonoBehaviour
             return;
         }
 
-        const int countToDrop = 1; // Удаляем один предмет
+        int countToDrop = 1;
+        int itemIDToDrop = _activeItemID;
 
         // 1. Удаляем предмет из модели Inventory
-        int itemsRemoved = _inventory.RemoveItem(_activeItemID, countToDrop);
+        int itemsRemoved = _inventory.RemoveItem(itemIDToDrop, countToDrop);
 
         if (itemsRemoved > 0)
         {
-            // 2. Вызываем ItemDropper для спавна
-            if (_itemDropper != null)
-            {
-                // ItemDropper сам получит PrefabObject через ItemDataRegistry
-                _itemDropper.Drop(_activeItemID, itemsRemoved);
-            }
-            else
-            {
-                Debug.LogError("ItemDropper не привязан к InventoryUI!");
-            }
+            _itemDropper.Drop(itemIDToDrop, itemsRemoved);
 
-            // 3. Скрываем описание и сбрасываем _activeItemID
-            HideDescription();
+            // 2. Проверяем, остался ли предмет в инвентаре
+            if (!_inventory.ContainsItem(itemIDToDrop))
+            {
+                // Скрываем описание, только если предмет полностью закончился
+                HideDescription();
+                // Сбрасываем _activeItemID
+                _activeItemID = 0;
+            }
         }
     }
 
     public void OnUse()
     {
-        Debug.Log("OnUse");
+        if (_activeItemID <= 0)
+        {
+            Debug.Log("Нет активного предмета для сброса.");
+            return;
+        }
+
+        int countToDrop = 1;
+        int itemIDToDrop = _activeItemID;
+
+        // 1. Удаляем предмет из модели Inventory
+        int itemsRemoved = _inventory.RemoveItem(itemIDToDrop, countToDrop);
+
+        if (itemsRemoved > 0)
+        {
+            // 2. Проверяем, остался ли предмет в инвентаре
+            if (!_inventory.ContainsItem(itemIDToDrop))
+            {
+                // Скрываем описание, только если предмет полностью закончился
+                HideDescription();
+                // Сбрасываем _activeItemID
+                _activeItemID = 0;
+            }
+        }
     }
 }

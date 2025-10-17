@@ -60,6 +60,11 @@ namespace Assets.Script.Player
             HandleCombat();
         }
 
+        internal void SetInput(PlayerInputData inputData)
+        {
+            _inputData = inputData;
+        }
+
         private void HandleMovement()
         {
             if (_inputData.MoveDirection != Vector2.zero)
@@ -102,9 +107,10 @@ namespace Assets.Script.Player
             //_itemDropper.DropItem();
         }
 
-        internal void SetInput(PlayerInputData inputData)
+        public void SetUseItem()
         {
-            _inputData = inputData;
-        }
+            Debug.Log("Use item");
+            _inventoryUI.OnUse();
+        }    
     }
 }
