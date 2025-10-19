@@ -10,6 +10,7 @@ public class StatPlayer : MonoBehaviour
     public float WalkingSpeed { get; private set; }
     public float RunSpeed { get; private set; }
     public float CurrentHealth { get; private set; }
+    public float Stamina { get; private set; }
     public int MaxHealth { get; private set; }
     public int Armor { get; private set; }
     public int Damage { get; private set; }
@@ -29,6 +30,12 @@ public class StatPlayer : MonoBehaviour
         MaxHealth = _stats.MaxHealth;
         CurrentHealth = _stats.CurrentHealth;
         Damage = _stats.Damage;
+        Stamina = _stats.Stamina;
+    }
+
+    public void TakeStamina(float stamina)
+    {
+        Stamina = Mathf.Clamp(Stamina - stamina, 0, _stats.Stamina);
     }
 
     public void TakeDamage(int damage)

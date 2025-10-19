@@ -1,18 +1,23 @@
 ﻿using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.EventSystems; // Для обработки клика
+using System; // Для Action
+// IPointerClickHandler удален
 
-public class InventorySlot : MonoBehaviour/*, IPointerClickHandler*/
+public class InventorySlot : MonoBehaviour
 {
     [SerializeField] private Image _itemIcon;
     [SerializeField] private TextMeshProUGUI _itemStack;
-    [SerializeField] private InventoryUI _inventoryUI;
-    [SerializeField] private GameObject _interaction;
 
-    private int _itemID = 0; // ID предмета, хранящегося в слоте
+    // ВНИМАНИЕ: Если используете компонент Button, убедитесь, что он привязан
+    // [SerializeField] private Button _slotButton; // Можно добавить для явной ссылки
+
+    public int _itemID { get; private set; } = 0;
 
     public bool IsOccupied { get; private set; } = false;
+
+    // СОБЫТИЕ: InventoryUI будет подписываться на него.
+    public event Action<int> OnSlotClicked;
 
     private void Awake()
     {
@@ -20,12 +25,7 @@ public class InventorySlot : MonoBehaviour/*, IPointerClickHandler*/
         {
             Debug.LogError($"Ошибка: Ссылки на UI-компоненты не установлены в InventorySlot на объекте {gameObject.name}. ПРОВЕРЬТЕ INSPECTOR!");
         }
-            // Предполагаем, что InventoryUI находится где-то выше в иерархии
-        _inventoryUI = GetComponentInParent<InventoryUI>();
         _itemIcon.preserveAspect = true;
-        _interaction.SetActive(false);
-
-
     }
 
     private void Start()
@@ -62,7 +62,7 @@ public class InventorySlot : MonoBehaviour/*, IPointerClickHandler*/
         _itemStack.text = "";
 
         _itemIcon.enabled = false;
-        _itemStack.gameObject.SetActive(false);
+        //_itemStack.gameObject.SetActive(false);
 
         _itemID = 0; // Сбрасываем ID
 
@@ -70,13 +70,12 @@ public class InventorySlot : MonoBehaviour/*, IPointerClickHandler*/
     }
 
     /// <summary>
-    /// Обрабатывает клик левой кнопкой мыши по слоту.
+    /// Этот метод должен быть привязан к событию OnClick компонента Unity Button
     /// </summary>
-    /// 
-    private bool _isDescriptionActive = false;
-
     public void OnPointerClick()
     {
-        _inventoryUI.ShowItemDescription(_itemID);
+        // Вызываем событие, передавая свой _itemID.
+        OnSlotClicked?.Invoke(_itemID);
+        // Debug.Log($"Slot clicked. ItemID: {_itemID}");
     }
 }

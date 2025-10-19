@@ -4,8 +4,7 @@ using System;
 using System.Linq; // Добавляем using System.Linq для GetValueOrDefault
 
 public class Inventory : MonoBehaviour
-{
-    // ... (Остальная часть класса ItemDataRegistry остается без изменений) ...
+{   
     public static class ItemDataRegistry
     {
         // ... (Код ItemDataRegistry) ...

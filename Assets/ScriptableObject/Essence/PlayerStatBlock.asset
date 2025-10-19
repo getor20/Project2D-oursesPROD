@@ -18,3 +18,4 @@ MonoBehaviour:
   Armor: 0
   WalkingSpeed: 4
   RunSpeed: 6
+  Stamina: 100

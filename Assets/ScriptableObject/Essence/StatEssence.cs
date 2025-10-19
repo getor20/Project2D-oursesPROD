@@ -9,6 +9,7 @@ public class PlayerStatBlock : ScriptableObject
     public int Armor;
     public float WalkingSpeed;
     public float RunSpeed;
+    public float Stamina;
 }
 
 [CreateAssetMenu(fileName = nameof(EnemyStatBlock), menuName = "Stat/Enemies")]
