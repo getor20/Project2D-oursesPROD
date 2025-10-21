@@ -7,5 +7,6 @@ public class ItemsStatBlock : ScriptableObject
     public string Name;
     public Sprite Icon;
     public string Description;
+    public float Edibility;
     public GameObject PrefabObject; // Префаб для отображения в мире
 }   

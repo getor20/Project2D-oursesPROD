@@ -199,7 +199,7 @@ public class InventoryUI : MonoBehaviour
             }
         }
     }
-
+    public float OnUses { get; private set; }
     public void OnUse()
     {
         if (_activeItemID <= 0)
@@ -210,11 +210,27 @@ public class InventoryUI : MonoBehaviour
 
         int countToUse = 1;
         int itemIDToUse = _activeItemID;
+        float edibilityValue = 0f; // Инициализация
+
+        // 1. Получаем данные о предмете
+        ItemsStatBlock itemData = Inventory.ItemDataRegistry.GetItemData(itemIDToUse);
+        if (itemData == null)
+        {
+            Debug.LogError($"Невозможно использовать предмет ID {itemIDToUse}: данные не найдены.");
+            return;
+        }
+
+        // 2. Получаем значение Edibility
+        // Предполагается, что в ItemsStatBlock есть поле public float Edibility
+        edibilityValue = itemData.Edibility; // <-- ПОЛУЧЕНИЕ ЗНАЧЕНИЯ
 
         int itemsRemoved = _inventory.RemoveItem(itemIDToUse, countToUse);
 
         if (itemsRemoved > 0)
         {
+            // 3. Передаем значение в метод OnUse() класса Inventory
+            OnUses = edibilityValue; // <-- ИЗМЕНЕНИЕ: передача значения
+
             if (!_inventory.ContainsItem(itemIDToUse))
             {
                 HideDescription();

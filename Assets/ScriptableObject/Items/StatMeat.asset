@@ -16,4 +16,5 @@ MonoBehaviour:
   Name: Meat
   Icon: {fileID: -84782468, guid: 1ee1b3ab7fd93aa4a9bb81f4d644f354, type: 3}
   Description: Good Meat
+  Edibility: 10
   PrefabObject: {fileID: 2831935881834325843, guid: 079939241c2e6a34a84470a15498d624, type: 3}

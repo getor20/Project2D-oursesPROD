@@ -53,6 +53,8 @@ public class Inventory : MonoBehaviour
 
     public event Action OnInventoryUpdated;
 
+    public float OnUses { get; private set; }
+
     private int _maxSlots;
     private int _maxStack;
 
@@ -187,4 +189,5 @@ public class Inventory : MonoBehaviour
 
         return actualRemoved;
     }
+    
 }

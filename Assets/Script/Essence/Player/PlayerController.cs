@@ -6,6 +6,9 @@ namespace Assets.Script.Player
     {
         [SerializeField] private Transform _hitboxTransform;
         [SerializeField] private InventoryUI _inventoryUI;
+        [SerializeField] private ControllerStatBar _controllerStatBar;
+
+        [SerializeField] private float _timer;
 
         private PlayerInputData _inputData;
 
@@ -13,6 +16,7 @@ namespace Assets.Script.Player
         private StatPlayer _stats;
         private MeleeAttacker _meleeAttacker;
         private LiftingObjects _liftingObjects;
+        private Inventory _inventory;
         private ItemDropper _itemDropper;
 
         public bool IsInteraction { get; private set; }
@@ -27,6 +31,7 @@ namespace Assets.Script.Player
             _meleeAttacker = GetComponent<MeleeAttacker>();
             _liftingObjects = GetComponent<LiftingObjects>();
             _itemDropper = GetComponent<ItemDropper>();
+            _inventory = GetComponent<Inventory>();
         }
 
         private void Update()
@@ -54,7 +59,7 @@ namespace Assets.Script.Player
                 IsTrigger = _liftingObjects.IsTrigger;
             }
 
-
+            SetStamina();
 
             HandleMovement();
             HandleCombat();
@@ -87,6 +92,40 @@ namespace Assets.Script.Player
             TransformHelper.UpdateRotation(_hitboxTransform, _mover.DirectionVector);
         }
 
+        [SerializeField] private float _timerlimit = 1f;
+
+        private void SetStamina() 
+        {
+            if (_mover.CurrentSpeed > 0)
+            {
+                if (_timer >= _timerlimit)
+                {
+                    _stats.TakeMinStamina(10f);
+                    _timer = 0f;
+                    _controllerStatBar.UpdateStaminaBar(_stats.CurrentStamina);
+                    Debug.Log("Stamina decreased by 1");
+                }
+                else
+                {
+                    Debug.Log("Stamina decreased by 0");
+                    _timer += Time.deltaTime;
+                }
+            }
+            else // Блок выполняется, когда _mover.CurrentSpeed <= 0 (персонаж остановился)
+            {
+                if (_timer >= 0f) // Проверяем, нужно ли вообще сбрасывать таймер
+                {
+                    _timer -= Time.deltaTime; // Уменьшаем таймер
+
+                    // Гарантируем, что таймер не уйдет в минус
+                    if (_timer <= 0f)
+                    {
+                        _timer = 0f;
+                    }
+                }
+            }
+        }
+
         public void SetInventory(bool isInInventory)
         {
             DisplayInventory = isInInventory;
@@ -111,6 +150,8 @@ namespace Assets.Script.Player
         {
             Debug.Log("Use item");
             _inventoryUI.OnUse();
+            _stats.RestoreStamina(_inventoryUI.OnUses);
+           // Debug.LogError($"Stamina restored by {_inventoryUI.OnUses}");
         }    
     }
 }
