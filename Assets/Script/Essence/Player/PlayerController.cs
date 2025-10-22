@@ -7,7 +7,10 @@ namespace Assets.Script.Player
         [SerializeField] private Transform _hitboxTransform;
         [SerializeField] private InventoryUI _inventoryUI;
         [SerializeField] private ControllerStatBar _controllerStatBar;
+        [SerializeField] private WeaponRotation _weaponRotation;
 
+
+        [SerializeField] private float _timerlimit = 1f;
         [SerializeField] private float _timer;
 
         private PlayerInputData _inputData;
@@ -76,6 +79,7 @@ namespace Assets.Script.Player
             {
                 float targetSpeed = _inputData.IsRunning ? _stats.RunSpeed : _stats.WalkingSpeed;
                 _mover.Move(_inputData.MoveDirection, targetSpeed);
+                _weaponRotation.SetDirection(_mover.DirectionVector);
             }
             else
             {
@@ -91,8 +95,6 @@ namespace Assets.Script.Player
             }
             TransformHelper.UpdateRotation(_hitboxTransform, _mover.DirectionVector);
         }
-
-        [SerializeField] private float _timerlimit = 1f;
 
         private void SetStamina() 
         {
