@@ -6,14 +6,12 @@ public class MeleeAttacker : MonoBehaviour
     [SerializeField] private BoxCollider2D _hitboxTemplate;
     [SerializeField] private float _attackCooldown;
 
-    private StatPlayer _stats;
-    private Animator _animator;
+    [SerializeField] private Animator _animator;
     private float _lastAttackTime = 0f;
 
     private void Awake()
     {
-        _stats = GetComponent<StatPlayer>();
-        _animator = GetComponent<Animator>();
+        //_animator = GetComponent<Animator>();
     }
 
     private void OnEnable()
@@ -24,6 +22,12 @@ public class MeleeAttacker : MonoBehaviour
         }
     }
 
+    public void i()
+    {
+        Debug.Log("Attack triggered");
+    }
+
+
     public void Attack()
     {
         if (Time.time - _lastAttackTime < _attackCooldown)
@@ -32,15 +36,13 @@ public class MeleeAttacker : MonoBehaviour
         }
 
         _lastAttackTime = Time.time;
+        Debug.Log("Attack triggered");
         _animator.SetTrigger("Attack");
-        //_animator.Play("Attack");
         Vector2 boxCenter = _hitboxTemplate.transform.position;
         Vector2 boxSize = _hitboxTemplate.size;
         float boxAngle = _hitboxTemplate.transform.eulerAngles.z;
 
         Collider2D[] hitTargets = Physics2D.OverlapBoxAll(boxCenter, boxSize, boxAngle, _target);
-
-        //Debug.Log($"{hitTargets.Length}");
 
         foreach (var hit in hitTargets)
         {
@@ -49,7 +51,7 @@ public class MeleeAttacker : MonoBehaviour
 
             if (hit.TryGetComponent<StatEnemy>(out StatEnemy targetStats))
             {
-                targetStats.TakeDamage(_stats.Damage);
+                targetStats.TakeDamage(10);
             }
         }
     }

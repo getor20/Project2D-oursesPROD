@@ -1,8 +1,7 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class WeaponRotation : MonoBehaviour
 {
-    [SerializeField] private Camera _mainCam;
     [SerializeField] private float _rotationOffset = 90;
     [SerializeField] private float _maxDeviation = 90;
 
@@ -19,96 +18,122 @@ public class WeaponRotation : MonoBehaviour
     private void Update()
     {
         RotateWeapon();
-        
+    }
+
+    public void SetRotationDirection(Vector2 direction)
+    {
+        _mousePos = direction;
     }
 
     public void SetDirection(Vector2 direction)
     {
-        // Íîðìàëèçóåì íàïðàâëåíèå
-        _direction = direction.normalized;
+        _direction = direction;
     }
 
     private void RotateWeapon()
     {
-        _mousePos = _mainCam.ScreenToWorldPoint(Input.mousePosition);
         Vector2 directionToMouse = _mousePos - transform.position;
 
-        // Óãîë â ãðàäóñàõ ñ ó÷åòîì ñìåùåíèÿ
         float targetAngle = Mathf.Atan2(directionToMouse.y, directionToMouse.x) * Mathf.Rad2Deg - _rotationOffset;
 
         float centerAngle = 0f;
-        float deviation = _maxDeviation; // Èñïîëüçóåì íàñòðàèâàåìîå îòêëîíåíèå
+        float deviation = _maxDeviation;
 
-        // 2. Îïðåäåëåíèå öåíòðàëüíîãî óãëà (centerAngle) äëÿ 8 íàïðàâëåíèé
-
-        // Ãîðèçîíòàëüíîå äâèæåíèå (X)
+        // ... (Ñ‚Ð²Ð¾Ð¹ ÑÑƒÑ‰ÐµÑÑ‚Ð²ÑƒÑŽÑ‰Ð¸Ð¹ ÐºÐ¾Ð´ Ð´Ð»Ñ centerAngle Ð¸ deviation, Ð±ÐµÐ· Ð¸Ð·Ð¼ÐµÐ½ÐµÐ½Ð¸Ð¹) ...
         bool right = _direction.x > 0.1f;
         bool left = _direction.x < -0.1f;
-
-        // Âåðòèêàëüíîå äâèæåíèå (Y)
         bool up = _direction.y > 0.1f;
         bool down = _direction.y < -0.1f;
 
         if (right && up)
         {
-            // Äèàãîíàëü Âïðàâî-Ââåðõ
             centerAngle = -45f;
+            _spriteRenderer.sortingOrder = -1;
         }
         else if (right && down)
         {
-            // Äèàãîíàëü Âïðàâî-Âíèç
             centerAngle = -135f;
+            _spriteRenderer.sortingOrder = 1;
         }
         else if (left && up)
         {
-            // Äèàãîíàëü Ëåâî-Ââåðõ
             centerAngle = 45f;
+            _spriteRenderer.sortingOrder = -1;
         }
         else if (left && down)
         {
-            // Äèàãîíàëü Ëåâî-Âíèç
             centerAngle = 135f;
+            _spriteRenderer.sortingOrder = 1;
         }
         else if (right)
         {
-            // Âïðàâî
             centerAngle = -90f;
+            _spriteRenderer.sortingOrder = 1;
         }
         else if (left)
         {
-            // Âëåâî
             centerAngle = 90f;
+            _spriteRenderer.sortingOrder = 1;
         }
         else if (up)
         {
-            // Ââåðõ
             centerAngle = 0f;
+            _spriteRenderer.sortingOrder = -1;
         }
         else if (down)
         {
-            // Âíèç
             centerAngle = 180f;
+            _spriteRenderer.sortingOrder = 1;
         }
         else
         {
-            // Ïåðñîíàæ ñòîèò: ðàçðåøàåì ïîëíûé ïîâîðîò
-            centerAngle = targetAngle; // Öåëèìñÿ ïðÿìî â ìûøü
-            deviation = 180f;          // Ìàêñèìàëüíî øèðîêèé äèàïàçîí
+            centerAngle = targetAngle;
+            deviation = 180f;
         }
 
-        // 3. Îãðàíè÷åíèå óãëà ñ ïîìîùüþ Mathf.DeltaAngle
-
-        // Åñëè ïåðñîíàæ ñòîèò, ìû óæå óñòàíîâèëè centerAngle = targetAngle, 
-        // ïîýòîìó íåò íåîáõîäèìîñòè â Clamp, íî ìû âñå ðàâíî ýòî äåëàåì äëÿ êîíñèñòåíòíîñòè.
         float angleDifference = Mathf.DeltaAngle(centerAngle, targetAngle);
-
-        // Îãðàíè÷èâàåì ýòó ðàçíèöó
         float clampedDifference = Mathf.Clamp(angleDifference, -deviation, deviation);
-
-        // Ïðèìåíÿåì îãðàíè÷åííóþ ðàçíèöó ê öåíòðó
         float clampedAngle = centerAngle + clampedDifference;
 
-        // 4. Ïðèìåíåíèå âðàùåíèÿ
         transform.rotation = Quaternion.Euler(0, 0, clampedAngle);
+
+        // --- ÐÐžÐ’ÐÐ¯ Ð£ÐŸÐ ÐžÐ©Ð•ÐÐÐÐ¯ Ð›ÐžÐ“Ð˜ÐšÐ flipX ---
+        // Ð•ÑÐ»Ð¸ ÑÐ¿Ñ€Ð°Ð¹Ñ‚ ÑÐ¼Ð¾Ñ‚Ñ€Ð¸Ñ‚ "Ð²Ð»ÐµÐ²Ð¾" (Ð¾Ñ‚Ð½Ð¾ÑÐ¸Ñ‚ÐµÐ»ÑŒÐ½Ð¾ Ð¸Ð³Ñ€Ð¾ÐºÐ°), Ñ‚Ð¾ Ð¿ÐµÑ€ÐµÐ²Ð¾Ñ€Ð°Ñ‡Ð¸Ð²Ð°ÐµÐ¼.
+        // Ð­Ñ‚Ð¾ Ð¾Ð·Ð½Ð°Ñ‡Ð°ÐµÑ‚, Ñ‡Ñ‚Ð¾ ÐµÑÐ»Ð¸ x-ÐºÐ¾Ð¾Ñ€Ð´Ð¸Ð½Ð°Ñ‚Ð° Ð²ÐµÐºÑ‚Ð¾Ñ€Ð° Ð¾Ñ‚ Ð¾Ñ€ÑƒÐ¶Ð¸Ñ Ð´Ð¾ Ð¼Ñ‹ÑˆÐ¸ Ð¾Ñ‚Ñ€Ð¸Ñ†Ð°Ñ‚ÐµÐ»ÑŒÐ½Ð°,
+        // Ñ‚Ð¾ Ð¼Ñ‹ÑˆÑŒ Ð½Ð°Ñ…Ð¾Ð´Ð¸Ñ‚ÑÑ ÑÐ»ÐµÐ²Ð° Ð¾Ñ‚ Ð¾Ñ€ÑƒÐ¶Ð¸Ñ.
+
+        // Ð‘Ð¾Ð»ÐµÐµ Ð½Ð°Ð´ÐµÐ¶Ð½Ñ‹Ð¹ ÑÐ¿Ð¾ÑÐ¾Ð±: Ð¸ÑÐ¿Ð¾Ð»ÑŒÐ·ÑƒÐµÐ¼ `transform.localEulerAngles.z`
+        // Ð¸Ð»Ð¸ Ð¿Ñ€Ð¾ÑÑ‚Ð¾ `clampedAngle`, Ð½Ð¾ Ñ ÑƒÑ‡ÐµÑ‚Ð¾Ð¼ Ð´Ð¸Ð°Ð¿Ð°Ð·Ð¾Ð½Ð° Ð¾Ñ‚ 0 Ð´Ð¾ 360.
+
+        // ÐŸÐ¾Ð»ÑƒÑ‡Ð°ÐµÐ¼ ÑƒÐ³Ð¾Ð» Ð² Ð´Ð¸Ð°Ð¿Ð°Ð·Ð¾Ð½Ðµ Ð¾Ñ‚ 0 Ð´Ð¾ 360 Ð³Ñ€Ð°Ð´ÑƒÑÐ¾Ð²
+        float currentZAngle = transform.localEulerAngles.z;
+
+        // Ð•ÑÐ»Ð¸ Ð¾Ñ€ÑƒÐ¶Ð¸Ðµ ÑÐ¼Ð¾Ñ‚Ñ€Ð¸Ñ‚ Ð²Ð²ÐµÑ€Ñ… (0), Ð²Ð»ÐµÐ²Ð¾ (90), Ð²Ð½Ð¸Ð· (180), Ð²Ð¿Ñ€Ð°Ð²Ð¾ (270 Ð¸Ð»Ð¸ -90)
+        // Ð•ÑÐ»Ð¸ _rotationOffset = 90, Ñ‚Ð¾:
+        //  - 0 Ð³Ñ€Ð°Ð´ÑƒÑÐ¾Ð² (localEulerAngles.z) = weapon pointing up
+        //  - 90 degrees = weapon pointing left
+        //  - 180 degrees = weapon pointing down
+        //  - 270 degrees (or -90) = weapon pointing right
+
+        // ÐœÑ‹ Ñ…Ð¾Ñ‚Ð¸Ð¼ flipX = true, ÐºÐ¾Ð³Ð´Ð° Ð¾Ñ€ÑƒÐ¶Ð¸Ðµ "ÑÐ¼Ð¾Ñ‚Ñ€Ð¸Ñ‚" Ð²Ð»ÐµÐ²Ð¾.
+        // Ð’ Ð´Ð°Ð½Ð½Ð¾Ð¼ ÑÐ»ÑƒÑ‡Ð°Ðµ, ÑÑ‚Ð¾ ÐºÐ¾Ð³Ð´Ð° ÑƒÐ³Ð¾Ð» Ð½Ð°Ñ…Ð¾Ð´Ð¸Ñ‚ÑÑ Ð¼ÐµÐ¶Ð´Ñƒ 90 Ð¸ 270 Ð³Ñ€Ð°Ð´ÑƒÑÐ°Ð¼Ð¸.
+        /*if (currentZAngle > 90f && currentZAngle < 270f)
+        {
+            _spriteRenderer.flipX = true;
+        }
+        else
+        {
+            _spriteRenderer.flipX = false;
+        }*/
+
+        // Ð•ÑÐ»Ð¸ ÑÑ‚Ð¾ Ð½Ðµ ÑÑ€Ð°Ð±Ð¾Ñ‚Ð°ÐµÑ‚, Ñ‚Ð¾ Ð¿Ð¾Ð¿Ñ€Ð¾Ð±ÑƒÐµÐ¼ Ð¸ÑÐ¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÑŒ directionToMouse.x
+        if (directionToMouse.x < 0) // ÐœÑ‹ÑˆÑŒ Ð½Ð°Ñ…Ð¾Ð´Ð¸Ñ‚ÑÑ ÑÐ»ÐµÐ²Ð° Ð¾Ñ‚ Ð¾Ñ€ÑƒÐ¶Ð¸Ñ
+        {
+             _spriteRenderer.flipX = true;
+        }
+        else // ÐœÑ‹ÑˆÑŒ Ð½Ð°Ñ…Ð¾Ð´Ð¸Ñ‚ÑÑ ÑÐ¿Ñ€Ð°Ð²Ð° Ð¾Ñ‚ Ð¾Ñ€ÑƒÐ¶Ð¸Ñ
+        {
+            _spriteRenderer.flipX = false;
+        }
     }
 }

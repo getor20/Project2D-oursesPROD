@@ -4,20 +4,19 @@ namespace Assets.Script.Player
 {
     public class PlayerController : MonoBehaviour
     {
-        [SerializeField] private Transform _hitboxTransform;
         [SerializeField] private InventoryUI _inventoryUI;
         [SerializeField] private ControllerStatBar _controllerStatBar;
         [SerializeField] private WeaponRotation _weaponRotation;
+        [SerializeField] private MeleeAttacker _meleeAttacker;
 
 
-        [SerializeField] private float _timerlimit = 1f;
+        [SerializeField] private float _timerLimit = 1f;
         [SerializeField] private float _timer;
 
         private PlayerInputData _inputData;
 
         private PlayerMove _mover;
         private StatPlayer _stats;
-        private MeleeAttacker _meleeAttacker;
         private LiftingObjects _liftingObjects;
         private Inventory _inventory;
         private ItemDropper _itemDropper;
@@ -31,7 +30,6 @@ namespace Assets.Script.Player
         {
             _mover = GetComponent<PlayerMove>();
             _stats = GetComponent<StatPlayer>();
-            _meleeAttacker = GetComponent<MeleeAttacker>();
             _liftingObjects = GetComponent<LiftingObjects>();
             _itemDropper = GetComponent<ItemDropper>();
             _inventory = GetComponent<Inventory>();
@@ -93,14 +91,13 @@ namespace Assets.Script.Player
             {
                 _meleeAttacker.Attack();
             }
-            TransformHelper.UpdateRotation(_hitboxTransform, _mover.DirectionVector);
         }
 
         private void SetStamina() 
         {
             if (_mover.CurrentSpeed > 0)
             {
-                if (_timer >= _timerlimit)
+                if (_timer >= _timerLimit)
                 {
                     _stats.TakeMinStamina(10f);
                     _timer = 0f;

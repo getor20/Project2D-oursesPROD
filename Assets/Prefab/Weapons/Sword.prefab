@@ -11,6 +11,9 @@ GameObject:
   - component: {fileID: 7901171718659523192}
   - component: {fileID: 2941834120219650821}
   - component: {fileID: 392603648610318108}
+  - component: {fileID: 9019222387337045677}
+  - component: {fileID: 4142960941106929518}
+  - component: {fileID: 3781742277777214449}
   m_Layer: 12
   m_Name: Sword
   m_TagString: Untagged
@@ -71,9 +74,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -625080223
-  m_SortingLayer: 4
-  m_SortingOrder: 0
+  m_SortingLayerID: -2104494739
+  m_SortingLayer: 3
+  m_SortingOrder: 1
   m_Sprite: {fileID: -851481512, guid: 68b6078d6cc69e9409e48fc9ad069a5c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -97,6 +100,88 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f542ccdc96ad59947b3238a0e1930e74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mainCam: {fileID: 0}
   _rotationOffset: 90
-  _maxDeviation: 90
+  _maxDeviation: 75
+--- !u!114 &9019222387337045677
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8827449040141869804}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 277862a644ef5f14d903af92efa8c062, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _target:
+    serializedVersion: 2
+    m_Bits: 512
+  _hitboxTemplate: {fileID: 4142960941106929518}
+  _attackCooldown: 0
+--- !u!61 &4142960941106929518
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8827449040141869804}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0.34375}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.07692308}
+    oldSize: {x: 0.5, y: 0.8125}
+    newSize: {x: 0.5, y: 0.8125}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.5, y: 0.8125}
+  m_EdgeRadius: 0
+--- !u!95 &3781742277777214449
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8827449040141869804}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5b1d94ae797062640b2a42b5de75f56c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
