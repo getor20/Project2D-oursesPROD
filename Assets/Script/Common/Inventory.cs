@@ -53,8 +53,6 @@ public class Inventory : MonoBehaviour
 
     public event Action OnInventoryUpdated;
 
-    public float OnUses { get; private set; }
-
     private int _maxSlots;
     private int _maxStack;
 

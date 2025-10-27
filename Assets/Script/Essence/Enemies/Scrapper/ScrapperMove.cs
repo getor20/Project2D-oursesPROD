@@ -3,7 +3,7 @@ using UnityEngine;
 public class ScrapperMove : MonoBehaviour
 {
     private Rigidbody2D _rigidbody2D;
-    private Vector2 _directionVector2;
+    public Vector2 _direction { get; private set; }
 
     private float _speedMain;
     public float CurrentSpeed => _rigidbody2D.velocity.magnitude;
@@ -20,7 +20,7 @@ public class ScrapperMove : MonoBehaviour
 
     public void SetMoveDirection(Vector2 direction)
     {
-        _directionVector2 = direction.normalized;
+        _direction = direction.normalized;
     }
 
     public void SetSpeed(float speed)
@@ -30,6 +30,6 @@ public class ScrapperMove : MonoBehaviour
 
     private void Move()
     {
-        _rigidbody2D.velocity = _directionVector2 * _speedMain;
+        _rigidbody2D.velocity = _direction * _speedMain;
     }
 }

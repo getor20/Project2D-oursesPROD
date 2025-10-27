@@ -200,42 +200,52 @@ public class InventoryUI : MonoBehaviour
         }
     }
     public float OnUses { get; private set; }
+
     public void OnUse()
     {
         if (_activeItemID <= 0)
         {
             Debug.Log("Нет активного предмета для использования.");
+            OnUses = 0; // Обнуляем, если нет выбранного предмета
             return;
         }
 
-        int countToUse = 1;
         int itemIDToUse = _activeItemID;
-        float edibilityValue = 0f; // Инициализация
 
         // 1. Получаем данные о предмете
         ItemsStatBlock itemData = Inventory.ItemDataRegistry.GetItemData(itemIDToUse);
         if (itemData == null)
         {
             Debug.LogError($"Невозможно использовать предмет ID {itemIDToUse}: данные не найдены.");
+            OnUses = 0; // Обнуляем, если не нашли данные
             return;
         }
 
-        // 2. Получаем значение Edibility
-        // Предполагается, что в ItemsStatBlock есть поле public float Edibility
-        edibilityValue = itemData.Edibility; // <-- ПОЛУЧЕНИЕ ЗНАЧЕНИЯ
+        // 2. Пытаемся удалить 1 предмет из инвентаря
+        int itemsRemoved = _inventory.RemoveItem(itemIDToUse, 1);
 
-        int itemsRemoved = _inventory.RemoveItem(itemIDToUse, countToUse);
-
+        // 3. Проверяем, удалось ли удалить (использовать) предмет
         if (itemsRemoved > 0)
         {
-            // 3. Передаем значение в метод OnUse() класса Inventory
-            OnUses = edibilityValue; // <-- ИЗМЕНЕНИЕ: передача значения
+            // Если предмет успешно удален, значит он был использован.
+            // Присваиваем значение съедобности.
+            OnUses = itemData.Edibility;
+            Debug.Log($"Предмет '{itemData.Name}' использован. OnUses установлено в {OnUses}");
 
+            // 4. Теперь проверяем, остались ли еще такие предметы
             if (!_inventory.ContainsItem(itemIDToUse))
             {
+                // Если это был последний предмет, скрываем его описание
                 HideDescription();
                 _activeItemID = 0;
             }
+        }
+        else
+        {
+            // Если предмет удалить не удалось (например, его уже нет),
+            // то и эффекта от использования быть не должно.
+            OnUses = 0;
+            Debug.LogWarning($"Попытка использовать предмет ID {itemIDToUse}, но его нет в инвентаре.");
         }
     }
 }

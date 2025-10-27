@@ -4,14 +4,18 @@ namespace Assets.Script.Player
 {
     public class PlayerController : MonoBehaviour
     {
+        [SerializeField] private LayerMask _targetLayerMask;
+
         [SerializeField] private InventoryUI _inventoryUI;
         [SerializeField] private ControllerStatBar _controllerStatBar;
         [SerializeField] private WeaponRotation _weaponRotation;
         [SerializeField] private MeleeAttacker _meleeAttacker;
 
 
-        [SerializeField] private float _timerLimit = 1f;
-        [SerializeField] private float _timer;
+        [SerializeField] private float _timerLimitStaminaWalking = 3.5f;
+        [SerializeField] private float _timerLimitStaminaRunning = 2f;
+        [SerializeField] private float _timerLimitStaminaMain;
+        [SerializeField] private float _timerStamina;
 
         private PlayerInputData _inputData;
 
@@ -62,6 +66,9 @@ namespace Assets.Script.Player
 
             SetStamina();
 
+            Debug.Log($"Current Health: {_stats.CurrentHealth}");
+            _controllerStatBar.UpdateHealthBar(_stats.CurrentHealth);
+
             HandleMovement();
             HandleCombat();
         }
@@ -89,37 +96,41 @@ namespace Assets.Script.Player
         {
             if (_inputData.IsAttacking)
             {
-                _meleeAttacker.Attack();
+                _meleeAttacker.Attack(_targetLayerMask);
             }
         }
 
-        private void SetStamina() 
+        private void SetStamina()
         {
+            _controllerStatBar.UpdateStaminaBar(_stats.CurrentStamina);
+
             if (_mover.CurrentSpeed > 0)
             {
-                if (_timer >= _timerLimit)
+                _timerLimitStaminaMain = _inputData.IsRunning ? _timerLimitStaminaRunning : _timerLimitStaminaWalking;
+
+                if (_timerStamina >= _timerLimitStaminaMain)
                 {
                     _stats.TakeMinStamina(10f);
-                    _timer = 0f;
+                    _timerStamina = 0f;
                     _controllerStatBar.UpdateStaminaBar(_stats.CurrentStamina);
                     Debug.Log("Stamina decreased by 1");
                 }
                 else
                 {
                     Debug.Log("Stamina decreased by 0");
-                    _timer += Time.deltaTime;
+                    _timerStamina += Time.deltaTime;
                 }
             }
             else // Блок выполняется, когда _mover.CurrentSpeed <= 0 (персонаж остановился)
             {
-                if (_timer >= 0f) // Проверяем, нужно ли вообще сбрасывать таймер
+                if (_timerStamina >= 0f) // Проверяем, нужно ли вообще сбрасывать таймер
                 {
-                    _timer -= Time.deltaTime; // Уменьшаем таймер
+                    _timerStamina -= Time.deltaTime; // Уменьшаем таймер
 
                     // Гарантируем, что таймер не уйдет в минус
-                    if (_timer <= 0f)
+                    if (_timerStamina <= 0f)
                     {
-                        _timer = 0f;
+                        _timerStamina = 0f;
                     }
                 }
             }
