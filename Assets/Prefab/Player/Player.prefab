@@ -1725,6 +1725,8 @@ MonoBehaviour:
   _timerLimitStaminaRunning: 2
   _timerLimitStaminaMain: 0
   _timerStamina: 0
+  _timerLimitHealth: 0
+  _timerHealth: 0
 --- !u!114 &2591792478769369483
 MonoBehaviour:
   m_ObjectHideFlags: 0

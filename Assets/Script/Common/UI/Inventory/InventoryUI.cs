@@ -216,7 +216,7 @@ public class InventoryUI : MonoBehaviour
         ItemsStatBlock itemData = Inventory.ItemDataRegistry.GetItemData(itemIDToUse);
         if (itemData == null)
         {
-            Debug.LogError($"Невозможно использовать предмет ID {itemIDToUse}: данные не найдены.");
+            Debug.Log($"Невозможно использовать предмет ID {itemIDToUse}: данные не найдены.");
             OnUses = 0; // Обнуляем, если не нашли данные
             return;
         }

@@ -12,8 +12,10 @@ public class StatPlayer : MonoBehaviour
     public float WalkingSpeed { get; private set; }
     public float RunSpeed { get; private set; }
     public float CurrentHealth { get; private set; }
-    public float MaxHealth { get; private set; }
+    public float Health { get; private set; }
     public float Stamina { get; private set; }
+    public float HP { get; private set; }
+    public float SetStamina { get; private set; }
     public float CurrentStamina { get; private set; }
     public float Armor { get; private set; }
 
@@ -29,11 +31,14 @@ public class StatPlayer : MonoBehaviour
         WalkingSpeed = _stats.WalkingSpeed;
         RunSpeed = _stats.RunSpeed;
         Armor = _stats.Armor;
-        MaxHealth = _stats.MaxHealth;
+        Health = _stats.MaxHealth;
         Stamina = _stats.Stamina;
 
-        CurrentHealth = _stats.MaxHealth;
-        CurrentStamina = _stats.Stamina;
+        HP = _stats.MaxHealth / _stats.MaxHealth;
+
+        CurrentHealth = _stats.MaxHealth / _stats.MaxHealth;
+        CurrentStamina = _stats.Stamina / _stats.Stamina;
+        Debug.Log($"Initialized Player Stats - Health: {CurrentHealth}, Stamina: {CurrentStamina}");
     }
 
     public void TakeMinStamina(float stamina)
@@ -52,13 +57,22 @@ public class StatPlayer : MonoBehaviour
         Debug.Log($"Stamina restored by: {staminaToRestore}. New Stamina: {Stamina}/{_stats.Stamina}");
     }
 
+    public void SetHealth(float health)
+    {
+        Health = Mathf.Min(Health + health, _stats.MaxHealth);
+
+        CurrentHealth = Health / _stats.MaxHealth;
+
+        Debug.Log($"{gameObject.name} - SetHealth: {health}, CurrentHealth: {CurrentHealth}/{Health}");
+    }
+
     public void TakeDamage(float damage)
     {
         float damageTake = Mathf.Max(0, damage);
 
-        CurrentHealth = Mathf.Clamp(MaxHealth -= damageTake, MinHealth, _stats.MaxHealth) / _stats.MaxHealth;
+        CurrentHealth = Mathf.Clamp(Health -= damageTake, MinHealth, _stats.MaxHealth) / _stats.MaxHealth;
 
-        Debug.Log($"{gameObject.name} - TakeDamage: {damageTake}, CurrentHealth: {CurrentHealth}/{MaxHealth}");
+        Debug.Log($"{gameObject.name} - TakeDamage: {damageTake}, CurrentHealth: {CurrentHealth}/{Health}");
 
         if (CurrentHealth <= MinHealth)
         {

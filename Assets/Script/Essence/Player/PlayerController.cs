@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Unity.VisualScripting.Antlr3.Runtime.Misc;
+using UnityEngine;
 
 namespace Assets.Script.Player
 {
@@ -16,6 +17,9 @@ namespace Assets.Script.Player
         [SerializeField] private float _timerLimitStaminaRunning = 2f;
         [SerializeField] private float _timerLimitStaminaMain;
         [SerializeField] private float _timerStamina;
+
+        [SerializeField] private float _timerLimitHealth;
+        [SerializeField] private float _timerHealth;
 
         private PlayerInputData _inputData;
 
@@ -64,10 +68,10 @@ namespace Assets.Script.Player
                 IsTrigger = _liftingObjects.IsTrigger;
             }
 
+            SetHp();
             SetStamina();
 
             Debug.Log($"Current Health: {_stats.CurrentHealth}");
-            _controllerStatBar.UpdateHealthBar(_stats.CurrentHealth);
 
             HandleMovement();
             HandleCombat();
@@ -100,6 +104,86 @@ namespace Assets.Script.Player
             }
         }
 
+        private void SetHp()
+        {
+            _controllerStatBar.UpdateHealthBar(_stats.CurrentHealth);
+
+            if (_stats.CurrentHealth < _stats.HP)
+            {
+                // Debug.LogError($"Current Stamina for Health Regen: {_stats.CurrentStamina}");
+                if (_stats.CurrentStamina == 1f)
+                {
+                    //Debug.LogError($"Max Stamina for Health Regen: {_stats.CurrentStamina}");
+                    _timerLimitHealth = 2;
+                }
+                else if (_stats.CurrentStamina == 0.9f)
+                {
+                    //Debug.LogError($"Max Stamina for Health Regen: {_stats.CurrentStamina}");
+                    _timerLimitHealth = 3;
+                }
+                else if (_stats.CurrentStamina == 0.8f)
+                {
+                    //Debug.LogError($"Max Stamina for Health Regen: {_stats.CurrentStamina}");
+                    _timerLimitHealth = 4;
+                }
+                else if (_stats.CurrentStamina == 0.7f)
+                {
+                   // Debug.LogError($"Max Stamina for Health Regen: {_stats.CurrentStamina}");
+                    _timerLimitHealth = 5;
+                }
+                else if (_stats.CurrentStamina == 0.6f)
+                {
+                    //Debug.LogError($"Max Stamina for Health Regen: {_stats.CurrentStamina}");
+                    _timerLimitHealth = 6;
+                }
+                else if (_stats.CurrentStamina == 0.5f)
+                {
+                    //Debug.LogError($"Max Stamina for Health Regen: {_stats.CurrentStamina}");
+                    _timerLimitHealth = 7;
+                }
+                else if (_stats.CurrentStamina == 0.4f)
+                {
+                    //Debug.LogError($"Max Stamina for Health Regen: {_stats.CurrentStamina}");
+                    _timerLimitHealth = 8;
+                }
+                else if (_stats.CurrentStamina == 0.3f)
+                {
+                    //Debug.LogError($"Max Stamina for Health Regen: {_stats.CurrentStamina}");
+                    _timerLimitHealth = 9;
+                }
+                else if (_stats.CurrentStamina == 0.2f)
+                {
+                    //Debug.LogError($"Max Stamina for Health Regen: {_stats.CurrentStamina}");
+                    _timerLimitHealth = 10;
+                }
+                else if (_stats.CurrentStamina == 0.1f)
+                {
+                    //Debug.LogError($"Max Stamina for Health Regen: {_stats.CurrentStamina}");
+                    _timerLimitHealth = 11;
+                }
+                else if (_stats.CurrentStamina == 0f)
+                {
+                    //Debug.LogError($"Max Stamina for Health Regen: {_stats.CurrentStamina}");
+                    _timerLimitHealth = 0;
+
+                }
+
+                if (_timerHealth >= _timerLimitHealth)
+                {
+                    _stats.SetHealth(10f);
+                    _timerHealth = 0f;
+                    _timerHealth -= Time.deltaTime;
+                }
+                else
+                {
+                    // Отсчет
+                    _timerHealth += Time.deltaTime;
+                }
+            }
+            else { _timerHealth = 0f; }
+            
+        }
+
         private void SetStamina()
         {
             _controllerStatBar.UpdateStaminaBar(_stats.CurrentStamina);
@@ -121,13 +205,13 @@ namespace Assets.Script.Player
                     _timerStamina += Time.deltaTime;
                 }
             }
-            else // Блок выполняется, когда _mover.CurrentSpeed <= 0 (персонаж остановился)
+            else
             {
-                if (_timerStamina >= 0f) // Проверяем, нужно ли вообще сбрасывать таймер
+                if (_timerStamina >= 0f) 
                 {
-                    _timerStamina -= Time.deltaTime; // Уменьшаем таймер
+                    _timerStamina -= Time.deltaTime; 
 
-                    // Гарантируем, что таймер не уйдет в минус
+                    
                     if (_timerStamina <= 0f)
                     {
                         _timerStamina = 0f;
