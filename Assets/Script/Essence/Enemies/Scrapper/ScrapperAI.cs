@@ -149,8 +149,6 @@ public class ScrapperAI : MonoBehaviour
         _coneVision.SetDirection(direction);
         _coneVision.SetChase();
 
-        _weaponRotation.SetRotationDirection(direction);
-
         _move.SetSpeed(_stats.SpeedChase);
     }
 

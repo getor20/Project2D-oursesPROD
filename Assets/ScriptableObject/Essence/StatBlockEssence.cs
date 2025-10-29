@@ -1,6 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = nameof(PlayerStatBlock), menuName = "Stat/Players")]
+
 public class PlayerStatBlock : ScriptableObject
 {
     public float MaxHealth;
@@ -8,6 +9,7 @@ public class PlayerStatBlock : ScriptableObject
     public float Stamina;
     public float WalkingSpeed;
     public float RunSpeed;
+    public float SlowSpeed;
 }
 
 [CreateAssetMenu(fileName = nameof(EnemyStatBlock), menuName = "Stat/Enemies")]

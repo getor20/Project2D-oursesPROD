@@ -11,6 +11,7 @@ public class StatPlayer : MonoBehaviour
 
     public float WalkingSpeed { get; private set; }
     public float RunSpeed { get; private set; }
+    public float SlowSpeed { get; private set; }
     public float CurrentHealth { get; private set; }
     public float Health { get; private set; }
     public float Stamina { get; private set; }
@@ -33,6 +34,7 @@ public class StatPlayer : MonoBehaviour
         Armor = _stats.Armor;
         Health = _stats.MaxHealth;
         Stamina = _stats.Stamina;
+        SlowSpeed = _stats.SlowSpeed;
 
         HP = _stats.MaxHealth / _stats.MaxHealth;
 

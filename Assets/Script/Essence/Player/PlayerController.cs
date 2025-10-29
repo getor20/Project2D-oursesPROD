@@ -84,9 +84,19 @@ namespace Assets.Script.Player
 
         private void HandleMovement()
         {
+            float targetSpeed;
             if (_inputData.MoveDirection != Vector2.zero)
             {
-                float targetSpeed = _inputData.IsRunning ? _stats.RunSpeed : _stats.WalkingSpeed;
+                if (_stats.CurrentStamina <= 0f)
+                {
+                    // Если выносливость равна нулю, игрок не может бежать
+                    targetSpeed = _stats.SlowSpeed;
+                }
+                else
+                {
+                    targetSpeed = _inputData.IsRunning ? _stats.RunSpeed : _stats.WalkingSpeed;
+                    
+                }
                 _mover.Move(_inputData.MoveDirection, targetSpeed);
                 _weaponRotation.SetDirection(_mover.DirectionVector);
             }
@@ -217,7 +227,7 @@ namespace Assets.Script.Player
                         _timerStamina = 0f;
                     }
                 }
-            }
+            }  
         }
 
         public void SetInventory(bool isInInventory)
