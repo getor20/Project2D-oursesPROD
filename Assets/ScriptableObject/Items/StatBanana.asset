@@ -16,4 +16,5 @@ MonoBehaviour:
   Name: Banana
   Icon: {fileID: -704754778, guid: 1ee1b3ab7fd93aa4a9bb81f4d644f354, type: 3}
   Description: Good Banana
+  Edibility: 10
   PrefabObject: {fileID: 2071207841136548365, guid: 1eca8acfead5bf54194d067cd9206436, type: 3}

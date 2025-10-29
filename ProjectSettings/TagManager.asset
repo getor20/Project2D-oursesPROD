@@ -17,7 +17,7 @@ TagManager:
   - Enemy
   - Building
   - Item
-  - 
+  - Weapons
   - 
   - 
   - 
@@ -47,8 +47,11 @@ TagManager:
   - name: Items
     uniqueID: 72274773
     locked: 0
-  - name: Player
+  - name: Player&Enemy&Weapons
     uniqueID: 2190472557
+    locked: 0
+  - name: Weapons
+    uniqueID: 3669887073
     locked: 0
   - name: Enemy
     uniqueID: 3397705459

@@ -16,12 +16,7 @@ public class Description : MonoBehaviour
         }
 
         _itemIcon.preserveAspect = true;
-
-        _itemIcon.sprite = null;
-        _itemName.text = "";
-        _itemDescription.text = "";
-
-        _itemIcon.enabled = false;
+        Hide();
     }
 
     /// <summary>
@@ -35,6 +30,16 @@ public class Description : MonoBehaviour
         _itemIcon.enabled = (icon != null); 
         
         _itemName.text = name;
-        _itemDescription.text = desc;
+        _itemDescription.text = desc;   
+    }
+
+    public void Hide()
+    {
+        if (_itemIcon == null || _itemName == null || _itemDescription == null) return;
+
+        _itemIcon.sprite = null;
+        _itemIcon.enabled = false;
+        _itemName.text = string.Empty;
+        _itemDescription.text = string.Empty;
     }
 }

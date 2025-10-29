@@ -15,6 +15,8 @@ public class ConeVision : MonoBehaviour
 
     private List<Transform> _targets = new List<Transform>();
 
+    public LayerMask TargetLayerMask => _targetLayerMask;
+
     public void SetDirection(Vector2 direction)
     {
         if (direction != Vector2.zero)

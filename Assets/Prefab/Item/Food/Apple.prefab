@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7076219060919391553}
   - component: {fileID: 3260120134156092038}
   - component: {fileID: 6071183373970385587}
+  - component: {fileID: 8578496454081629219}
   m_Layer: 11
   m_Name: Apple
   m_TagString: Untagged
@@ -162,3 +163,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Data>k__BackingField: {fileID: 11400000, guid: 194ac56297d5a8a4d8d0a5bb9447232f, type: 2}
+--- !u!114 &8578496454081629219
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3290738908658133573}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShadowGroup: 0
+  m_ComponentVersion: 1
+  m_HasRenderer: 1
+  m_UseRendererSilhouette: 1
+  m_CastsShadows: 1
+  m_SelfShadows: 0
+  m_ApplyToSortingLayers: 000000003311a09455d34e046df58f82f3de84ca211a63ae99b2b50f
+  m_ShapePath:
+  - {x: -0.375, y: -0.4375, z: 0}
+  - {x: -0.375, y: 0.4375, z: 0}
+  - {x: 0.375, y: 0.4375, z: 0}
+  - {x: 0.375, y: -0.4375, z: 0}
+  m_ShapePathHash: 0
+  m_Mesh: {fileID: 0}
+  m_InstanceId: -64308
+  m_LocalBounds:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0.375, y: 0.4375, z: 0}

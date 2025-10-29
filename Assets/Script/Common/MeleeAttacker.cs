@@ -2,29 +2,33 @@ using UnityEngine;
 
 public class MeleeAttacker : MonoBehaviour
 {
-    [SerializeField] private LayerMask _target;
+    //private LayerMask _target;
+    [SerializeField] private StatBlockSword _weaponStat;
     [SerializeField] private BoxCollider2D _hitboxTemplate;
-    [SerializeField] private float _attackCooldown;
+    [SerializeField] private float _attackCooldown = 0.5f;
 
-    private StatPlayer _stats;
-    private Animator _animator;
+    [SerializeField] private Animator _animator;
     private float _lastAttackTime = 0f;
 
     private void Awake()
     {
-        _stats = GetComponent<StatPlayer>();
-        _animator = GetComponent<Animator>();
+        //_animator = GetComponent<Animator>();
     }
 
-    private void OnEnable()
+    /*private void OnEnable()
     {
         if (_hitboxTemplate != null)
         {
             _hitboxTemplate.enabled = false;
         }
+    }*/
+
+    public void SetTarget(LayerMask target)
+    {
+               // _target = target;
     }
 
-    public void Attack()
+    public void Attack(LayerMask target)
     {
         if (Time.time - _lastAttackTime < _attackCooldown)
         {
@@ -32,24 +36,35 @@ public class MeleeAttacker : MonoBehaviour
         }
 
         _lastAttackTime = Time.time;
+        Debug.Log("Attack triggered");
         _animator.SetTrigger("Attack");
-        //_animator.Play("Attack");
         Vector2 boxCenter = _hitboxTemplate.transform.position;
         Vector2 boxSize = _hitboxTemplate.size;
         float boxAngle = _hitboxTemplate.transform.eulerAngles.z;
 
-        Collider2D[] hitTargets = Physics2D.OverlapBoxAll(boxCenter, boxSize, boxAngle, _target);
-
-        //Debug.Log($"{hitTargets.Length}");
+        Collider2D[] hitTargets = Physics2D.OverlapBoxAll(boxCenter, boxSize, boxAngle, target);
 
         foreach (var hit in hitTargets)
         {
-            if (hit.transform == transform || hit.transform.IsChildOf(transform))
-                continue;
+            
 
-            if (hit.TryGetComponent<StatEnemy>(out StatEnemy targetStats))
+            /*if (hit.TryGetComponent<TakeDamage>(out TakeDamage takeDamage))
             {
-                targetStats.TakeDamage(_stats.Damage);
+                takeDamage.IsDamage(10);
+            }*/
+
+
+            if (hit.TryGetComponent<StatEnemy>(out StatEnemy statEnemy))
+            {
+                statEnemy.TakeDamage(_weaponStat.damage);
+            }
+
+            if (hit.TryGetComponent<StatPlayer>(out StatPlayer statPlayer))
+            {
+                if (hit.transform == transform || hit.transform.IsChildOf(transform))
+                    Debug.LogError("yyy");
+
+                statPlayer.TakeDamage(_weaponStat.damage);
             }
         }
     }

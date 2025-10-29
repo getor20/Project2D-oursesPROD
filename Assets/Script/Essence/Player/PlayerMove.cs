@@ -28,10 +28,10 @@ public class PlayerMove : MonoBehaviour
     {
         if (CurrentSpeed > 0)
         {
-            //  движение прямым
+            //  движение по прямой
             bool isDirect = Mathf.Approximately(_mainDirection.x, 0) || Mathf.Approximately(_mainDirection.y, 0);
 
-            //  движение угловым
+            //  движение по угловым
             bool isAngular = _angularVector != Vector2.zero;
 
             if (isDirect)

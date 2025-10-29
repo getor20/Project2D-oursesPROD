@@ -11,10 +11,14 @@ public class ScrapperAI : MonoBehaviour
     
     [SerializeField] private ConeVision _coneVision;
     [SerializeField] private PatrolPath _patrolPath;
+    [SerializeField] private WeaponRotation _weaponRotation;
+    [SerializeField] private MeleeAttacker _meleeAttacker;
+
     [SerializeField] private float _patrolPointThreshold = 0.5f;    
     [SerializeField] private float _attackDistance = 2;
     [SerializeField] private float _waitTime = 0;
     [SerializeField] private int _indexPatrol = 0;
+
 
     private StatEnemy _stats;
     private ScrapperMove _move;
@@ -36,7 +40,7 @@ public class ScrapperAI : MonoBehaviour
     private void Start()
     {
         transform.position = _patrolPath.GetPoint(_indexPatrol).Position;
-
+        //_stats.TakeDamage(0);
         _enemyState = ScrapperState.Patrol;
     }
 
@@ -48,6 +52,9 @@ public class ScrapperAI : MonoBehaviour
         {
             _waitTime = 0;
         }
+
+        _weaponRotation.SetDirection(_move._direction);
+        _weaponRotation.SetRotationDirection(_target != null ? (Vector2)_target.position : (Vector2)transform.position + _move._direction);
     }
 
     private void UpdateTarget()
@@ -134,6 +141,8 @@ public class ScrapperAI : MonoBehaviour
         else if (distanceToTarget <= _attackDistance && speed <= 0)
         {
             _move.SetMoveDirection(Vector2.zero);
+            _meleeAttacker.Attack(_coneVision.TargetLayerMask);
+
         }
 
         _animator.SetDirection(direction);
@@ -141,5 +150,11 @@ public class ScrapperAI : MonoBehaviour
         _coneVision.SetChase();
 
         _move.SetSpeed(_stats.SpeedChase);
+    }
+
+    public void Die()
+    {
+        Debug.Log("Scrapper died");
+        gameObject.SetActive(false);
     }
 }

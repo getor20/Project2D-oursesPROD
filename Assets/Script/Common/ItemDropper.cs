@@ -24,17 +24,6 @@ public class ItemDropper : MonoBehaviour
             // 2. Создаем экземпляр префаба
             GameObject droppedItem = Instantiate(itemData.PrefabObject, _dropPoint.position, Quaternion.identity);
 
-            // 3. Добавляем физический эффект (для реалистичного "вылета")
-            if (droppedItem.TryGetComponent<Rigidbody>(out Rigidbody rb))
-            {
-                Vector3 randomDropForce = new Vector3(
-                    Random.Range(-0.5f, 0.5f),
-                    Random.Range(1f, 2f),
-                    Random.Range(-0.5f, 0.5f));
-
-                // Используем небольшую силу, чтобы предмет отскочил от игрока
-                rb.AddForce(randomDropForce * 5f, ForceMode.Impulse);
-            }
 
             Debug.Log($"Dropped: {itemData.Name} x1");
         }

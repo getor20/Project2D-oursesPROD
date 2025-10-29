@@ -7,32 +7,41 @@ public class StatEnemy : MonoBehaviour
 
     [SerializeField] private EnemyStatBlock _stats;
 
-    public int MaxHealth { get; private set; }
-    public int CurrentHealth { get; private set; }
-    public int Damage { get; private set; }
+    private TakeDamage _takeDamage;
+
+    private int _isDamage;
+
+    public float MaxHealth { get; private set; }
+    public float CurrentHealth { get; private set; }
     public float SpeedPatrol { get; private set; }
     public float SpeedChase { get; private set; }
-    public int Armor { get; private set; }
+    public float Armor { get; private set; }
 
     public UnityEvent OnDie;
 
     private void Awake()
     {
         Initialize();
+        _takeDamage = GetComponent<TakeDamage>();
     }
 
     private void Initialize()
     {
         MaxHealth = _stats.MaxHealth;
         CurrentHealth = MaxHealth;
-        Damage = _stats.Damage;
         SpeedChase = _stats.SpeedChase;
         SpeedPatrol = _stats.SpeedPatrol;
     }
 
-    public void TakeDamage(int damage)
+    private void Update()
     {
-        int damageTake = Mathf.Max(0, damage - Armor);
+        _isDamage = _takeDamage.Damage;
+        //TakeDamage();
+    }
+
+    public void TakeDamage(float damage)
+    {
+        float damageTake = Mathf.Max(0, /*_takeDamage.Damage*/ damage);
 
         CurrentHealth = Mathf.Clamp(CurrentHealth - damageTake, MinHealth, MaxHealth);
 
@@ -43,10 +52,11 @@ public class StatEnemy : MonoBehaviour
             Die();
         }
     }
+
     private void Die()
     {
         OnDie?.Invoke();
 
-        gameObject.SetActive(false);
+        //gameObject.SetActive(false);
     }
 }

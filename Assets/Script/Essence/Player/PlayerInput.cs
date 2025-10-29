@@ -47,4 +47,19 @@ public class PlayerInput : MonoBehaviour
         }
     }
 
+    public void OnDropItem(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            _playerController.SetDropItem();
+        }
+    }
+
+    public void OnUseItem(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            _playerController.SetUseItem();
+        }
+    }
 }

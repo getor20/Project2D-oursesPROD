@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6422002623021244234}
   - component: {fileID: 1851140735681474127}
   - component: {fileID: 6808471816864873729}
+  - component: {fileID: 1304307467531917327}
   m_Layer: 11
   m_Name: Banana
   m_TagString: Untagged
@@ -162,3 +163,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Data>k__BackingField: {fileID: 11400000, guid: 463b59f0f73929947b2b6ee999a6c4bd, type: 2}
+--- !u!114 &1304307467531917327
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2071207841136548365}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShadowGroup: 0
+  m_ComponentVersion: 1
+  m_HasRenderer: 1
+  m_UseRendererSilhouette: 1
+  m_CastsShadows: 1
+  m_SelfShadows: 0
+  m_ApplyToSortingLayers: 000000003311a09455d34e046df58f82f3de84ca211a63ae99b2b50f
+  m_ShapePath:
+  - {x: -0.5, y: -0.46875, z: 0}
+  - {x: -0.5, y: 0.46875, z: 0}
+  - {x: 0.5, y: 0.46875, z: 0}
+  - {x: 0.5, y: -0.46875, z: 0}
+  m_ShapePathHash: 0
+  m_Mesh: {fileID: 0}
+  m_InstanceId: -148224
+  m_LocalBounds:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0.5, y: 0.46875, z: 0}

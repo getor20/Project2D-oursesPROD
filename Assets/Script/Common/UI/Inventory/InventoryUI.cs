@@ -10,7 +10,6 @@ public class InventoryUI : MonoBehaviour
     [Tooltip("Максимальное количество предметов в одном UI-стеке.")]
     [field: SerializeField] public int MaxStack { get; private set; }
 
-    // Ссылка на компонент Description (целевой объект для отображения информации)
     [SerializeField] private Description _description;
 
     private InventorySlot[] _slots;
@@ -27,6 +26,13 @@ public class InventoryUI : MonoBehaviour
         {
             Debug.LogError("Не найден ни один компонент InventorySlot.");
         }
+        
+        // Подписываемся на событие клика каждого слота
+        foreach (var slot in _slots)
+        {
+            // Здесь мы подписываемся на публичное событие слота
+            slot.OnSlotClicked += ShowItemDescription;
+        }
     }
 
     private void Start()
@@ -37,22 +43,16 @@ public class InventoryUI : MonoBehaviour
             return;
         }
 
-        // Передаем лимиты UI в компонент Inventory
         _inventory.SetInventoryLimits(TotalSlotsCount, MaxStack);
-
         _inventory.OnInventoryUpdated += RefreshDisplay;
-
-        // Скрываем описание при старте
-        //HideDescription();
     }
 
     public void HideDescription()
     {
         if (_description != null)
         {
-            // _description.Hide(); // Предполагаем, что этот метод существует
+            _description.Hide();
         }
-        // --- СБРОС ID АКТИВНОГО ПРЕДМЕТА ---
         _activeItemID = 0;
     }
 
@@ -61,40 +61,54 @@ public class InventoryUI : MonoBehaviour
     // --------------------------------------------------------------------------------
 
     /// <summary>
-    /// Вызывается InventorySlot. Получает данные и отображает описание.
+    /// Вызывается InventorySlot через событие. Получает itemID и отображает описание.
     /// </summary>
     public void ShowItemDescription(int itemID)
     {
-        // ПРОВЕРКА 1: Проверка ссылки на Description
         if (_description == null)
         {
             Debug.LogError("КРИТИЧЕСКАЯ ОШИБКА: Компонент Description не привязан к InventoryUI. Проверьте Inspector.");
             return;
         }
+        
+        if (itemID == 0)
+        {
+            HideDescription();
+            return;
+        }
 
-        _activeItemID = itemID;
+        if (_activeItemID == itemID)
+        {
+            HideDescription();
+            return;
+        }
+        
+        _activeItemID = itemID; 
 
-        Debug.Log($"[UI Diagnostic] Клик по слоту! Запрошен ID: {itemID}"); // <-- ЛОГ 1
+        Debug.Log($"[UI Diagnostic] Клик по слоту! Запрошен ID: {_activeItemID}");
 
-        // 1. Получаем полные данные из реестра Inventory
-        ItemsStatBlock data = Inventory.ItemDataRegistry.GetItemData(itemID);
+        ItemsStatBlock data = Inventory.ItemDataRegistry.GetItemData(_activeItemID);
 
         if (data != null)
         {
-            Debug.Log($"[UI Diagnostic] Данные получены. Имя предмета: {data.Name}"); // <-- ЛОГ 2
-
-            // 2. Вызываем метод Show в Description (Description выполняет отображение)
+            Debug.Log($"[UI Diagnostic] Данные получены. Имя предмета: {data.Name}");
             _description.Show(data.Icon, data.Name, data.Description);
+        }
+        else
+        {
+            Debug.LogWarning($"[UI Diagnostic] Не найдены данные для предмета с ID: {_activeItemID}");
+            HideDescription();
         }
     }
 
     // --------------------------------------------------------------------------------
     // МЕТОДЫ ОБНОВЛЕНИЯ ОТОБРАЖЕНИЯ
     // --------------------------------------------------------------------------------
+    
+    // ... (Методы RefreshDisplay, GetItemIcon, ClearAllSlots остаются без изменений) ...
 
     private void ClearAllSlots()
     {
-        // Вызываем ClearSlot на всех слотах, что также скроет описание, если оно было активно
         foreach (var slot in _slots)
         {
             slot.ClearSlot();
@@ -103,13 +117,9 @@ public class InventoryUI : MonoBehaviour
 
     private Sprite GetItemIcon(int itemID)
     {
-        // Получаем иконку из реестра Inventory
         return Inventory.ItemDataRegistry.GetIcon(itemID);
     }
 
-    /// <summary>
-    /// Обновляет отображение инвентаря на основе данных из Inventory.
-    /// </summary>
     private void RefreshDisplay()
     {
         ClearAllSlots();
@@ -138,7 +148,6 @@ public class InventoryUI : MonoBehaviour
 
                 Sprite itemIcon = GetItemIcon(itemID);
 
-                // Передаем ID предмета в SetItem
                 currentSlot.SetItem(itemIcon, countForThisSlot, itemID);
 
                 slotIndex++;
@@ -152,9 +161,20 @@ public class InventoryUI : MonoBehaviour
         {
             _inventory.OnInventoryUpdated -= RefreshDisplay;
         }
+        
+        if (_slots != null)
+        {
+            foreach (var slot in _slots)
+            {
+                if (slot != null)
+                {
+                    // Отписка от событий
+                    slot.OnSlotClicked -= ShowItemDescription;
+                }
+            }
+        }
     }
 
-    // Фрагмент кода для InventoryUI.OnDrop()
     public void OnDrop()
     {
         if (_activeItemID <= 0)
@@ -163,31 +183,69 @@ public class InventoryUI : MonoBehaviour
             return;
         }
 
-        const int countToDrop = 1; // Удаляем один предмет
+        int countToDrop = 1;
+        int itemIDToDrop = _activeItemID;
 
-        // 1. Удаляем предмет из модели Inventory
-        int itemsRemoved = _inventory.RemoveItem(_activeItemID, countToDrop);
+        int itemsRemoved = _inventory.RemoveItem(itemIDToDrop, countToDrop);
 
         if (itemsRemoved > 0)
         {
-            // 2. Вызываем ItemDropper для спавна
-            if (_itemDropper != null)
-            {
-                // ItemDropper сам получит PrefabObject через ItemDataRegistry
-                _itemDropper.Drop(_activeItemID, itemsRemoved);
-            }
-            else
-            {
-                Debug.LogError("ItemDropper не привязан к InventoryUI!");
-            }
+            _itemDropper.Drop(itemIDToDrop, itemsRemoved);
 
-            // 3. Скрываем описание и сбрасываем _activeItemID
-            HideDescription();
+            if (!_inventory.ContainsItem(itemIDToDrop))
+            {
+                HideDescription();
+                _activeItemID = 0;
+            }
         }
     }
+    public float OnUses { get; private set; }
 
     public void OnUse()
     {
-        Debug.Log("OnUse");
+        if (_activeItemID <= 0)
+        {
+            Debug.Log("Нет активного предмета для использования.");
+            OnUses = 0; // Обнуляем, если нет выбранного предмета
+            return;
+        }
+
+        int itemIDToUse = _activeItemID;
+
+        // 1. Получаем данные о предмете
+        ItemsStatBlock itemData = Inventory.ItemDataRegistry.GetItemData(itemIDToUse);
+        if (itemData == null)
+        {
+            Debug.Log($"Невозможно использовать предмет ID {itemIDToUse}: данные не найдены.");
+            OnUses = 0; // Обнуляем, если не нашли данные
+            return;
+        }
+
+        // 2. Пытаемся удалить 1 предмет из инвентаря
+        int itemsRemoved = _inventory.RemoveItem(itemIDToUse, 1);
+
+        // 3. Проверяем, удалось ли удалить (использовать) предмет
+        if (itemsRemoved > 0)
+        {
+            // Если предмет успешно удален, значит он был использован.
+            // Присваиваем значение съедобности.
+            OnUses = itemData.Edibility;
+            Debug.Log($"Предмет '{itemData.Name}' использован. OnUses установлено в {OnUses}");
+
+            // 4. Теперь проверяем, остались ли еще такие предметы
+            if (!_inventory.ContainsItem(itemIDToUse))
+            {
+                // Если это был последний предмет, скрываем его описание
+                HideDescription();
+                _activeItemID = 0;
+            }
+        }
+        else
+        {
+            // Если предмет удалить не удалось (например, его уже нет),
+            // то и эффекта от использования быть не должно.
+            OnUses = 0;
+            Debug.LogWarning($"Попытка использовать предмет ID {itemIDToUse}, но его нет в инвентаре.");
+        }
     }
 }
