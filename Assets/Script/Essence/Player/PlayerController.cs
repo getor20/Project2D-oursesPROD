@@ -1,4 +1,5 @@
 ﻿using Unity.VisualScripting.Antlr3.Runtime.Misc;
+using UnityEditor;
 using UnityEngine;
 
 namespace Assets.Script.Player
@@ -95,7 +96,7 @@ namespace Assets.Script.Player
                 else
                 {
                     targetSpeed = _inputData.IsRunning ? _stats.RunSpeed : _stats.WalkingSpeed;
-                    
+
                 }
                 _mover.Move(_inputData.MoveDirection, targetSpeed);
                 _weaponRotation.SetDirection(_mover.DirectionVector);
@@ -138,7 +139,7 @@ namespace Assets.Script.Player
                 }
                 else if (_stats.CurrentStamina == 0.7f)
                 {
-                   // Debug.LogError($"Max Stamina for Health Regen: {_stats.CurrentStamina}");
+                    // Debug.LogError($"Max Stamina for Health Regen: {_stats.CurrentStamina}");
                     _timerLimitHealth = 5;
                 }
                 else if (_stats.CurrentStamina == 0.6f)
@@ -191,7 +192,7 @@ namespace Assets.Script.Player
                 }
             }
             else { _timerHealth = 0f; }
-            
+
         }
 
         private void SetStamina()
@@ -217,24 +218,24 @@ namespace Assets.Script.Player
             }
             else
             {
-                if (_timerStamina >= 0f) 
+                if (_timerStamina >= 0f)
                 {
-                    _timerStamina -= Time.deltaTime; 
+                    _timerStamina -= Time.deltaTime;
 
-                    
+
                     if (_timerStamina <= 0f)
                     {
                         _timerStamina = 0f;
                     }
                 }
-            }  
+            }
         }
 
         public void SetInventory(bool isInInventory)
         {
             DisplayInventory = isInInventory;
             //Debug.Log($"Inventory state: {DisplayInventory}");
-        } 
+        }
 
         public void SetInteraction(bool isInteracting)
         {
@@ -255,7 +256,12 @@ namespace Assets.Script.Player
             Debug.Log("Use item");
             _inventoryUI.OnUse();
             _stats.RestoreStamina(_inventoryUI.OnUses);
-           // Debug.LogError($"Stamina restored by {_inventoryUI.OnUses}");
-        }    
+            // Debug.LogError($"Stamina restored by {_inventoryUI.OnUses}");
+        }
+
+        public void OnDeath()
+        {
+            gameObject.SetActive(false);
+        }
     }
 }

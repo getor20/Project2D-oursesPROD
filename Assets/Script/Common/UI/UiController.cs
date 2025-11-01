@@ -1,7 +1,7 @@
 using Assets.Script.Player;
 using UnityEngine;
 
-public class UiController : MonoBehaviour
+public class UIController : MonoBehaviour
 {
     [SerializeField] private PlayerController _playerController;
     [SerializeField] private GameObject _inventoryUI;
