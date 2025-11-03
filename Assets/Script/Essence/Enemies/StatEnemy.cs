@@ -34,7 +34,7 @@ public class StatEnemy : MonoBehaviour
 
         CurrentHealth = Mathf.Clamp(CurrentHealth - damageTake, MinHealth, MaxHealth);
 
-        Debug.Log($"{gameObject.name} - TakeDamage: {damageTake}, CurrentHealth: {CurrentHealth}/{MaxHealth}");
+        //Debug.Log($"{gameObject.name} - TakeDamage: {damageTake}, CurrentHealth: {CurrentHealth}/{MaxHealth}");
 
         if (CurrentHealth <= MinHealth)
         {

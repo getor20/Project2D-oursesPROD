@@ -12,7 +12,7 @@ namespace Assets.Script.Player
         [SerializeField] private ControllerStatBar _controllerStatBar;
         [SerializeField] private WeaponRotation _weaponRotation;
         [SerializeField] private MeleeAttacker _meleeAttacker;
-
+        [SerializeField] private Bonfire _bonfire;
 
         [SerializeField] private float _timerLimitStaminaWalking = 3.5f;
         [SerializeField] private float _timerLimitStaminaRunning = 2f;
@@ -52,30 +52,27 @@ namespace Assets.Script.Player
                 return;
             }
 
-            if (IsInteraction == true)
+            bool isBlocked = IsInteraction || DisplayInventory;
+
+            if (isBlocked)
             {
-                // Заняты другим делом, отключаем индикатор
+                // Если есть ЛЮБАЯ блокировка высокого приоритета, отключаем триггер.
                 IsTrigger = false;
             }
-            // 2. ИЛИ проверяем, открыт ли инвентарь
-            else if (DisplayInventory == true)
-            {
-                // Инвентарь открыт, отключаем индикатор
-                IsTrigger = false;
-            }
-            // 3. Иначе (если ничто не блокирует) — используем реальное значение от скрипта подбора
             else
             {
-                IsTrigger = _liftingObjects.IsTrigger;
+                IsTrigger = _bonfire.IsTrigger || _liftingObjects.IsTrigger;
             }
 
             SetHp();
             SetStamina();
 
-            Debug.Log($"Current Health: {_stats.CurrentHealth}");
+            //Debug.Log($"Current Health: {_stats.CurrentHealth}");
 
             HandleMovement();
             HandleCombat();
+
+            Debug.Log($"IsTrigger1: {IsTriggeri}");
         }
 
         internal void SetInput(PlayerInputData inputData)
@@ -208,11 +205,11 @@ namespace Assets.Script.Player
                     _stats.TakeMinStamina(10f);
                     _timerStamina = 0f;
                     _controllerStatBar.UpdateStaminaBar(_stats.CurrentStamina);
-                    Debug.Log("Stamina decreased by 1");
+                    //Debug.Log("Stamina decreased by 1");
                 }
                 else
                 {
-                    Debug.Log("Stamina decreased by 0");
+                    //Debug.Log("Stamina decreased by 0");
                     _timerStamina += Time.deltaTime;
                 }
             }
@@ -253,7 +250,7 @@ namespace Assets.Script.Player
 
         public void SetUseItem()
         {
-            Debug.Log("Use item");
+           // Debug.Log("Use item");
             _inventoryUI.OnUse();
             _stats.RestoreStamina(_inventoryUI.OnUses);
             // Debug.LogError($"Stamina restored by {_inventoryUI.OnUses}");
@@ -262,6 +259,14 @@ namespace Assets.Script.Player
         public void OnDeath()
         {
             gameObject.SetActive(false);
+        }
+
+        private bool IsTriggeri;
+
+        public void IsTriggers()
+        {
+            Debug.LogFormat("Trigger true");
+            IsTriggeri = true;
         }
     }
 }

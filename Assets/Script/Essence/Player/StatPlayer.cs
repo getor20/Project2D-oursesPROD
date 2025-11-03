@@ -40,13 +40,13 @@ public class StatPlayer : MonoBehaviour
 
         CurrentHealth = _stats.MaxHealth / _stats.MaxHealth;
         CurrentStamina = _stats.Stamina / _stats.Stamina;
-        Debug.Log($"Initialized Player Stats - Health: {CurrentHealth}, Stamina: {CurrentStamina}");
+        //Debug.Log($"Initialized Player Stats - Health: {CurrentHealth}, Stamina: {CurrentStamina}");
     }
 
     public void TakeMinStamina(float stamina)
     {
         CurrentStamina = Mathf.Clamp(Stamina -= stamina, 0, _stats.Stamina) / _stats.Stamina;
-        Debug.Log($"Current Stamina: {CurrentStamina}");
+        //Debug.Log($"Current Stamina: {CurrentStamina}");
     }
 
     public void RestoreStamina(float staminaToRestore)

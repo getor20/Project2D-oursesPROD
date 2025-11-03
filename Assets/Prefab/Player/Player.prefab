@@ -1666,6 +1666,7 @@ MonoBehaviour:
   _controllerStatBar: {fileID: 5085796161916932879}
   _weaponRotation: {fileID: 8900642380249982838}
   _meleeAttacker: {fileID: 278404177437095623}
+  _bonfire: {fileID: 0}
   _timerLimitStaminaWalking: 3.5
   _timerLimitStaminaRunning: 2
   _timerLimitStaminaMain: 0
@@ -5076,6 +5077,10 @@ PrefabInstance:
     - target: {fileID: 8827449040141869804, guid: 9db533ebe2c76f6409d72cfbd1c213bb, type: 3}
       propertyPath: m_Name
       value: Sword
+      objectReference: {fileID: 0}
+    - target: {fileID: 9019222387337045677, guid: 9db533ebe2c76f6409d72cfbd1c213bb, type: 3}
+      propertyPath: _attackCooldown
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
