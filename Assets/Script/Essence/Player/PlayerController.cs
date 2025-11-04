@@ -1,6 +1,7 @@
 ﻿using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Assets.Script.Player
 {
@@ -62,6 +63,7 @@ namespace Assets.Script.Player
             else
             {
                 IsTrigger = _bonfire.IsTrigger || _liftingObjects.IsTrigger;
+               
             }
 
             SetHp();
@@ -238,6 +240,11 @@ namespace Assets.Script.Player
         {
             IsInteraction = isInteracting;
             _liftingObjects.Interaction(IsInteraction);
+            if (_bonfire.IsTrigger)
+            {
+                Debug.LogFormat ("Bonfire used");
+                SceneManager.LoadScene(2);
+            }
             //Debug.Log($"Interaction state: {IsInteraction}");
         }
 
@@ -253,6 +260,7 @@ namespace Assets.Script.Player
            // Debug.Log("Use item");
             _inventoryUI.OnUse();
             _stats.RestoreStamina(_inventoryUI.OnUses);
+            
             // Debug.LogError($"Stamina restored by {_inventoryUI.OnUses}");
         }
 
