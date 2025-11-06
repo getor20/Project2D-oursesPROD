@@ -1,7 +1,4 @@
-﻿using Unity.VisualScripting.Antlr3.Runtime.Misc;
-using UnityEditor;
-using UnityEngine;
-using UnityEngine.SceneManagement;
+﻿using UnityEngine;
 
 namespace Assets.Script.Player
 {
@@ -14,6 +11,7 @@ namespace Assets.Script.Player
         [SerializeField] private WeaponRotation _weaponRotation;
         [SerializeField] private MeleeAttacker _meleeAttacker;
         [SerializeField] private Bonfire _bonfire;
+        [SerializeField] private UserUiController _userUiController;
 
         [SerializeField] private float _timerLimitStaminaWalking = 3.5f;
         [SerializeField] private float _timerLimitStaminaRunning = 2f;
@@ -28,8 +26,6 @@ namespace Assets.Script.Player
         private PlayerMove _mover;
         private StatPlayer _stats;
         private LiftingObjects _liftingObjects;
-        private Inventory _inventory;
-        private ItemDropper _itemDropper;
 
         public bool IsInteraction { get; private set; }
         public bool DisplayInventory { get; private set; }
@@ -41,8 +37,6 @@ namespace Assets.Script.Player
             _mover = GetComponent<PlayerMove>();
             _stats = GetComponent<StatPlayer>();
             _liftingObjects = GetComponent<LiftingObjects>();
-            _itemDropper = GetComponent<ItemDropper>();
-            _inventory = GetComponent<Inventory>();
         }
 
         private void Update()
@@ -243,7 +237,8 @@ namespace Assets.Script.Player
             if (_bonfire.IsTrigger)
             {
                 Debug.LogFormat ("Bonfire used");
-                SceneManager.LoadScene(2);
+                _userUiController.OnWin();
+                Time.timeScale = 0f;
             }
             //Debug.Log($"Interaction state: {IsInteraction}");
         }
