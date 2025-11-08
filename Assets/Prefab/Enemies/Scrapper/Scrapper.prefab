@@ -82,7 +82,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -2104494739
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: -987540877, guid: a73496a2c1d966c40bc4cdc31d2d3fa6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -204,7 +204,7 @@ MonoBehaviour:
   - {x: 0.125, y: -0.375, z: 0}
   m_ShapePathHash: 0
   m_Mesh: {fileID: 0}
-  m_InstanceId: 79504
+  m_InstanceId: 64304
   m_LocalBounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0.125, y: 0.375, z: 0}
@@ -237,7 +237,7 @@ MonoBehaviour:
   _weaponRotation: {fileID: 7345184741579394006}
   _meleeAttacker: {fileID: 2141231355206081127}
   _patrolPointThreshold: 0.5
-  _attackDistance: 2
+  _attackDistance: 1.25
   _waitTime: 0
   _indexPatrol: 0
 --- !u!114 &3971197010227163128
@@ -252,7 +252,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2ae85e7bb585204eaba8fdc1878cdb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _stats: {fileID: 11400000, guid: baa23ca28dd850e479227470c329bc7d, type: 2}
+  _stats: {fileID: 11400000, guid: 4e35ecab027714c4bbaf645cfc5464d3, type: 2}
   OnDie:
     m_PersistentCalls:
       m_Calls:
@@ -341,10 +341,10 @@ MonoBehaviour:
     m_Bits: 64
   _obstacleLayerMask:
     serializedVersion: 2
-    m_Bits: 1024
+    m_Bits: 9216
   _mainVisionRadius: 0
   _patrolVisionRadius: 3
-  _chaseVisionRadius: 6
+  _chaseVisionRadius: 4.5
   _visionAngle: 90
 --- !u!1 &3584910870999953346
 GameObject:
@@ -429,10 +429,6 @@ PrefabInstance:
     - target: {fileID: 8827449040141869804, guid: 9db533ebe2c76f6409d72cfbd1c213bb, type: 3}
       propertyPath: m_Name
       value: Sword
-      objectReference: {fileID: 0}
-    - target: {fileID: 9019222387337045677, guid: 9db533ebe2c76f6409d72cfbd1c213bb, type: 3}
-      propertyPath: _attackCooldown
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

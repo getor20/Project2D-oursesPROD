@@ -8,15 +8,15 @@ public class ControllerStatBar : MonoBehaviour
 
     public void UpdateHealthBar(float fillAmount)
     {
-        Debug.Log($"Updating Health Bar: {fillAmount}");
+        //Debug.Log($"Updating Health Bar: {fillAmount}");
         _imageHP.fillAmount = fillAmount;
-        Debug.Log($"Health Bar fill amount set to: {_imageHP.fillAmount}");
+        //Debug.Log($"Health Bar fill amount set to: {_imageHP.fillAmount}");
     }
 
     public void UpdateStaminaBar(float fillAmount)
     {
-        Debug.Log($"Updating Stamina Bar: {fillAmount}");
+       // Debug.Log($"Updating Stamina Bar: {fillAmount}");
         _imageStamina.fillAmount = fillAmount;
-        Debug.Log($"Stamina Bar fill amount set to: {_imageStamina.fillAmount}");
+       /// Debug.Log($"Stamina Bar fill amount set to: {_imageStamina.fillAmount}");
     }
 }

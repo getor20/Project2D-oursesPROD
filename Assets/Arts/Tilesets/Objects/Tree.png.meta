@@ -45,7 +45,7 @@ TextureImporter:
   compressionQuality: 50
   spriteMode: 2
   spriteExtrude: 1
-  spriteMeshType: 1
+  spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 16
@@ -162,106 +162,105 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Maple Tree_0
+      name: Tree_0
       rect:
         serializedVersion: 2
-        x: 43
-        y: 3
-        width: 9
-        height: 11
+        x: 16
+        y: 0
+        width: 14
+        height: 9
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape:
-      - - {x: -1.5, y: -5.5}
-        - {x: -1.5, y: -3.5}
-        - {x: -0.5, y: -2.5}
-        - {x: 0.5, y: -2.5}
-        - {x: 1.5, y: -3.5}
-        - {x: 1.5, y: -5.5}
+      physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 96905a173f744f04c9b321f63e54dfa8
-      internalID: 40904745
+      spriteID: 9afe5aa3b1e096749813f1a0222f06d3
+      internalID: 2100984977
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Maple Tree_1
+      name: Tree_1
       rect:
         serializedVersion: 2
-        x: 71
+        x: 39
         y: 3
         width: 20
         height: 31
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
+      outline:
+      - - {x: -3, y: -13.5}
+        - {x: -3, y: 11.5}
+        - {x: 3, y: 11.5}
+        - {x: 3, y: -13.5}
       physicsShape:
-      - - {x: 1, y: -15.5}
-        - {x: -2, y: -15.5}
+      - - {x: -2, y: -15.5}
         - {x: -3, y: -14.5}
         - {x: -5, y: -13.5}
         - {x: -5, y: -11.5}
         - {x: -4, y: -9.5}
-        - {x: -3, y: -8.5}
-        - {x: -2, y: -7.5}
         - {x: -1, y: -6.5}
         - {x: 0, y: -6.5}
-        - {x: 1, y: -7.5}
         - {x: 3, y: -8.5}
         - {x: 4, y: -10.5}
         - {x: 5, y: -12.5}
         - {x: 5, y: -14.5}
+        - {x: 1, y: -15.5}
       tessellationDetail: 0
       bones: []
-      spriteID: 3cd9ea30451c4ee45acf237c2e3aa336
-      internalID: 1676509928
+      spriteID: 00f7aae050212b749bd4cee50408575b
+      internalID: -1894899880
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Maple Tree_2
+      name: Tree_2
       rect:
         serializedVersion: 2
-        x: 96
+        x: 64
         y: 2
         width: 32
         height: 45
-      alignment: 9
+      alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
+      outline:
+      - - {x: -4, y: -20.5}
+        - {x: -4, y: 16.5}
+        - {x: 4, y: 16.5}
+        - {x: 4, y: -20.5}
       physicsShape:
-      - - {x: 7, y: -18.5}
-        - {x: 7, y: -20.5}
-        - {x: 5, y: -22.5}
-        - {x: -2, y: -22.5}
-        - {x: -4, y: -20.5}
+      - - {x: -2, y: -22.5}
+        - {x: -3, y: -21.5}
         - {x: -7, y: -20.5}
         - {x: -7, y: -18.5}
         - {x: -5, y: -16.5}
-        - {x: -4, y: -11.5}
-        - {x: 2, y: -10.5}
+        - {x: -4, y: -15.5}
+        - {x: -4, y: -10.5}
         - {x: 4, y: -10.5}
         - {x: 4, y: -15.5}
+        - {x: 7, y: -18.5}
+        - {x: 7, y: -20.5}
+        - {x: 5, y: -22.5}
       tessellationDetail: 0
       bones: []
-      spriteID: dc97a47e7d6abf64c8d4a9f160beb88f
-      internalID: 953526180
+      spriteID: 0e3ca12b9964550418da55b61da898ce
+      internalID: -402270331
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Maple Tree_3
+      name: Tree_3
       rect:
         serializedVersion: 2
-        x: 137
+        x: 105
         y: 2
         width: 14
         height: 11
@@ -269,54 +268,137 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape:
-      - - {x: -2, y: -5.5}
-        - {x: -4, y: -3.5}
-        - {x: -7, y: -3.5}
-        - {x: -7, y: -1.5}
-        - {x: -5, y: 0.5}
-        - {x: -4, y: 1.5}
-        - {x: -4, y: 4.5}
-        - {x: -3, y: 5.5}
-        - {x: 3, y: 5.5}
-        - {x: 4, y: 4.5}
-        - {x: 4, y: 1.5}
-        - {x: 5, y: 0.5}
-        - {x: 6, y: -0.5}
-        - {x: 7, y: -1.5}
-        - {x: 7, y: -3.5}
-        - {x: 5, y: -5.5}
+      physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0070153b9ef3d6344b20e408e6a1ec19
-      internalID: -593439357
+      spriteID: 7885c608b9d68544dadd6f214232200a
+      internalID: -141596115
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Maple Tree_4
+      name: Tree_4
       rect:
         serializedVersion: 2
-        x: 14
-        y: 3
-        width: 5
-        height: 3
+        x: 17
+        y: 33
+        width: 16
+        height: 15
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape:
-      - - {x: -1.5, y: -1.5}
-        - {x: -2.5, y: 0.5}
-        - {x: -1.5, y: 1.5}
-        - {x: 1.5, y: 1.5}
-        - {x: 2.5, y: 0.5}
-        - {x: 1.5, y: -1.5}
+      physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fdb856c8b36053a49a0c7a7b992a5942
-      internalID: -1410396684
+      spriteID: 177a952b05daa94478a16c27d49f2cd6
+      internalID: -766633093
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tree_5
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 34
+        width: 13
+        height: 12
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 009ddb208028ee648ba3415edd45479b
+      internalID: -606032051
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tree_6
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 19
+        width: 13
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0641afe57c4b8fa4b8f160dfb300f5f0
+      internalID: 908799755
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tree_7
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 20
+        width: 4
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 09b3d223bcf92574b8ec83d53e9d69f4
+      internalID: -1951676889
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tree_8
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 27
+        width: 6
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 84d342207eb534b469654723cfef819e
+      internalID: -776460947
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tree_9
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 19
+        width: 4
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5ac76f06ad6a85741b650ee54d28392e
+      internalID: -255538270
       vertices: []
       indices: 
       edges: []
@@ -332,11 +414,16 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Maple Tree_0: 40904745
-      Maple Tree_1: 1676509928
-      Maple Tree_2: 953526180
-      Maple Tree_3: -593439357
-      Maple Tree_4: -1410396684
+      Tree_0: 2100984977
+      Tree_1: -1894899880
+      Tree_2: -402270331
+      Tree_3: -141596115
+      Tree_4: -766633093
+      Tree_5: -606032051
+      Tree_6: 908799755
+      Tree_7: -1951676889
+      Tree_8: -776460947
+      Tree_9: -255538270
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

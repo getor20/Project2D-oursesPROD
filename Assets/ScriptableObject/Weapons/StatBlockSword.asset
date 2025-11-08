@@ -12,8 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c59e26e85fd9864bb3424b19fa01868, type: 3}
   m_Name: StatBlockSword
   m_EditorClassIdentifier: 
-  weaponName: Sword
   damage: 10
-  attackSpeed: 1
-  range: 1.5
-  icon: {fileID: 0}

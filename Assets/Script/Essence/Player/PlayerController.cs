@@ -1,5 +1,4 @@
-﻿using Unity.VisualScripting.Antlr3.Runtime.Misc;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Assets.Script.Player
 {
@@ -11,7 +10,9 @@ namespace Assets.Script.Player
         [SerializeField] private ControllerStatBar _controllerStatBar;
         [SerializeField] private WeaponRotation _weaponRotation;
         [SerializeField] private MeleeAttacker _meleeAttacker;
-
+        [SerializeField] private Bonfire _bonfire;
+        [SerializeField] private UserUiController _userUiController;
+        [SerializeField] private AudioManager _audioManager;
 
         [SerializeField] private float _timerLimitStaminaWalking = 3.5f;
         [SerializeField] private float _timerLimitStaminaRunning = 2f;
@@ -26,8 +27,6 @@ namespace Assets.Script.Player
         private PlayerMove _mover;
         private StatPlayer _stats;
         private LiftingObjects _liftingObjects;
-        private Inventory _inventory;
-        private ItemDropper _itemDropper;
 
         public bool IsInteraction { get; private set; }
         public bool DisplayInventory { get; private set; }
@@ -39,8 +38,6 @@ namespace Assets.Script.Player
             _mover = GetComponent<PlayerMove>();
             _stats = GetComponent<StatPlayer>();
             _liftingObjects = GetComponent<LiftingObjects>();
-            _itemDropper = GetComponent<ItemDropper>();
-            _inventory = GetComponent<Inventory>();
         }
 
         private void Update()
@@ -51,30 +48,28 @@ namespace Assets.Script.Player
                 return;
             }
 
-            if (IsInteraction == true)
+            bool isBlocked = IsInteraction || DisplayInventory;
+
+            if (isBlocked)
             {
-                // Заняты другим делом, отключаем индикатор
+                // Если есть ЛЮБАЯ блокировка высокого приоритета, отключаем триггер.
                 IsTrigger = false;
             }
-            // 2. ИЛИ проверяем, открыт ли инвентарь
-            else if (DisplayInventory == true)
-            {
-                // Инвентарь открыт, отключаем индикатор
-                IsTrigger = false;
-            }
-            // 3. Иначе (если ничто не блокирует) — используем реальное значение от скрипта подбора
             else
             {
-                IsTrigger = _liftingObjects.IsTrigger;
+                IsTrigger = _bonfire.IsTrigger || _liftingObjects.IsTrigger;
+               
             }
 
             SetHp();
             SetStamina();
 
-            Debug.Log($"Current Health: {_stats.CurrentHealth}");
+            //Debug.Log($"Current Health: {_stats.CurrentHealth}");
 
             HandleMovement();
             HandleCombat();
+
+            //Debug.Log($"IsTrigger1: {IsTriggeri}");
         }
 
         internal void SetInput(PlayerInputData inputData)
@@ -95,7 +90,7 @@ namespace Assets.Script.Player
                 else
                 {
                     targetSpeed = _inputData.IsRunning ? _stats.RunSpeed : _stats.WalkingSpeed;
-                    
+
                 }
                 _mover.Move(_inputData.MoveDirection, targetSpeed);
                 _weaponRotation.SetDirection(_mover.DirectionVector);
@@ -138,7 +133,7 @@ namespace Assets.Script.Player
                 }
                 else if (_stats.CurrentStamina == 0.7f)
                 {
-                   // Debug.LogError($"Max Stamina for Health Regen: {_stats.CurrentStamina}");
+                    // Debug.LogError($"Max Stamina for Health Regen: {_stats.CurrentStamina}");
                     _timerLimitHealth = 5;
                 }
                 else if (_stats.CurrentStamina == 0.6f)
@@ -191,7 +186,7 @@ namespace Assets.Script.Player
                 }
             }
             else { _timerHealth = 0f; }
-            
+
         }
 
         private void SetStamina()
@@ -207,39 +202,46 @@ namespace Assets.Script.Player
                     _stats.TakeMinStamina(10f);
                     _timerStamina = 0f;
                     _controllerStatBar.UpdateStaminaBar(_stats.CurrentStamina);
-                    Debug.Log("Stamina decreased by 1");
+                    //Debug.Log("Stamina decreased by 1");
                 }
                 else
                 {
-                    Debug.Log("Stamina decreased by 0");
+                    //Debug.Log("Stamina decreased by 0");
                     _timerStamina += Time.deltaTime;
                 }
             }
             else
             {
-                if (_timerStamina >= 0f) 
+                if (_timerStamina >= 0f)
                 {
-                    _timerStamina -= Time.deltaTime; 
+                    _timerStamina -= Time.deltaTime;
 
-                    
+
                     if (_timerStamina <= 0f)
                     {
                         _timerStamina = 0f;
                     }
                 }
-            }  
+            }
         }
 
         public void SetInventory(bool isInInventory)
         {
             DisplayInventory = isInInventory;
             //Debug.Log($"Inventory state: {DisplayInventory}");
-        } 
+        }
 
         public void SetInteraction(bool isInteracting)
         {
             IsInteraction = isInteracting;
             _liftingObjects.Interaction(IsInteraction);
+            if (_bonfire.IsTrigger)
+            {
+                Debug.LogFormat ("Bonfire used");
+                _userUiController.OnWin();
+                _audioManager.PlaySFX(_audioManager.WinClip);
+                Time.timeScale = 0f;
+            }
             //Debug.Log($"Interaction state: {IsInteraction}");
         }
 
@@ -252,10 +254,17 @@ namespace Assets.Script.Player
 
         public void SetUseItem()
         {
-            Debug.Log("Use item");
+           // Debug.Log("Use item");
             _inventoryUI.OnUse();
             _stats.RestoreStamina(_inventoryUI.OnUses);
-           // Debug.LogError($"Stamina restored by {_inventoryUI.OnUses}");
-        }    
+            
+            // Debug.LogError($"Stamina restored by {_inventoryUI.OnUses}");
+        }
+
+        public void OnDeath()
+        {
+            gameObject.SetActive(false);
+            _audioManager.PlaySFX(_audioManager.DeathClip);
+        }
     }
 }

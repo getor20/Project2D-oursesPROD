@@ -7,10 +7,6 @@ public class StatEnemy : MonoBehaviour
 
     [SerializeField] private EnemyStatBlock _stats;
 
-    private TakeDamage _takeDamage;
-
-    private int _isDamage;
-
     public float MaxHealth { get; private set; }
     public float CurrentHealth { get; private set; }
     public float SpeedPatrol { get; private set; }
@@ -22,7 +18,6 @@ public class StatEnemy : MonoBehaviour
     private void Awake()
     {
         Initialize();
-        _takeDamage = GetComponent<TakeDamage>();
     }
 
     private void Initialize()
@@ -31,12 +26,6 @@ public class StatEnemy : MonoBehaviour
         CurrentHealth = MaxHealth;
         SpeedChase = _stats.SpeedChase;
         SpeedPatrol = _stats.SpeedPatrol;
-    }
-
-    private void Update()
-    {
-        _isDamage = _takeDamage.Damage;
-        //TakeDamage();
     }
 
     public void TakeDamage(float damage)
