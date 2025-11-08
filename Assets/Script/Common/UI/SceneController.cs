@@ -9,6 +9,7 @@ public class SceneController : MonoBehaviour
     public void TransitionScene()
     {
         SceneManager.LoadScene(sceneIndex);
+        Time.timeScale = 1f;
     }
 
     public void ExitingGame()

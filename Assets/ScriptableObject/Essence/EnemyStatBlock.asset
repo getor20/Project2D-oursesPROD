@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4850f4afc03563249b123fdd0e8f1cfb, type: 3}
   m_Name: EnemyStatBlock
   m_EditorClassIdentifier: 
-  MaxHealth: 10
+  MaxHealth: 100
   SpeedPatrol: 3
   SpeedChase: 5

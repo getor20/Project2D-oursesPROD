@@ -10,7 +10,7 @@ public class Bonfire : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("RRRRRRRRRRRRRRRRRRRRRR");
+        Debug.Log("Вход");
         if (_enemyCounter.ActiveEnemyCount <= 0)
         {
             IsTrigger = true;
@@ -19,7 +19,7 @@ public class Bonfire : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        Debug.Log("EEEEEEEEEEEEEEEEEEEEEE");
+        Debug.Log("Выход");
         IsTrigger = false;  
     }
 }

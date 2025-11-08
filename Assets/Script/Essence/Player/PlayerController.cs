@@ -12,6 +12,7 @@ namespace Assets.Script.Player
         [SerializeField] private MeleeAttacker _meleeAttacker;
         [SerializeField] private Bonfire _bonfire;
         [SerializeField] private UserUiController _userUiController;
+        [SerializeField] private AudioManager _audioManager;
 
         [SerializeField] private float _timerLimitStaminaWalking = 3.5f;
         [SerializeField] private float _timerLimitStaminaRunning = 2f;
@@ -68,7 +69,7 @@ namespace Assets.Script.Player
             HandleMovement();
             HandleCombat();
 
-            Debug.Log($"IsTrigger1: {IsTriggeri}");
+            //Debug.Log($"IsTrigger1: {IsTriggeri}");
         }
 
         internal void SetInput(PlayerInputData inputData)
@@ -238,6 +239,7 @@ namespace Assets.Script.Player
             {
                 Debug.LogFormat ("Bonfire used");
                 _userUiController.OnWin();
+                _audioManager.PlaySFX(_audioManager.WinClip);
                 Time.timeScale = 0f;
             }
             //Debug.Log($"Interaction state: {IsInteraction}");
@@ -262,14 +264,7 @@ namespace Assets.Script.Player
         public void OnDeath()
         {
             gameObject.SetActive(false);
-        }
-
-        private bool IsTriggeri;
-
-        public void IsTriggers()
-        {
-            Debug.LogFormat("Trigger true");
-            IsTriggeri = true;
+            _audioManager.PlaySFX(_audioManager.DeathClip);
         }
     }
 }
