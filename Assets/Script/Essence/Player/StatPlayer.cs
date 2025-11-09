@@ -6,6 +6,7 @@ public class StatPlayer : MonoBehaviour
     [SerializeField] private PlayerStatBlock _stats;
 
     [SerializeField] private ControllerStatBar _controllerStatBar;
+    [SerializeField] private AudioManager _audioManager;
 
     private const int MinHealth = 0;
 
@@ -73,6 +74,8 @@ public class StatPlayer : MonoBehaviour
         float damageTake = Mathf.Max(0, damage);
 
         CurrentHealth = Mathf.Clamp(Health -= damageTake, MinHealth, _stats.MaxHealth) / _stats.MaxHealth;
+
+        _audioManager.PlaySFX(_audioManager.HitClip);
 
         Debug.Log($"{gameObject.name} - TakeDamage: {damageTake}, CurrentHealth: {CurrentHealth}/{Health}");
 

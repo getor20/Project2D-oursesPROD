@@ -1,115 +1,97 @@
 using UnityEngine;
-using System.Collections;
+using Random = UnityEngine.Random;
 
 public class AudioManager : MonoBehaviour
 {
     [SerializeField] private AudioSource _sound;
     [SerializeField] private AudioSource _sFX;
 
-    [field: SerializeField] public AudioClip BackgroundMusicUn { get; private set; }
-    [field: SerializeField] public AudioClip BackgroundMusicTwo { get; private set; }
+    [field: Header("        Sound Clips")]
+    [field: SerializeField] private AudioClip[] _backgroundMusicSound;
+    [field: SerializeField] public AudioClip WinSound { get; private set; }
+    [field: SerializeField] public AudioClip DeathSound { get; private set; }
 
-    [field: SerializeField] public AudioClip DeathClip { get; private set; }
-    [field: SerializeField] public AudioClip WinClip { get; private set; }
+    [field: Header("        SFX Clips")]
+    [field: SerializeField] public AudioClip HitClip { get; private set; }
+    [field: SerializeField] public AudioClip SelectionClip { get; private set; }
+    [field: SerializeField] public AudioClip[] DeathClip { get; private set; }
 
-    private bool _isMusicPlaying = false;
+
+    public AudioClip CurrentDeathClip { get; private set; }
+
+    private int _currentTrackIndex = -1;
 
     private void Start()
     {
-        // Убедимся, что AudioSource для музыки не зациклен
         _sound.loop = false;
-
-        // Запускаем первый трек
-        StartNextBackgroundMusic();
+        PlayNextBackgroundMusic();
     }
 
     private void Update()
     {
-        // Проверяем, если флаг говорит, что музыка должна играть, НО AudioSource остановился
-        // (это означает, что трек закончился, а не был поставлен на паузу)
-        if (_isMusicPlaying && !_sound.isPlaying && _sound.time == 0)
+        if (!_sound.isPlaying && _backgroundMusicSound.Length > 0)
         {
-            // Здесь ваш код, который выполнится, когда песня закончится
-            Debug.Log("Фоновая песня закончилась! Запускаем следующую...");
-
-            // Запускаем логику переключения
-            StartNextBackgroundMusic();
+            Debug.Log("Фоновая песня/спец.клип закончился! Запускаем следующую BGM...");
+            PlayNextBackgroundMusic();
         }
+
+        CurrentDeathClip = DeathClip[Random.Range(0, DeathClip.Length)];
     }
 
-    /// <summary>
-    /// Логика переключения треков (взаимное переключение Un <-> Two)
-    /// </summary>
-    private void StartNextBackgroundMusic()
+    private void PlayNextBackgroundMusic()
     {
-        // 1. Проверяем, какой клип только что закончился
-        if (_sound.clip == BackgroundMusicUn)
+        if (_backgroundMusicSound.Length == 0)
         {
-            // 2. Устанавливаем следующий клип
-            _sound.clip = BackgroundMusicTwo;
-        }
-        else if (_sound.clip == BackgroundMusicTwo)
-        {
-            // 3. Устанавливаем первый клип
-            _sound.clip = BackgroundMusicUn;
-        }
-        else // Случай, когда запускается первый раз в Start()
-        {
-            // Рандомный выбор первого трека
-            _sound.clip = (Random.Range(0, 2) == 0) ? BackgroundMusicUn : BackgroundMusicTwo;
+            Debug.LogWarning("Список фоновой музыки пуст!");
+            return;
         }
 
-        // 4. Начинаем воспроизведение нового клипа
-        _sound.Play();
-        _isMusicPlaying = true; // Устанавливаем флаг, что музыка играет
+        if (_backgroundMusicSound.Length == 1)
+        {
+            _sound.clip = _backgroundMusicSound[0];
+            _sound.Play();
+            _currentTrackIndex = 0;
+            return;
+        }
+
+        int newIndex = _currentTrackIndex;
+
+        int attempts = 0;
+        const int MAX_ATTEMPTS = 10;
+
+        while (newIndex == _currentTrackIndex && attempts < MAX_ATTEMPTS)
+        {
+            newIndex = Random.Range(0, _backgroundMusicSound.Length);
+            attempts++;
+        }
+
+        if (newIndex != _currentTrackIndex)
+        {
+            _currentTrackIndex = newIndex;
+            _sound.clip = _backgroundMusicSound[_currentTrackIndex];
+            _sound.Play();
+        }
+        else if (_currentTrackIndex == -1 && _backgroundMusicSound.Length > 0)
+        {
+            _currentTrackIndex = Random.Range(0, _backgroundMusicSound.Length);
+            _sound.clip = _backgroundMusicSound[_currentTrackIndex];
+            _sound.Play();
+        }
     }
 
-    /// <summary>
-    /// Воспроизводит SFX, ставит BGM на паузу, ждет завершения SFX и возобновляет BGM.
-    /// </summary>
+    public void PlaySound(AudioClip clip)
+    {
+        _sound.Stop();
+        _sound.PlayOneShot(clip);
+    }
+
+
     public void PlaySFX(AudioClip clip)
     {
-        // 1. Останавливаем все ранее запущенные корутины возобновления музыки, чтобы избежать конфликтов
-        StopCoroutine("WaitForSFXToFinishAndResumeBGM");
+        /*var randomPitch = Random.Range(0, DeathClip.Length);
 
-        // 2. Если BGM играет, ставим ее на паузу
-        if (_sound.isPlaying)
-        {
-            _sound.Pause();
-        }
+        _sFX.clip = DeathClip[randomPitch];*/
 
-        // 3. Запускаем SFX (Используем Play, чтобы статус _sFX.isPlaying был корректным)
-        _sFX.clip = clip;
-        _sFX.Play();
-
-        // 4. Запускаем корутину, которая возобновит BGM после SFX
-        StartCoroutine(WaitForSFXToFinishAndResumeBGM());
-    }
-
-    /// <summary>
-    /// Корутина для ожидания завершения SFX и возобновления фоновой музыки.
-    /// </summary>
-    private IEnumerator WaitForSFXToFinishAndResumeBGM()
-    {
-        // Ждем, пока _sFX.isPlaying не станет false (то есть пока SFX не закончится)
-        yield return new WaitWhile(() => _sFX.isPlaying);
-
-        // Если фоновая музыка должна играть (она не была остановлена вручную командой Stop/другим кодом)
-        if (_isMusicPlaying)
-        {
-            // Возобновляем фоновую музыку с того же места
-            _sound.UnPause();
-        }
-    }
-
-    // Добавьте этот метод, если хотите иметь контроль над возобновлением музыки
-    public void ResumeBackgroundMusic()
-    {
-        // Возобновляем, только если флаг _isMusicPlaying установлен (т.е. мы хотим, чтобы музыка играла),
-        // и если она в данный момент не играет. UnPause() работает, только если была Pause().
-        if (_isMusicPlaying && !_sound.isPlaying && _sound.time > 0)
-        {
-            _sound.UnPause();
-        }
+        _sFX.PlayOneShot(clip);
     }
 }
