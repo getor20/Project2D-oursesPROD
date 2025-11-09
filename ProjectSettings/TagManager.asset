@@ -11,14 +11,14 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Player
+  - Object
+  - MapBoundaries
+  - Enemy
+  - Building
+  - Item
+  - Weapons
+  - Tree
   - 
   - 
   - 
@@ -40,4 +40,28 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Level
+    uniqueID: 2493518131
+    locked: 0
+  - name: Items
+    uniqueID: 72274773
+    locked: 0
+  - name: Plants
+    uniqueID: 1097949137
+    locked: 0
+  - name: Player&Enemy&Weapons
+    uniqueID: 2190472557
+    locked: 0
+  - name: Weapons
+    uniqueID: 3669887073
+    locked: 0
+  - name: Enemy
+    uniqueID: 3397705459
+    locked: 0
+  - name: Object
+    uniqueID: 2925730337
+    locked: 0
+  - name: Building
+    uniqueID: 263565977
     locked: 0

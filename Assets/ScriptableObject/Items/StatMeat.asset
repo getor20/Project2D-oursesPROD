@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec12a29c15f409547a684b60798f3107, type: 3}
+  m_Name: StatMeat
+  m_EditorClassIdentifier: 
+  ID: 2
+  Name: Meat
+  Icon: {fileID: -84782468, guid: 1ee1b3ab7fd93aa4a9bb81f4d644f354, type: 3}
+  Description: Good Meat
+  Edibility: 10
+  PrefabObject: {fileID: 2831935881834325843, guid: 079939241c2e6a34a84470a15498d624, type: 3}
