@@ -192,34 +192,36 @@ namespace Assets.Script.Player
         private void SetStamina()
         {
             _controllerStatBar.UpdateStaminaBar(_stats.CurrentStamina);
-
-            if (_mover.CurrentSpeed > 0)
+            if (_ifWin == false)
             {
-                _timerLimitStaminaMain = _inputData.IsRunning ? _timerLimitStaminaRunning : _timerLimitStaminaWalking;
-
-                if (_timerStamina >= _timerLimitStaminaMain)
+                if (_mover.CurrentSpeed > 0)
                 {
-                    _stats.TakeMinStamina(10f);
-                    _timerStamina = 0f;
-                    _controllerStatBar.UpdateStaminaBar(_stats.CurrentStamina);
-                    //Debug.Log("Stamina decreased by 1");
+                    _timerLimitStaminaMain = _inputData.IsRunning ? _timerLimitStaminaRunning : _timerLimitStaminaWalking;
+
+                    if (_timerStamina >= _timerLimitStaminaMain)
+                    {
+                        _stats.TakeMinStamina(10f);
+                        _timerStamina = 0f;
+                        _controllerStatBar.UpdateStaminaBar(_stats.CurrentStamina);
+                        //Debug.Log("Stamina decreased by 1");
+                    }
+                    else
+                    {
+                        //Debug.Log("Stamina decreased by 0");
+                        _timerStamina += Time.deltaTime;
+                    }
                 }
                 else
                 {
-                    //Debug.Log("Stamina decreased by 0");
-                    _timerStamina += Time.deltaTime;
-                }
-            }
-            else
-            {
-                if (_timerStamina >= 0f)
-                {
-                    _timerStamina -= Time.deltaTime;
-
-
-                    if (_timerStamina <= 0f)
+                    if (_timerStamina >= 0f)
                     {
-                        _timerStamina = 0f;
+                        _timerStamina -= Time.deltaTime;
+
+
+                        if (_timerStamina <= 0f)
+                        {
+                            _timerStamina = 0f;
+                        }
                     }
                 }
             }
@@ -231,6 +233,7 @@ namespace Assets.Script.Player
             //Debug.Log($"Inventory state: {DisplayInventory}");
         }
 
+        private bool _ifWin = false;
         public void SetInteraction(bool isInteracting)
         {
             IsInteraction = isInteracting;
@@ -239,8 +242,9 @@ namespace Assets.Script.Player
             {
                 Debug.LogFormat ("Bonfire used");
                 _userUiController.OnWin();
-                _audioManager.PlaySFX(_audioManager.WinClip);
-                Time.timeScale = 0f;
+                _audioManager.PlaySound(_audioManager.WinSound);
+                _ifWin = true;
+                //Time.timeScale = 0f;
             }
             //Debug.Log($"Interaction state: {IsInteraction}");
         }
@@ -264,7 +268,7 @@ namespace Assets.Script.Player
         public void OnDeath()
         {
             gameObject.SetActive(false);
-            _audioManager.PlaySFX(_audioManager.DeathClip);
+            _audioManager.PlaySound(_audioManager.DeathSound);
         }
     }
 }

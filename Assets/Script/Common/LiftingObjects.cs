@@ -5,6 +5,7 @@ using UnityEngine;
 public class LiftingObjects : MonoBehaviour
 {
     [field: SerializeField] private List<Food> _items = new List<Food>();
+    [field: SerializeField] private AudioManager _audioManager;
     private Inventory _inventory;
 
     public bool IsTrigger { get; private set; }
@@ -60,7 +61,7 @@ public class LiftingObjects : MonoBehaviour
             {
                 Destroy(foodItem.gameObject); // Уничтожаем визуальный объект
             }
-
+            _audioManager.PlaySFX(_audioManager.SelectionClip);
             // Очистка внутреннего списка _items
             _items.RemoveAll(canBePickedUp.Invoke);
         }

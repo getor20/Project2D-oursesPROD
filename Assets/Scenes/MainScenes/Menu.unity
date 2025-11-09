@@ -2324,7 +2324,7 @@ Tilemap:
       - {fileID: -521209293, guid: d7a49df88778f9546aa3ce093065e3c3, type: 3}
       - {fileID: -748819249, guid: d7a49df88778f9546aa3ce093065e3c3, type: 3}
       - {fileID: 1475065, guid: d7a49df88778f9546aa3ce093065e3c3, type: 3}
-      m_AnimationSpeed: 5.0000005
+      m_AnimationSpeed: 5
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: -8, y: -6, z: 0}
@@ -2555,7 +2555,7 @@ Tilemap:
       - {fileID: 361588429, guid: d7a49df88778f9546aa3ce093065e3c3, type: 3}
       - {fileID: 1863217769, guid: d7a49df88778f9546aa3ce093065e3c3, type: 3}
       - {fileID: 635414431, guid: d7a49df88778f9546aa3ce093065e3c3, type: 3}
-      m_AnimationSpeed: 5
+      m_AnimationSpeed: 5.0000005
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: -6, y: -5, z: 0}
@@ -2852,7 +2852,7 @@ Tilemap:
       - {fileID: -521209293, guid: d7a49df88778f9546aa3ce093065e3c3, type: 3}
       - {fileID: -748819249, guid: d7a49df88778f9546aa3ce093065e3c3, type: 3}
       - {fileID: 1475065, guid: d7a49df88778f9546aa3ce093065e3c3, type: 3}
-      m_AnimationSpeed: 5.0000005
+      m_AnimationSpeed: 5
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: -9, y: -2, z: 0}
@@ -3237,7 +3237,7 @@ Tilemap:
       - {fileID: -767199337, guid: d7a49df88778f9546aa3ce093065e3c3, type: 3}
       - {fileID: 87762473, guid: d7a49df88778f9546aa3ce093065e3c3, type: 3}
       - {fileID: 463653964, guid: d7a49df88778f9546aa3ce093065e3c3, type: 3}
-      m_AnimationSpeed: 5
+      m_AnimationSpeed: 5.0000005
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 6, y: 3, z: 0}
@@ -4487,10 +4487,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _sound: {fileID: 1341851271}
   _sFX: {fileID: 0}
-  <BackgroundMusicUn>k__BackingField: {fileID: 8300000, guid: a25fdfebbbe32cb4fbe66f253c128048, type: 3}
-  <BackgroundMusicTwo>k__BackingField: {fileID: 8300000, guid: 5ad644ae2dbcf2b4fb1050be8b6b6d3c, type: 3}
-  <DeathClip>k__BackingField: {fileID: 0}
-  <WinClip>k__BackingField: {fileID: 0}
+  _backgroundMusicSound:
+  - {fileID: 8300000, guid: a25fdfebbbe32cb4fbe66f253c128048, type: 3}
+  - {fileID: 8300000, guid: 5ad644ae2dbcf2b4fb1050be8b6b6d3c, type: 3}
+  <WinSound>k__BackingField: {fileID: 0}
+  <DeathSound>k__BackingField: {fileID: 0}
+  <HitClip>k__BackingField: {fileID: 0}
+  <SelectionClip>k__BackingField: {fileID: 0}
+  <DeathClip>k__BackingField:
+  - {fileID: 8300000, guid: 0112338c39e8f934c823090fad133d50, type: 3}
 --- !u!1 &1604391313
 GameObject:
   m_ObjectHideFlags: 0

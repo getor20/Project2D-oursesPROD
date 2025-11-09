@@ -6,6 +6,7 @@ public class StatEnemy : MonoBehaviour
     private const int MinHealth = 0;
 
     [SerializeField] private EnemyStatBlock _stats;
+    [SerializeField] private AudioManager _audioManager;
 
     public float MaxHealth { get; private set; }
     public float CurrentHealth { get; private set; }
@@ -40,12 +41,17 @@ public class StatEnemy : MonoBehaviour
         {
             Die();
         }
+        else // <-- ИСПРАВЛЕНИЕ: Звук попадания, только если персонаж НЕ умер
+        {
+            _audioManager.PlaySFX(_audioManager.HitClip);
+        }
     }
 
     private void Die()
     {
         OnDie?.Invoke();
-
-        //gameObject.SetActive(false);
+        // Использование нового метода для случайного клипа смерти
+        _audioManager.PlaySFX(_audioManager.CurrentDeathClip);
+        // gameObject.SetActive(false);
     }
 }

@@ -61,9 +61,6 @@ public class MeleeAttacker : MonoBehaviour
 
             if (hit.TryGetComponent<StatPlayer>(out StatPlayer statPlayer))
             {
-                if (hit.transform == transform || hit.transform.IsChildOf(transform))
-                    Debug.LogError("yyy");
-
                 statPlayer.TakeDamage(_weaponStat.damage);
             }
         }

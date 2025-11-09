@@ -204,7 +204,7 @@ MonoBehaviour:
   - {x: 0.125, y: -0.375, z: 0}
   m_ShapePathHash: 0
   m_Mesh: {fileID: 0}
-  m_InstanceId: 64304
+  m_InstanceId: -60426
   m_LocalBounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0.125, y: 0.375, z: 0}
@@ -253,6 +253,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _stats: {fileID: 11400000, guid: 4e35ecab027714c4bbaf645cfc5464d3, type: 2}
+  _audioManager: {fileID: 0}
   OnDie:
     m_PersistentCalls:
       m_Calls:
