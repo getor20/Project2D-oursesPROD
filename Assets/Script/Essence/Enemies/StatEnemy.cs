@@ -3,13 +3,13 @@ using UnityEngine.Events;
 
 public class StatEnemy : MonoBehaviour
 {
-    private const int MinHealth = 0;
-
     [SerializeField] private EnemyStatBlock _stats;
     [SerializeField] private AudioManager _audioManager;
 
-    public float MaxHealth { get; private set; }
+    private const int MinHealth = 0;
+
     public float CurrentHealth { get; private set; }
+    public float Health { get; private set; }
     public float SpeedPatrol { get; private set; }
     public float SpeedChase { get; private set; }
     public float Armor { get; private set; }
@@ -23,19 +23,30 @@ public class StatEnemy : MonoBehaviour
 
     private void Initialize()
     {
-        MaxHealth = _stats.MaxHealth;
-        CurrentHealth = MaxHealth;
+        Health = _stats.MaxHealth;
+        
         SpeedChase = _stats.SpeedChase;
         SpeedPatrol = _stats.SpeedPatrol;
+
+        CurrentHealth = _stats.MaxHealth / _stats.MaxHealth;
+    }
+
+    public void SetHealth(float health)
+    {
+        Health = Mathf.Min(Health + health, _stats.MaxHealth);
+
+        CurrentHealth = Health / _stats.MaxHealth;
+
+        Debug.Log($"{gameObject.name} - SetHealth: {health}, CurrentHealth: {CurrentHealth}/{Health}");
     }
 
     public void TakeDamage(float damage)
     {
-        float damageTake = Mathf.Max(0, /*_takeDamage.Damage*/ damage);
+        float damageTake = Mathf.Max(0, damage);
 
-        CurrentHealth = Mathf.Clamp(CurrentHealth - damageTake, MinHealth, MaxHealth);
+        CurrentHealth = Mathf.Clamp(Health -= damageTake, MinHealth, _stats.MaxHealth) / _stats.MaxHealth;
 
-        Debug.Log($"{gameObject.name} - TakeDamage: {damageTake}, CurrentHealth: {CurrentHealth}/{MaxHealth}");
+        Debug.Log($"{gameObject.name} - TakeDamage: {damageTake}, CurrentHealth: {CurrentHealth}/{Health}");
 
         if (CurrentHealth <= MinHealth)
         {

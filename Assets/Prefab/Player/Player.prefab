@@ -657,7 +657,7 @@ GameObject:
   - component: {fileID: 7011663443889731017}
   - component: {fileID: 5085796161916932879}
   m_Layer: 5
-  m_Name: StatBar
+  m_Name: Stat Bar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -748,7 +748,7 @@ GameObject:
   - component: {fileID: 1407935942271867666}
   - component: {fileID: 1984295915818505846}
   m_Layer: 5
-  m_Name: StaminaBar
+  m_Name: Stamina Bar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1066,7 +1066,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7186054136938500092}
   m_HandleRect: {fileID: 5414273262275210732}
   m_Direction: 2
-  m_Value: 1.0000004
+  m_Value: 1.0000019
   m_Size: 0.525
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -1602,7 +1602,7 @@ MonoBehaviour:
   - {x: 0.125, y: -0.375, z: 0}
   m_ShapePathHash: 764802325
   m_Mesh: {fileID: 0}
-  m_InstanceId: -150492
+  m_InstanceId: -1818
   m_LocalBounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0.125, y: 0.375, z: 0}
@@ -1619,7 +1619,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _stats: {fileID: 11400000, guid: ecae4989a66ad4c4790a7225edd802f3, type: 2}
-  _controllerStatBar: {fileID: 5085796161916932879}
+  _audioManager: {fileID: 0}
   OnDie:
     m_PersistentCalls:
       m_Calls:
@@ -1667,6 +1667,8 @@ MonoBehaviour:
   _weaponRotation: {fileID: 8900642380249982838}
   _meleeAttacker: {fileID: 278404177437095623}
   _bonfire: {fileID: 0}
+  _userUiController: {fileID: 0}
+  _audioManager: {fileID: 0}
   _timerLimitStaminaWalking: 3.5
   _timerLimitStaminaRunning: 2
   _timerLimitStaminaMain: 0
@@ -1698,6 +1700,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _items: []
+  _audioManager: {fileID: 0}
 --- !u!114 &298268796358472199
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1756,7 +1759,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.00006845087}
+  m_AnchoredPosition: {x: 0, y: -0.0003378428}
   m_SizeDelta: {x: 0, y: 400}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &6012622571117010536
@@ -1771,7 +1774,7 @@ GameObject:
   - component: {fileID: 3183008208055616266}
   - component: {fileID: 9108118810341886013}
   m_Layer: 5
-  m_Name: HPBar
+  m_Name: HP Bar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

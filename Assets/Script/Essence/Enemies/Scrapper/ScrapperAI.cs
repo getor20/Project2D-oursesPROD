@@ -13,6 +13,7 @@ public class ScrapperAI : MonoBehaviour
     [SerializeField] private PatrolPath _patrolPath;
     [SerializeField] private WeaponRotation _weaponRotation;
     [SerializeField] private MeleeAttacker _meleeAttacker;
+    [SerializeField] private ControllerStatBar _controllerStatBar;
 
     [SerializeField] private float _patrolPointThreshold = 0.5f;    
     [SerializeField] private float _attackDistance = 2;
@@ -55,6 +56,8 @@ public class ScrapperAI : MonoBehaviour
 
         _weaponRotation.SetDirection(_move._direction);
         _weaponRotation.SetRotationDirection(_target != null ? (Vector2)_target.position : (Vector2)transform.position + _move._direction);
+
+        _controllerStatBar.UpdateHealthBar(_stats.CurrentHealth);
     }
 
     private void UpdateTarget()

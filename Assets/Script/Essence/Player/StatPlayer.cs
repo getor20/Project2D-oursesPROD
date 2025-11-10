@@ -4,8 +4,6 @@ using UnityEngine.Events;
 public class StatPlayer : MonoBehaviour
 {
     [SerializeField] private PlayerStatBlock _stats;
-
-    [SerializeField] private ControllerStatBar _controllerStatBar;
     [SerializeField] private AudioManager _audioManager;
 
     private const int MinHealth = 0;
@@ -16,7 +14,6 @@ public class StatPlayer : MonoBehaviour
     public float CurrentHealth { get; private set; }
     public float Health { get; private set; }
     public float Stamina { get; private set; }
-    public float HP { get; private set; }
     public float SetStamina { get; private set; }
     public float CurrentStamina { get; private set; }
     public float Armor { get; private set; }
@@ -37,9 +34,8 @@ public class StatPlayer : MonoBehaviour
         Stamina = _stats.Stamina;
         SlowSpeed = _stats.SlowSpeed;
 
-        HP = _stats.MaxHealth / _stats.MaxHealth;
-
         CurrentHealth = _stats.MaxHealth / _stats.MaxHealth;
+
         CurrentStamina = _stats.Stamina / _stats.Stamina;
         //Debug.Log($"Initialized Player Stats - Health: {CurrentHealth}, Stamina: {CurrentStamina}");
     }
@@ -77,7 +73,7 @@ public class StatPlayer : MonoBehaviour
 
         _audioManager.PlaySFX(_audioManager.HitClip);
 
-        Debug.Log($"{gameObject.name} - TakeDamage: {damageTake}, CurrentHealth: {CurrentHealth}/{Health}");
+        //Debug.Log($"{gameObject.name} - TakeDamage: {damageTake}, CurrentHealth: {CurrentHealth}/{Health}");
 
         if (CurrentHealth <= MinHealth)
         {
