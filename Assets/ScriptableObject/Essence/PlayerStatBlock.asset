@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16f44a02dd80da646b53829a8e6da4c7, type: 3}
   m_Name: PlayerStatBlock
   m_EditorClassIdentifier: 
-  MaxHealth: 1
+  MaxHealth: 100
   Armor: 0
   Stamina: 100
   WalkingSpeed: 4

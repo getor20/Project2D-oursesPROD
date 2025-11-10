@@ -113,7 +113,7 @@ namespace Assets.Script.Player
         {
             _controllerStatBar.UpdateHealthBar(_stats.CurrentHealth);
 
-            if (_stats.CurrentHealth < _stats.HP)
+            if (_stats.CurrentHealth < _stats.Health)
             {
                 // Debug.LogError($"Current Stamina for Health Regen: {_stats.CurrentStamina}");
                 if (_stats.CurrentStamina == 1f)
